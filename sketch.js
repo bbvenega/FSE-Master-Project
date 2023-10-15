@@ -9,7 +9,7 @@ let homeButton;
 
 
 function preload() {
-myFont = loadFont('HeehawRegular-PZy7[1].ttf');
+myFont = loadFont('HeehawRegular-PZy7.ttf');
 mainMenuImg = loadImage("farmmainmenu.jpg");
 activity1BG = loadImage("whackamoleBG.jpg");
 moleWHH = loadImage("mole.jpg");
