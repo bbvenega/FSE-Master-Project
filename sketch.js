@@ -31,6 +31,7 @@ fill(196, 164, 132,250);
 rect(150,35,675,90,50);
 fill('black');
 text("FSE Master Project ", 500,100);
+print("this is a test to test GitHub");
 
 textSize(40);
 
