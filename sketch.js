@@ -1,11 +1,24 @@
+
+// Declares the unviersal variables used throughout the program
 let pageSel = "home";
 let homePage = true;
 let cursorX = 0;
 let cursorY = 0;
-let act1Start = false;
-let circleX = 0;
-let circleY = 0;
 let homeButton;
+
+//Main menu variables
+
+// Activity One Variables
+let act1Button;
+let game1On = false;
+var score = 0;
+var whackValue;
+var molePosX;
+var molePosY;
+var correctGuess = true;
+
+
+
 
 
 function preload() {
@@ -20,8 +33,12 @@ function setup() {
 textFont(myFont);
 pageSel = "home";
 createCanvas(1000, 500);
+
+// The code below creates the necessary buttons 
 homeButton = createButton("Go home");
-homeButton.mousePressed(home);
+homeButton.mouseClicked(home);
+act1Button = createButton("Begin game");
+  act1Button.mouseClicked(startWhackAMole);
 
 // Title text & Background
 background(mainMenuImg);
@@ -31,7 +48,7 @@ fill(196, 164, 132,250);
 rect(150,35,675,90,50);
 fill('black');
 text("FSE Master Project ", 500,100);
-print("this is a test to test GitHub");
+
 
 textSize(40);
 
@@ -69,11 +86,12 @@ cursorY = mouseY;
 cursorX = mouseX;
 print(cursorX);
 
-if(pageSel ==  "activity1") {
-  if(cursorX > 100) {
-    WhackAMole();
-    print("getting here");
-  }
+if(pageSel ==  "activity1" & game1On == true) {
+  correctGuess = true;
+  let d = dist(mouseX,mouseY,molePosX,molePosY);
+    if(d <= 20) {
+      WhackAMole();
+    }
 }
 }
 
@@ -96,6 +114,9 @@ textSize(40);
 text("Time Left: ", 950,150)
 
 
+
+
+
 fill('green');
 
 
@@ -111,16 +132,26 @@ circle(300,450,75);
 circle(450,450,75);
 circle(600,450,75);
 
+act1Button.position(900,200);
+
+
 
 
 }
 
+function startWhackAMole() {
+  if(game1On == false) {
+    game1On = true;
+    WhackAMole();
+  }
+}
+
 function WhackAMole() {
 
-
-
-var whackValue;
-whackValue = random(1,9);
+while(game1On && correctGuess && score <= 5) {
+  correctGuess = false;
+  score++;
+  whackValue = random(1,9);
 whackValue = round(whackValue);
 int(whackValue);
 print(whackValue);
@@ -130,53 +161,81 @@ switch(whackValue) {
    activityOne();
      fill('purple');
    square(300,250,10);
+   molePosX = 300;
+   molePosY = 250;
+
    break;
    case 2:
    activityOne();
      fill('purple');
    square(450,250,10);
+   molePosX = 450;
+   molePosY = 250;
    break;
    case 3:
    activityOne();
      fill('purple');
    square(600,300,10);
-   
+   molePosX = 600;
+   molePosY = 300;
    break;
    case 4:
    activityOne();
      fill('purple');
    square(300,350,10);
+   molePosX = 300;
+   molePosY = 350;
    break;
    case 5: 
    activityOne();
      fill('purple');
    square(450,350,10);
+   molePosX = 450;
+   molePosY = 350;
    break;
    case 6: 
    activityOne();
      fill('purple');
    square(600,350,10);
+   molePosX = 600;
+   molePosY = 350;
    break;
    case 7:
    activityOne();
      fill('purple');
    square(300,450,10);
+   molePosX = 300;
+   molePosY = 450;
    break;
    case 8:
    activityOne();
      fill('purple');
    square(450,450,10);
+   molePosX = 450;
+   molePosY = 450;
    break;
    case 9: 
    activityOne();
      fill('purple');
    square(600,450,10);
+   molePosX = 600;
+   molePosY = 450;
    break;
 } 
 
 
-
 }
+  
+  if(score > 5) {
+    text("you win!!!!!!!", 500,250,100);
+  }
+}
+
+
+
+
+
+
 
 
 
@@ -204,9 +263,10 @@ pageSel = "settings";
 
 }
 function home() {
+  pageSel = "home";
 homeButton.position(0,501);
 textFont(myFont);
-pageSel = "home";
+
 createCanvas(1000, 500);
 
 // Title text & Background
