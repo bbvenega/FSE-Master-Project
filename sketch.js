@@ -235,7 +235,25 @@ switch(whackValue) {
 }
   
   if(score > 5) {
-    text("you win!!!!!!!", 500,250,100);
+
+    background(activity1BG);
+    image(moleWHH,800, 150);
+      moleWHH.resize(300,300);
+  
+  
+      homeButton.position(50,50);
+     
+    background(activity1BG);
+    textSize(80);
+    fill('black');  
+    text("Whack-a-Mole", 550,75);
+      fill(200, 0, 0);
+    image(smallMole, 999, 999, 1, 1);
+    text("YOU WIN!", (width /2) - 100 , 275, 200, 300);
+      act1Button.position(900, 900);
+      game1On = false;
+      score = 0;
+      correctGuess = true;
   }
 }
 
