@@ -22,14 +22,19 @@ var correctGuess = true;
 
 
 function preload() {
+  
 myFont = loadFont('HeehawRegular-PZy7.ttf');
 mainMenuImg = loadImage("farmmainmenu.jpg");
 activity1BG = loadImage("whackamoleBG.jpg");
 moleWHH = loadImage("mole.jpg");
+smallMole = loadImage("smallmole.webp");
+coinSound = loadSound("coinSound.mp3")
+
 
 }
 // The setup function creates and prints the entire home page
 function setup() {
+
 textFont(myFont);
 pageSel = "home";
 createCanvas(1000, 500);
@@ -89,7 +94,8 @@ print(cursorX);
 if(pageSel ==  "activity1" & game1On == true) {
   correctGuess = true;
   let d = dist(mouseX,mouseY,molePosX,molePosY);
-    if(d <= 20) {
+    if(d <= 30) {
+      coinSound.play();
       WhackAMole();
     }
 }
@@ -103,15 +109,13 @@ createCanvas(1000,500)
 
   background(activity1BG);
 
-  image(moleWHH,800, 150);
-moleWHH.resize(300,300);
 
 homeButton.position(50,50);
 textSize(80);
 fill('black');  
 text("Whack-a-Mole", 550,75);
 textSize(40);
-text("Time Left: ", 950,150)
+text("Time Left: ", 750,150);
 
 
 
@@ -141,6 +145,7 @@ act1Button.position(900,200);
 
 function startWhackAMole() {
   if(game1On == false) {
+    
     game1On = true;
     WhackAMole();
   }
@@ -149,6 +154,9 @@ function startWhackAMole() {
 function WhackAMole() {
 
 while(game1On && correctGuess && score <= 5) {
+
+  
+
   correctGuess = false;
   score++;
   whackValue = random(1,9);
@@ -156,68 +164,68 @@ whackValue = round(whackValue);
 int(whackValue);
 print(whackValue);
 
+
+
 switch(whackValue) {
  case 1: 
    activityOne();
-     fill('purple');
-   square(300,250,10);
-   molePosX = 300;
+  image(smallMole,275,230,50,50); 
+    molePosX = 300;
    molePosY = 250;
-
    break;
    case 2:
    activityOne();
-     fill('purple');
-   square(450,250,10);
+     
+     image(smallMole,425,230,50,50);
    molePosX = 450;
    molePosY = 250;
    break;
    case 3:
    activityOne();
-     fill('purple');
-   square(600,300,10);
+     
+     image(smallMole,575,230,50,50);
    molePosX = 600;
-   molePosY = 300;
+   molePosY = 250;
    break;
    case 4:
    activityOne();
-     fill('purple');
-   square(300,350,10);
+     
+     image(smallMole,275,320,50,50);
    molePosX = 300;
    molePosY = 350;
    break;
    case 5: 
    activityOne();
-     fill('purple');
-   square(450,350,10);
+     
+     image(smallMole,425,320,50,50);
    molePosX = 450;
    molePosY = 350;
    break;
    case 6: 
    activityOne();
-     fill('purple');
-   square(600,350,10);
+     
+     image(smallMole,575,320,50,50);
    molePosX = 600;
    molePosY = 350;
    break;
    case 7:
    activityOne();
-     fill('purple');
-   square(300,450,10);
+     
+     image(smallMole,275,430,50,50);
    molePosX = 300;
    molePosY = 450;
    break;
    case 8:
    activityOne();
-     fill('purple');
-   square(450,450,10);
+     
+     image(smallMole,425,430,50,50);
    molePosX = 450;
    molePosY = 450;
    break;
    case 9: 
    activityOne();
-     fill('purple');
-   square(600,450,10);
+     
+     image(smallMole,575,430,50,50);
    molePosX = 600;
    molePosY = 450;
    break;
@@ -264,6 +272,7 @@ pageSel = "settings";
 }
 function home() {
   pageSel = "home";
+  act1Button.position(0,510);
 homeButton.position(0,501);
 textFont(myFont);
 
