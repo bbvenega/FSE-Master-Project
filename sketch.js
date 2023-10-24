@@ -96,6 +96,7 @@ if(pageSel ==  "activity1" & game1On == true) {
   let d = dist(mouseX,mouseY,molePosX,molePosY);
     if(d <= 30) {
       coinSound.play();
+      score++;
       WhackAMole();
     }
 }
@@ -115,7 +116,9 @@ textSize(80);
 fill('black');  
 text("Whack-a-Mole", 550,75);
 textSize(40);
-text("Time Left: ", 750,150);
+text("Get 10 to Win!", 810,275);
+textSize(35);
+text("Current score: " + score, 820,350);
 
 
 
@@ -153,12 +156,12 @@ function startWhackAMole() {
 
 function WhackAMole() {
 
-while(game1On && correctGuess && score <= 5) {
+while(game1On && correctGuess && score <= 10) {
 
   
 
   correctGuess = false;
-  score++;
+  
   whackValue = random(1,9);
 whackValue = round(whackValue);
 int(whackValue);
@@ -234,7 +237,7 @@ switch(whackValue) {
 
 }
   
-  if(score > 5) {
+  if(score > 10) {
 
     background(activity1BG);
     image(moleWHH,800, 150);
