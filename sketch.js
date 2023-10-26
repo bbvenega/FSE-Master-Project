@@ -237,7 +237,7 @@ switch(whackValue) {
 
 }
   
-  if(score > 10) {
+  if(score > 9) {
 
     background(activity1BG);
     image(moleWHH,800, 150);
