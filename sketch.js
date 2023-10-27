@@ -302,6 +302,17 @@ function activityTwo() {
   homeButton.position(50, 50);
   text("Activity 2", 500, 100);
   pageSel = "activityTwo";
+  strokeWeight(0);
+  fill("white");
+  square(175,200,100);
+  fill("black");
+  square(600,200,100);
+  triangle(225,400,175,600,275,600);
+  fill("red");
+  rect(525,250,50,5);
+  rect(450,250,50,5);
+  rect(375,250,50,5);
+  rect(300,250,50,5);
 
 }
 
