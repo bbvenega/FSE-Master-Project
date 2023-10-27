@@ -16,9 +16,14 @@ var whackValue;
 var molePosX;
 var molePosY;
 var correctGuess = true;
+var gameCompleted = false;
+
+
+
+
 
 function preload() {
-  myFont = loadFont("HeehawRegular-PZy7.ttf");
+myFont = loadFont("HeehawRegular-PZy7.ttf");
   mainMenuImg = loadImage("farmmainmenu.jpg");
   activity1BG = loadImage("newfarmpic.png");
   moleWHH = loadImage("mole2.png");
@@ -26,13 +31,12 @@ function preload() {
 }
 // The setup function creates and prints the entire home page
 function setup() {
-  // coinSound = loadSound("coinSound.mp3");
 
   textFont(myFont);
   pageSel = "home";
   createCanvas(1000, 500);
 
-  // The code below creates the necessary buttons
+  // The code below creates the necessary buttons 
   homeButton = createButton("Go home");
   homeButton.mouseClicked(home);
   act1Button = createButton("Begin game");
@@ -79,13 +83,13 @@ function setup() {
 function mouseClicked() {
   cursorY = mouseY;
   cursorX = mouseX;
-
-
-  if ((pageSel == "activity1") & (game1On == true)) {
+  
+  
+  if ((pageSel == "activity1") && (game1On == true)) {
     correctGuess = true;
     let d = dist(mouseX, mouseY, molePosX, molePosY);
     if (d <= 30) {
-      // coinSound.play();
+      coinSound.play();
       score++;
       WhackAMole();
     }
@@ -101,16 +105,29 @@ function activityOne() {
 
   homeButton.position(50, 50);
   textSize(80);
-  fill("black");
-  text("Whack-a-Mole", 550, 75);
-  textSize(40);
-  text("Get 10 to Win!", 810, 275);
+
+  fill(196, 164, 132, 250);
+  rect(125, 25, 750, 100, 50);
+
+  fill('black');
+  text("Whack-a-Mole", 500, 100);
   textSize(35);
+  fill(196, 164, 132, 250);
+  rect(650, 210, 330, 175, 50);
+
+  fill('black');
+  text("Get 10 to Win!", 810, 275);
+  textSize(30);
   text("Current score: " + score, 820, 350);
 
-  fill("green");
 
-  fill("#6e4f32");
+
+
+
+  fill('green');
+
+
+  fill('brown')
   strokeWeight(1);
   circle(300, 250, 75);
   circle(450, 250, 75);
@@ -122,24 +139,30 @@ function activityOne() {
   circle(450, 450, 75);
   circle(600, 450, 75);
 
-  act1Button.position(900, 200);
+  act1Button.position(900, 450);
+
+
+
+
 }
 
 function startWhackAMole() {
   if (game1On == false) {
+
     game1On = true;
     WhackAMole();
   }
 }
 
 function WhackAMole() {
+
   while (game1On && correctGuess && score <= 10) {
     correctGuess = false;
 
     whackValue = random(1, 9);
     whackValue = round(whackValue);
     int(whackValue);
-
+    
 
     switch (whackValue) {
       case 1:
@@ -208,7 +231,7 @@ function WhackAMole() {
   }
 
   if (score > 9) {
-    background(activity1BG);
+        background(activity1BG);
     image(moleWHH, 800, 150);
     moleWHH.resize(300, 300);
 
@@ -216,18 +239,39 @@ function WhackAMole() {
 
     background(activity1BG);
     textSize(80);
-    fill("black");
-    text("Whack-a-Mole", 550, 75);
+
+    fill(196, 164, 132, 250);
+    rect(125, 25, 750, 100, 50);
+    fill('black');
+    text("Whack-a-Mole", 500, 100);
     fill(200, 0, 0);
     image(smallMole, 999, 999, 1, 1);
-    fill("black");
-    text("YOU WIN!", 500, 350);
+    text("YOU WIN!", (width / 2) - 100, 275, 200, 300);
+    textSize(70);
+
+    fill(196, 164, 132, 250);
+    rect((width / 4), 390, (width / 2), 100, 50);
+
+    fill('black');
+    text("Try Again?", (width / 2),475);
+
+    
     act1Button.position(900, 900);
     game1On = false;
     score = 0;
     correctGuess = true;
+    gameCompleted = true;
+    pageSel == "tryAgain"
   }
 }
+
+
+
+
+
+
+
+
 
 function activityTwo() {
   background(activity1BG);
@@ -270,11 +314,11 @@ function home() {
 
   // Title text & Background
   background(mainMenuImg);
-  textSize(50);
+  textSize(50)
   textAlign(CENTER);
   fill(196, 164, 132, 250);
   rect(150, 35, 675, 90, 50);
-  fill("black");
+  fill('black');
   text("FSE Master Project ", 500, 100);
 
   textSize(40);
@@ -282,59 +326,72 @@ function home() {
   // Menu buttons
   fill(196, 164, 132, 250);
   rect(150, 250, 300, 100, 50);
-  fill("black");
+  fill('black');
   textAlign(CENTER);
   text("Activity 1", 300, 315);
 
+
   fill(196, 164, 132, 250);
-  rect(500, 250, 300, 100, 50);
-  fill("black");
+  rect(500, 250, 300, 100, 50)
+  fill('black');
   textAlign(CENTER);
   text("Activity 2", 650, 315);
 
   fill(196, 164, 132, 250);
-  rect(150, 375, 300, 100, 50);
-  fill("black");
+  rect(150, 375, 300, 100, 50)
+  fill('black');
   textAlign(CENTER);
   text("Activity 3", 300, 440);
 
   fill(196, 164, 132, 250);
-  rect(500, 375, 300, 100, 50);
-  fill("black");
+  rect(500, 375, 300, 100, 50)
+  fill('black');
   textAlign(CENTER);
   text("Settings", 650, 440);
+
 }
 
+
 function draw() {
+
+
   // Decides which page is opened based on click position
   if (pageSel == "home") {
     if (cursorX >= 150 && cursorX <= 450 && cursorY >= 250 && cursorY <= 350) {
       pageSel = "activity1";
       activityOne();
-    } else if (
-      cursorX >= 500 &&
-      cursorX <= 800 &&
-      cursorY >= 250 &&
-      cursorY <= 350
-    ) {
+
+    } else if (cursorX >= 500 && cursorX <= 800 && cursorY >= 250 && cursorY <= 350) {
       pageSel = "activity2";
       activityTwo();
-    } else if (
-      cursorX >= 150 &&
-      cursorX <= 450 &&
-      cursorY >= 375 &&
-      cursorY <= 475
-    ) {
+
+
+    } else if (cursorX >= 150 && cursorX <= 450 && cursorY >= 375 && cursorY <= 475) {
       pageSel = "activity3";
       activityThree();
-    } else if (
-      cursorX >= 500 &&
-      cursorX <= 800 &&
-      cursorY >= 375 &&
-      cursorY <= 475
-    ) {
+
+
+    } else if (cursorX >= 500 && cursorX <= 800 && cursorY >= 375 && cursorY <= 475) {
       pageSel = "settings";
       settings();
     }
+
+
+
   }
+
+  if (pageSel == "tryAgain" && gameCompleted == true) {
+    if(mouseX >= 250 && mouseX <= 750) {
+      text("testtestest", 500, 300);
+      gameCompleted = false;
+    }
+
+  }
+
+
 }
+
+
+
+
+
