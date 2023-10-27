@@ -17,11 +17,12 @@ var molePosX;
 var molePosY;
 var correctGuess = true;
 var gameCompleted = false;
+var TARGETSCORE = 10;
 
 
 
 
-
+// The function preload contains all of our visual assets that need to be loaded before running the application
 function preload() {
 
   myFont = loadFont('HeehawRegular-PZy7.ttf');
@@ -88,10 +89,16 @@ function setup() {
 
 // The function below waits until the user selects one of the menu options
 function mouseClicked() {
+
+  // The following variables hold the X and Y coordinate of every user click.
   cursorY = mouseY;
   cursorX = mouseX;
   print(cursorX);
 
+
+// The following segment of code determines if activity 1 is active and if so determines if the user is clicking close enough to each mole. 
+// If so, it plays a coin noise, adds to the score, and calls whackAMole
+// If not, it plays an error noise.
   if (pageSel == "activity1" & game1On == true) {
     correctGuess = true;
     let d = dist(mouseX, mouseY, molePosX, molePosY);
@@ -109,8 +116,10 @@ function mouseClicked() {
 
 }
 
-//The following functions setup and operate each of the individual pages.
 
+
+
+// The following function paints and operates the activity one page.
 function activityOne() {
   createCanvas(1000, 500)
 
@@ -131,7 +140,7 @@ function activityOne() {
   rect(650, 210, 330, 175, 50);
 
   fill('black');
-  text("Get 10 to Win!", 810, 275);
+  text("Get " + TARGETSCORE + " to Win!", 810, 275);
   textSize(30);
   text("Current score: " + score, 820, 350);
 
@@ -161,6 +170,8 @@ function activityOne() {
 
 }
 
+// The purpose of this function is to activate the variable that represents activity 1's status.
+// When called, flips the game 1 "On switch" and calls it for the first time.
 function startWhackAMole() {
   if (game1On == false) {
 
@@ -169,21 +180,25 @@ function startWhackAMole() {
   }
 }
 
+// The whack a mole portion of activity one.
 function WhackAMole() {
 
-  while (game1On && correctGuess && score <= 10) {
+  // This while loop generates and moves the location of the mole.
+  // In order for the mole to move, the game1On and correctGuess must be true.
+  // Will generate moles under those conditions until score is met.
+  while (game1On && correctGuess && score <= TARGETSCORE) {
 
 
-
+    // Resets correctGuess so it holds position of mole.
     correctGuess = false;
 
     whackValue = random(1, 9);
     whackValue = round(whackValue);
     int(whackValue);
-    print(whackValue);
 
 
 
+    // This switch case statement determines where the mole appears based on random number between 1-9 generated above.
     switch (whackValue) {
       case 1:
         activityOne();
@@ -251,8 +266,9 @@ function WhackAMole() {
 
 
   }
-
-  if (score > 9) {
+  // This condition is met when the determined score is reached
+  // It prints congratulatory message and asks user to try again.
+  if (score > TARGETSCORE - 1) {
 
     background(activity1BG);
     image(moleWHH, 800, 150);
@@ -277,9 +293,9 @@ function WhackAMole() {
     rect((width / 4), 390, (width / 2), 100, 50);
 
     fill('black');
-    text("Try Again?", (width / 2),475);
+    text("Try Again?", (width / 2), 475);
 
-    
+
     act1Button.position(900, 900);
     game1On = false;
     score = 0;
@@ -296,7 +312,7 @@ function WhackAMole() {
 
 
 
-
+// The following function paints and operates the activity two page.
 function activityTwo() {
   background(activity1BG);
   homeButton.position(50, 50);
@@ -304,18 +320,19 @@ function activityTwo() {
   pageSel = "activityTwo";
   strokeWeight(0);
   fill("white");
-  square(175,200,100);
+  square(175, 200, 100);
   fill("black");
-  square(600,200,100);
-  triangle(225,400,175,600,275,600);
+  square(600, 200, 100);
+  triangle(225, 400, 175, 600, 275, 600);
   fill("red");
-  rect(525,250,50,5);
-  rect(450,250,50,5);
-  rect(375,250,50,5);
-  rect(300,250,50,5);
+  rect(525, 250, 50, 5);
+  rect(450, 250, 50, 5);
+  rect(375, 250, 50, 5);
+  rect(300, 250, 50, 5);
 
 }
 
+// The following function paints and operates the activity three page.
 function activityThree() {
   background(activity1BG);
   homeButton.position(50, 50);
@@ -323,7 +340,7 @@ function activityThree() {
   pageSel = "activityThree";
 
 }
-
+// The following function paints and operates the settings page.
 function settings() {
   background(activity1BG);
   homeButton.position(50, 50);
@@ -331,10 +348,15 @@ function settings() {
   pageSel = "settings";
 
 }
+
+// The following function paints and operates the home page.
 function home() {
   pageSel = "home";
+
+  // Moves unecessary buttons off screen.
   act1Button.position(0, 510);
   homeButton.position(0, 501);
+
   textFont(myFont);
 
   createCanvas(1000, 500);
@@ -382,7 +404,7 @@ function home() {
 function draw() {
 
 
-  // Decides which page is opened based on click position
+  // Decides which page is opened based on click position.
   if (pageSel == "home") {
     if (cursorX >= 150 && cursorX <= 450 && cursorY >= 250 && cursorY <= 350) {
       pageSel = "activity1";
@@ -407,8 +429,9 @@ function draw() {
 
   }
 
+  // Resets game if user selects try again.
   if (pageSel == "tryAgain" && gameCompleted == true) {
-    if(mouseX >= 250 && mouseX <= 750) {
+    if (mouseX >= 250 && mouseX <= 750) {
       text("testtestest", 500, 300);
       gameCompleted = false;
     }
