@@ -19,7 +19,11 @@ var correctGuess = true;
 var gameCompleted = false;
 var TARGETSCORE = 10;
 
-
+// Activity two variables
+var rectPosX;
+var rectPosY;
+var trianglePosX;
+var tranglePosY;
 
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
@@ -320,15 +324,21 @@ function activityTwo() {
   pageSel = "activityTwo";
   strokeWeight(0);
   fill("white");
-  square(175, 200, 100);
+  square(175,200,100);
   fill("black");
-  square(600, 200, 100);
-  triangle(225, 400, 175, 600, 275, 600);
-  fill("red");
-  rect(525, 250, 50, 5);
-  rect(450, 250, 50, 5);
-  rect(375, 250, 50, 5);
-  rect(300, 250, 50, 5);
+  square(600,200,100);
+  triangle(225,350,160,450,285,450);
+  fill("white");
+  triangle(650,350,600,450,710,450);
+  fill("yellow");
+  rect(525,250,50,5);
+  rect(450,250,50,5);
+  rect(375,250,50,5);
+  rect(300,250,50,5);
+  rect(525,400,50,5);
+  rect(450,400,50,5);
+  rect(375,400,50,5);
+  rect(300,400,50,5);
 
 }
 
