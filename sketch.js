@@ -17,7 +17,7 @@ var molePosX;
 var molePosY;
 var correctGuess = true;
 var gameCompleted = false;
-var TARGETSCORE = 10;
+var TARGETSCORE = 1;
 
 
 
@@ -164,10 +164,11 @@ function activityOne() {
   circle(600, 450, 75);
 
   act1Button.position(900, 450);
-
-
-
-
+  fill(196, 164, 132, 250);
+  rect(100,230,100, 215, 60);
+  fill('black')
+  text("Tap the mole to win!",(width/7),275, 10);
+  
 }
 
 // The purpose of this function is to activate the variable that represents activity 1's status.
@@ -286,8 +287,12 @@ function WhackAMole() {
     text("Whack-a-Mole", 500, 100);
     fill(200, 0, 0);
     image(smallMole, 999, 999, 1, 1);
-    text("YOU WIN!", (width / 2) - 100, 275, 200, 300);
+    fill(196, 164, 132, 250);
+    rect((width/4),215,(width/2),100,50);
+    fill('black');
+    text("YOU WIN!", 500, 300);
     textSize(70);
+    
 
     fill(196, 164, 132, 250);
     rect((width / 4), 390, (width / 2), 100, 50);
