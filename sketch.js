@@ -5,7 +5,7 @@ let homePage = true;
 let cursorX = 0;
 let cursorY = 0;
 let homeButton;
-
+var tryAgainCC = 0;
 //Main menu variables
 
 // Activity One Variables
@@ -17,7 +17,7 @@ var molePosX;
 var molePosY;
 var correctGuess = true;
 var gameCompleted = false;
-var TARGETSCORE = 1;
+var TARGETSCORE = 10;
 var clickCount = 0;
 
 // Activity two variables
@@ -99,8 +99,12 @@ function mouseClicked() {
   // The following variables hold the X and Y coordinate of every user click.
   cursorY = mouseY;
   cursorX = mouseX;
-  print(cursorX);
 
+ 
+ 
+  if(pageSel == "tryAgain") {
+  tryAgainCC++;
+  }
 
 // The following segment of code determines if activity 1 is active and if so determines if the user is clicking close enough to each mole. 
 // If so, it plays a coin noise, adds to the score, and calls whackAMole
@@ -186,7 +190,7 @@ function activityOne() {
 // When called, flips the game 1 "On switch" and calls it for the first time.
 function startWhackAMole() {
   if (game1On == false) {
-
+    clickCount = 0;
     game1On = true;
     WhackAMole();
   }
@@ -203,6 +207,7 @@ function WhackAMole() {
 
     // Resets correctGuess so it holds position of mole.
     correctGuess = false;
+  
 
     whackValue = random(1, 9);
     whackValue = round(whackValue);
@@ -317,8 +322,9 @@ function WhackAMole() {
     score = 0;
     correctGuess = true;
     gameCompleted = true;
-    pageSel == "tryAgain";
+    pageSel = "tryAgain";
     clickCount = 0;
+    tryAgainCC = 0;
   }
 }
 
@@ -454,10 +460,13 @@ function draw() {
 
   // Resets game if user selects try again.
   if (pageSel == "tryAgain" && gameCompleted == true) {
-    if (mouseX >= 250 && mouseX <= 750) {
-      text("testtestest", 500, 300);
+    if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <=490) {
+      if(tryAgainCC >= 1) {
+        pageSel = "activity1";
       gameCompleted = false;
+      activityOne();
     }
+  }
 
   }
 
