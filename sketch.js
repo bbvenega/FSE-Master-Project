@@ -207,63 +207,63 @@ function WhackAMole() {
     switch (whackValue) {
       case 1:
         activityOne();
-        image(smallMole, 275, 230, 75, 75);
+        image(smallMole, 263, 215, 75, 75);
         molePosX = 300;
         molePosY = 250;
         break;
       case 2:
         activityOne();
 
-        image(smallMole, 425, 230, 75, 75);
+        image(smallMole, 413, 215, 75, 75);
         molePosX = 450;
         molePosY = 250;
         break;
       case 3:
         activityOne();
 
-        image(smallMole, 575, 230, 75, 75);
+        image(smallMole, 563, 215, 75, 75);
         molePosX = 600;
         molePosY = 250;
         break;
       case 4:
         activityOne();
 
-        image(smallMole, 275, 320, 75, 75);
+        image(smallMole, 263, 315, 75, 75);
         molePosX = 300;
         molePosY = 350;
         break;
       case 5:
         activityOne();
 
-        image(smallMole, 425, 320, 75, 75);
+        image(smallMole, 413, 315, 75, 75);
         molePosX = 450;
         molePosY = 350;
         break;
       case 6:
         activityOne();
 
-        image(smallMole, 575, 320, 75, 75);
+        image(smallMole, 563, 315, 75, 75);
         molePosX = 600;
         molePosY = 350;
         break;
       case 7:
         activityOne();
 
-        image(smallMole, 275, 430, 75, 75);
+        image(smallMole, 263, 415, 75, 75);
         molePosX = 300;
         molePosY = 450;
         break;
       case 8:
         activityOne();
 
-        image(smallMole, 425, 430, 75, 75);
+        image(smallMole, 413, 415, 75, 75);
         molePosX = 450;
         molePosY = 450;
         break;
       case 9:
         activityOne();
 
-        image(smallMole, 575, 430, 75, 75);
+        image(smallMole, 563, 415, 75, 75);
         molePosX = 600;
         molePosY = 450;
         break;
