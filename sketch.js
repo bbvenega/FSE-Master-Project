@@ -113,12 +113,14 @@ function mouseClicked() {
     correctGuess = true;
     let d = dist(mouseX, mouseY, molePosX, molePosY);
     if (d <= 30) {
+      coinSound.setVolume(0.05);
       coinSound.play();
       score++;
       WhackAMole();
     } else if(game1On == true) {
       clickCount++;
       if(clickCount >= 2) {
+        wrongAnswer.setVolume(0.4);
         wrongAnswer.play();
       }
 
