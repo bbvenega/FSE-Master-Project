@@ -18,6 +18,7 @@ var molePosY;
 var correctGuess = true;
 var gameCompleted = false;
 var TARGETSCORE = 1;
+var clickCount = 0;
 
 // Activity two variables
 var rectPosX;
@@ -35,6 +36,7 @@ function preload() {
   moleWHH = loadImage("mole2.png");
   smallMole = loadImage("mole2.png");
   coinSound = loadSound("coinSound.mp3")
+  wrongAnswer = loadSound("wrongans.mp3");
 
 
 }
@@ -110,9 +112,14 @@ function mouseClicked() {
       coinSound.play();
       score++;
       WhackAMole();
+    } else if(game1On == true) {
+      clickCount++;
+      if(clickCount >= 2) {
+        wrongAnswer.play();
+      }
+
     }
   }
-
 
 
 
@@ -310,7 +317,8 @@ function WhackAMole() {
     score = 0;
     correctGuess = true;
     gameCompleted = true;
-    pageSel == "tryAgain"
+    pageSel == "tryAgain";
+    clickCount = 0;
   }
 }
 
