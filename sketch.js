@@ -37,6 +37,7 @@ function preload() {
   smallMole = loadImage("mole2.png");
   coinSound = loadSound("coinSound.mp3")
   wrongAnswer = loadSound("wrongans.mp3");
+  hay = loadImage("hay.webp");
 
 
 }
@@ -339,15 +340,28 @@ function WhackAMole() {
 
 // The following function paints and operates the activity two page.
 function activityTwo() {
+  //Paints the GUI for Act2
   background(activity1BG);
-  homeButton.position(50, 50);
-  text("Activity 2", 500, 100);
   pageSel = "activityTwo";
+  homeButton.position(50, 50);
+  fill(196, 164, 132, 250);
+  rect(125, 25, 750, 100, 50);
+  fill('black');
+  textSize(75);
+  text("Drag and Match", 500, 100);
+
+  fill(196, 164, 132, 250);
+  rect(100,230,100, 215, 60);
+  textSize(20);
+  fill('black')
+  text("Drag and match the shapes to win!",(width/7),275, 10);
+
+
   strokeWeight(0);
   fill("white");
-  square(175,200,100);
+  image(hay, 200,150,200,200);
   fill("black");
-  square(600,200,100);
+  square(600,175,150);
   triangle(225,350,160,450,285,450);
   fill("white");
   triangle(650,350,600,450,710,450);
@@ -394,7 +408,7 @@ function home() {
 
   // Title text & Background
   background(mainMenuImg);
-  textSize(50)
+  textSize(70)
   textAlign(CENTER);
   fill(196, 164, 132, 250);
   rect(150, 35, 675, 90, 50);
