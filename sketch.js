@@ -25,6 +25,8 @@ var rectPosX;
 var rectPosY;
 var trianglePosX;
 var tranglePosY;
+var randomImageTopVal;
+var randomImageBottomVal;
 
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
@@ -38,6 +40,8 @@ function preload() {
   coinSound = loadSound("coinSound.mp3")
   wrongAnswer = loadSound("wrongans.mp3");
   hay = loadImage("hay.webp");
+  pig = loadImage("pig.png");
+  pumpkin = loadImage("pumpkin.png")
 
 
 }
@@ -101,15 +105,15 @@ function mouseClicked() {
   cursorY = mouseY;
   cursorX = mouseX;
 
- 
- 
-  if(pageSel == "tryAgain") {
-  tryAgainCC++;
+
+
+  if (pageSel == "tryAgain") {
+    tryAgainCC++;
   }
 
-// The following segment of code determines if activity 1 is active and if so determines if the user is clicking close enough to each mole. 
-// If so, it plays a coin noise, adds to the score, and calls whackAMole
-// If not, it plays an error noise.
+  // The following segment of code determines if activity 1 is active and if so determines if the user is clicking close enough to each mole. 
+  // If so, it plays a coin noise, adds to the score, and calls whackAMole
+  // If not, it plays an error noise.
   if (pageSel == "activity1" & game1On == true) {
     correctGuess = true;
     let d = dist(mouseX, mouseY, molePosX, molePosY);
@@ -118,9 +122,9 @@ function mouseClicked() {
       coinSound.play();
       score++;
       WhackAMole();
-    } else if(game1On == true) {
+    } else if (game1On == true) {
       clickCount++;
-      if(clickCount >= 2) {
+      if (clickCount >= 2) {
         wrongAnswer.setVolume(0.4);
         wrongAnswer.play();
       }
@@ -183,10 +187,10 @@ function activityOne() {
 
   act1Button.position(900, 450);
   fill(196, 164, 132, 250);
-  rect(100,230,100, 215, 60);
+  rect(100, 230, 100, 215, 60);
   fill('black')
-  text("Tap the mole to win!",(width/7),275, 10);
-  
+  text("Tap the mole to win!", (width / 7), 275, 10);
+
 }
 
 // The purpose of this function is to activate the variable that represents activity 1's status.
@@ -210,7 +214,7 @@ function WhackAMole() {
 
     // Resets correctGuess so it holds position of mole.
     correctGuess = false;
-  
+
 
     whackValue = random(1, 9);
     whackValue = round(whackValue);
@@ -307,11 +311,11 @@ function WhackAMole() {
     fill(200, 0, 0);
     image(smallMole, 999, 999, 1, 1);
     fill(196, 164, 132, 250);
-    rect((width/4),215,(width/2),100,50);
+    rect((width / 4), 215, (width / 2), 100, 50);
     fill('black');
     text("YOU WIN!", 500, 300);
     textSize(70);
-    
+
 
     fill(196, 164, 132, 250);
     rect((width / 4), 390, (width / 2), 100, 50);
@@ -341,6 +345,7 @@ function WhackAMole() {
 // The following function paints and operates the activity two page.
 function activityTwo() {
   //Paints the GUI for Act2
+  
   background(activity1BG);
   pageSel = "activityTwo";
   homeButton.position(50, 50);
@@ -351,32 +356,64 @@ function activityTwo() {
   text("Drag and Match", 500, 100);
 
   fill(196, 164, 132, 250);
-  rect(100,230,100, 215, 60);
+  rect(100, 230, 100, 215, 60);
   textSize(20);
   fill('black')
-  text("Drag and match the shapes to win!",(width/7),275, 10);
+  text("Drag and match the shapes to win!", (width / 7), 275, 10);
 
 
-  strokeWeight(0);
-  fill("white");
-  image(hay, 200,150,200,200);
-  fill("black");
-  square(600,175,150);
-  triangle(225,350,160,450,285,450);
-  fill("white");
-  triangle(650,350,600,450,710,450);
-  fill("yellow");
-  rect(525,250,50,5);
-  rect(450,250,50,5);
-  rect(375,250,50,5);
-  rect(300,250,50,5);
-  rect(525,400,50,5);
-  rect(450,400,50,5);
-  rect(375,400,50,5);
-  rect(300,400,50,5);
+  topImage();
+  bottomImage();
+
+
+
+
+
+ 
+ 
+
 
 }
 
+function topImage() {
+  randomImageTopVal = random(1,2);
+  randomImageTopVal = round(randomImageTopVal);
+  int(randomImageTopVal);
+  fill('black');
+  text(randomImageTopVal, 100, 100);
+
+  switch(randomImageTopVal) {
+    case 1: 
+    image(hay, 200, 120, 200, 200);
+    tint(20, 200);
+    image(hay, 600, 120, 200, 200);
+    noTint();
+    break;
+
+    case 2: 
+    image(pumpkin, 200, 120, 200, 200);
+    tint(20, 200);
+    image(pumpkin, 600, 120, 200, 200);
+    noTint();
+    break
+  }
+}
+
+function bottomImage() {
+  randomImageBottomVal = random(1,1);
+  randomImageBottomVal = round(randomImageBottomVal);
+  int(randomImageBottomVal);
+  fill('black');
+  text(randomImageBottomVal, 250, 250);
+  switch(randomImageBottomVal) {
+    case 1: 
+    image(pig, 220, 325, 150, 150);
+    tint(20,200);
+    image(pig,620, 325, 150,150);
+    noTint();
+    break;
+  }
+}
 // The following function paints and operates the activity three page.
 function activityThree() {
   background(activity1BG);
@@ -476,13 +513,13 @@ function draw() {
 
   // Resets game if user selects try again.
   if (pageSel == "tryAgain" && gameCompleted == true) {
-    if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <=490) {
-      if(tryAgainCC >= 1) {
+    if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
+      if (tryAgainCC >= 1) {
         pageSel = "activity1";
-      gameCompleted = false;
-      activityOne();
+        gameCompleted = false;
+        activityOne();
+      }
     }
-  }
 
   }
 
