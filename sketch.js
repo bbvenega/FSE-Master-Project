@@ -26,7 +26,9 @@ var rectPosY;
 var trianglePosX;
 var tranglePosY;
 var randomImageTopVal;
+var previousImageTopVal;
 var randomImageBottomVal;
+var previousImageBottomVal;
 
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
@@ -41,7 +43,8 @@ function preload() {
   wrongAnswer = loadSound("wrongans.mp3");
   hay = loadImage("hay.webp");
   pig = loadImage("pig.png");
-  pumpkin = loadImage("pumpkin.png")
+  farm = loadImage("farm.png");
+  corn = loadImage("corn.png");
 
 
 }
@@ -376,11 +379,11 @@ function activityTwo() {
 }
 
 function topImage() {
+ 
   randomImageTopVal = random(1,2);
   randomImageTopVal = round(randomImageTopVal);
   int(randomImageTopVal);
-  fill('black');
-  text(randomImageTopVal, 100, 100);
+
 
   switch(randomImageTopVal) {
     case 1: 
@@ -388,29 +391,38 @@ function topImage() {
     tint(20, 200);
     image(hay, 600, 120, 200, 200);
     noTint();
+    previousImageTopVal = randomImageTopVal;
     break;
 
     case 2: 
-    image(pumpkin, 200, 120, 200, 200);
+    image(farm, 200, 120, 200, 200);
     tint(20, 200);
-    image(pumpkin, 600, 120, 200, 200);
+    image(farm, 600, 120, 200, 200);
     noTint();
+    previousImageTopVal = randomImageTopVal;
     break
   }
 }
 
 function bottomImage() {
-  randomImageBottomVal = random(1,1);
+  randomImageBottomVal = random(1,2);
   randomImageBottomVal = round(randomImageBottomVal);
   int(randomImageBottomVal);
-  fill('black');
-  text(randomImageBottomVal, 250, 250);
+
   switch(randomImageBottomVal) {
     case 1: 
     image(pig, 220, 325, 150, 150);
     tint(20,200);
     image(pig,620, 325, 150,150);
     noTint();
+    previousImageBottomVal = randomImageBottomVal;
+    break;
+    case 2: 
+    image(corn, 220, 325, 150, 150);
+    tint(20,200);
+    image(corn, 620, 325, 150, 150);
+    noTint();
+    previousImageBottomVal = randomImageBottomVal;
     break;
   }
 }
