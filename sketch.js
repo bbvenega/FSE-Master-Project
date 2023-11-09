@@ -6,6 +6,8 @@ let cursorX = 0;
 let cursorY = 0;
 let homeButton;
 var tryAgainCC = 0;
+let gainSlider, muteButton, muteState;
+let player;
 //Main menu variables
 
 // Activity One Variables
@@ -526,9 +528,52 @@ function activityThree() {
 function settings() {
   background(activity1BG);
   homeButton.position(50, 50);
+  fill(196, 164, 132, 250);
+  rect(125, 25, 750, 100, 50);
+  fill('black');
+  textSize(75);
   text("Settings", 500, 100);
   pageSel = "settings";
+  muteState = false;
+  muteButton = createButton("mute all sounds"); //mute button
+  muteButton.position(175, 350);
+  muteButton.mousePressed(tog);
 
+  gainSlider = createSlider(-60, 12, 0, 1); //volume slider
+  gainSlider.position(0, 350);
+  function draw() {
+    background(bgColor); //changes background color
+    console.log(muteState); //are we currently mutes?
+    text("this controls the volume", 30, 350);
+    
+    if (muteState != true) { //run volume normally when not muted
+      volume();
+    }
+  }
+  
+  function volume() { //volume corresponds to the lsider
+    player.volume.value = gainSlider.value();
+  }
+  
+  
+  function playsound() { //triggers sound playback
+    player.start();
+  }
+  function tog() { //calls certain funcitons depending on if we are mutes
+    if (muteState === true) {
+      muteoff(); //turns mute off
+      muteState = false;//adjusts state variable
+    } else {
+      muteon(); //turns mute on
+      muteState = true; //adjusts state variable
+    }
+  }
+  function muteon() {
+    player.volume.value = -60;
+  }
+  function muteoff() {
+    volume();
+  }
 }
 
 // The following function paints and operates the home page.
