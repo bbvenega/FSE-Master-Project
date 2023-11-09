@@ -463,6 +463,26 @@ function bottomImage() {
     break;
   }
 }
+
+function paintActivityTwoBack() {
+  background(activity1BG);
+  homeButton.position(50, 50);
+  fill(196, 164, 132, 250);
+  rect(125, 25, 750, 100, 50);
+  fill('black');
+  textSize(75);
+  //text("Drag and Match", 500, 100);
+    // Test Code
+    text("TEST TEST TEST TEST", 500, 100);
+
+  fill(196, 164, 132, 250);
+  rect(100, 230, 100, 215, 60);
+  textSize(20);
+  fill('black')
+  text("Drag and match the shapes to win!", (width / 7), 275, 10);
+
+}
+
 // The following function paints and operates the activity three page.
 function activityThree() {
   background(activity1BG);
@@ -607,21 +627,8 @@ function draw() {
 
   // Activity 2 check of distance, and paints the background
   if (pageSel == "activity2" && mouseIsPressed == true) { 
-    background(activity1BG);
-    homeButton.position(50, 50);
-    fill(196, 164, 132, 250);
-    rect(125, 25, 750, 100, 50);
-    fill('black');
-    textSize(75);
-    //text("Drag and Match", 500, 100);
-      // Test Code
-      text("TEST TEST TEST TEST", 500, 100);
-  
-    fill(196, 164, 132, 250);
-    rect(100, 230, 100, 215, 60);
-    textSize(20);
-    fill('black')
-    text("Drag and match the shapes to win!", (width / 7), 275, 10);
+    
+    paintActivityTwoBack();
       
       if(int(randomImageTopVal) == 1) { 
         dHay = dist(mouseX, mouseY, hayX + 100, hayY + 100); // Distance between the HayXY and cursorXY
@@ -644,14 +651,10 @@ function draw() {
           tint(20, 200);
           image(hay, 600, 120, 200, 200);
           noTint();
-          // var hayX = mouseX;
-          // var hayY = mouseY;
-          
-          // let hayNX = 600;
-          // let hayNY = 120;
-
-          
-        // TOFIX Reset values, Set try again screen, reset variables' X and Y values
+          // var hayX = mouseX; // let hayNX = 600;
+          // var hayY = mouseY; // let hayNY = 120;
+        
+          // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
         }
       } //else {
 //        image(farm, 200, 120, 200, 200);
