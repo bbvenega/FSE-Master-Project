@@ -44,7 +44,9 @@ function preload() {
   hay = loadImage("hay.webp");
   pig = loadImage("pig.png");
   farm = loadImage("farm.png");
-  corn = loadImage("corn.png");
+  horse = loadImage("horse.png");
+  milkjug = loadImage("milkjug.png");
+  egg = loadImage("egg.png");
 
 
 }
@@ -383,7 +385,7 @@ function topImage() {
  
 
   // This part of the function determines a random integer that will dictate which picture will display. 
-  randomImageTopVal = random(1,2);
+  randomImageTopVal = random(1,3);
   randomImageTopVal = round(randomImageTopVal);
   int(randomImageTopVal);
 
@@ -407,7 +409,15 @@ if(previousImageTopVal == randomImageTopVal) {
     image(farm, 600, 120, 200, 200);
     noTint();
     previousImageTopVal = randomImageTopVal;
-    break
+    break;
+
+    case 3: 
+    image(horse, 200, 150, 150, 150);
+    tint(20, 200);
+    image(horse, 600, 150, 175, 175);
+    noTint();
+    previousImageTopVal = randomImageTopVal;
+    break;
   }
 }
 
@@ -415,7 +425,7 @@ if(previousImageTopVal == randomImageTopVal) {
 function bottomImage() {
   
   // This part of the function determines a random integer that will dictate which picture will display. 
-  randomImageBottomVal = random(1,2);
+  randomImageBottomVal = random(1,3);
   randomImageBottomVal = round(randomImageBottomVal);
   int(randomImageBottomVal);
 
@@ -434,12 +444,17 @@ function bottomImage() {
     previousImageBottomVal = randomImageBottomVal;
     break;
     case 2: 
-    image(corn, 220, 325, 175, 175);
+    image(egg, 220, 325, 150, 150);
     tint(20,200);
-    image(corn, 620, 325, 175, 175);
+    image(egg, 620, 325, 150, 150);
     noTint();
     previousImageBottomVal = randomImageBottomVal;
     break;
+    case 3:
+      image(milkjug, 220, 325, 175, 175);
+      tint(20,200);
+      image(milkjug, 620, 325, 175, 175);
+      noTint();
   }
 }
 // The following function paints and operates the activity three page.
@@ -473,7 +488,7 @@ function home() {
 
   // Title text & Background
   background(mainMenuImg);
-  textSize(70)
+  textSize(55)
   textAlign(CENTER);
   fill(196, 164, 132, 250);
   rect(150, 35, 675, 90, 50);
