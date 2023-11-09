@@ -378,12 +378,19 @@ function activityTwo() {
 
 }
 
+// The following function displays a random image that appears on the top half of the screen for Activity 2.
 function topImage() {
  
+
+  // This part of the function determines a random integer that will dictate which picture will display. 
   randomImageTopVal = random(1,2);
   randomImageTopVal = round(randomImageTopVal);
   int(randomImageTopVal);
 
+  // Ensures that the picture is never the same as the one before.
+if(previousImageTopVal == randomImageTopVal) {
+  topImage();
+}
 
   switch(randomImageTopVal) {
     case 1: 
@@ -404,10 +411,19 @@ function topImage() {
   }
 }
 
+// The following function displays a random image that appears on the bottom half of the screen for Activity 2.
 function bottomImage() {
+  
+  // This part of the function determines a random integer that will dictate which picture will display. 
   randomImageBottomVal = random(1,2);
   randomImageBottomVal = round(randomImageBottomVal);
   int(randomImageBottomVal);
+
+
+  // Ensures that the picture is never the same as the one before.
+  if(previousImageBottomVal == randomImageBottomVal) {
+    bottomImage();
+  }
 
   switch(randomImageBottomVal) {
     case 1: 
@@ -418,9 +434,9 @@ function bottomImage() {
     previousImageBottomVal = randomImageBottomVal;
     break;
     case 2: 
-    image(corn, 220, 325, 150, 150);
+    image(corn, 220, 325, 175, 175);
     tint(20,200);
-    image(corn, 620, 325, 150, 150);
+    image(corn, 620, 325, 175, 175);
     noTint();
     previousImageBottomVal = randomImageBottomVal;
     break;
