@@ -25,6 +25,10 @@ var rectPosX;
 var rectPosY;
 var trianglePosX;
 var tranglePosY;
+var randomImageTopVal;
+var previousImageTopVal;
+var randomImageBottomVal;
+var previousImageBottomVal;
 
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
@@ -37,6 +41,12 @@ function preload() {
   smallMole = loadImage("mole2.png");
   coinSound = loadSound("coinSound.mp3")
   wrongAnswer = loadSound("wrongans.mp3");
+  hay = loadImage("hay.webp");
+  pig = loadImage("pig.png");
+  farm = loadImage("farm.png");
+  horse = loadImage("horse.png");
+  milkjug = loadImage("milkjug.png");
+  egg = loadImage("egg.png");
 
 
 }
@@ -100,15 +110,15 @@ function mouseClicked() {
   cursorY = mouseY;
   cursorX = mouseX;
 
- 
- 
-  if(pageSel == "tryAgain") {
-  tryAgainCC++;
+
+
+  if (pageSel == "tryAgain") {
+    tryAgainCC++;
   }
 
-// The following segment of code determines if activity 1 is active and if so determines if the user is clicking close enough to each mole. 
-// If so, it plays a coin noise, adds to the score, and calls whackAMole
-// If not, it plays an error noise.
+  // The following segment of code determines if activity 1 is active and if so determines if the user is clicking close enough to each mole. 
+  // If so, it plays a coin noise, adds to the score, and calls whackAMole
+  // If not, it plays an error noise.
   if (pageSel == "activity1" & game1On == true) {
     correctGuess = true;
     let d = dist(mouseX, mouseY, molePosX, molePosY);
@@ -117,9 +127,9 @@ function mouseClicked() {
       coinSound.play();
       score++;
       WhackAMole();
-    } else if(game1On == true) {
+    } else if (game1On == true) {
       clickCount++;
-      if(clickCount >= 2) {
+      if (clickCount >= 2) {
         wrongAnswer.setVolume(0.4);
         wrongAnswer.play();
       }
@@ -182,10 +192,10 @@ function activityOne() {
 
   act1Button.position(900, 450);
   fill(196, 164, 132, 250);
-  rect(100,230,100, 215, 60);
+  rect(100, 230, 100, 215, 60);
   fill('black')
-  text("Tap the mole to win!",(width/7),275, 10);
-  
+  text("Tap the mole to win!", (width / 7), 275, 10);
+
 }
 
 // The purpose of this function is to activate the variable that represents activity 1's status.
@@ -209,7 +219,7 @@ function WhackAMole() {
 
     // Resets correctGuess so it holds position of mole.
     correctGuess = false;
-  
+
 
     whackValue = random(1, 9);
     whackValue = round(whackValue);
@@ -306,11 +316,11 @@ function WhackAMole() {
     fill(200, 0, 0);
     image(smallMole, 999, 999, 1, 1);
     fill(196, 164, 132, 250);
-    rect((width/4),215,(width/2),100,50);
+    rect((width / 4), 215, (width / 2), 100, 50);
     fill('black');
     text("YOU WIN!", 500, 300);
     textSize(70);
-    
+
 
     fill(196, 164, 132, 250);
     rect((width / 4), 390, (width / 2), 100, 50);
@@ -339,30 +349,114 @@ function WhackAMole() {
 
 // The following function paints and operates the activity two page.
 function activityTwo() {
+  //Paints the GUI for Act2
+  
   background(activity1BG);
-  homeButton.position(50, 50);
-  text("Activity 2", 500, 100);
   pageSel = "activityTwo";
-  strokeWeight(0);
-  fill("white");
-  square(175,200,100);
-  fill("black");
-  square(600,200,100);
-  triangle(225,350,160,450,285,450);
-  fill("white");
-  triangle(650,350,600,450,710,450);
-  fill("yellow");
-  rect(525,250,50,5);
-  rect(450,250,50,5);
-  rect(375,250,50,5);
-  rect(300,250,50,5);
-  rect(525,400,50,5);
-  rect(450,400,50,5);
-  rect(375,400,50,5);
-  rect(300,400,50,5);
+  homeButton.position(50, 50);
+  fill(196, 164, 132, 250);
+  rect(125, 25, 750, 100, 50);
+  fill('black');
+  textSize(75);
+  text("Drag and Match", 500, 100);
+
+  fill(196, 164, 132, 250);
+  rect(100, 230, 100, 215, 60);
+  textSize(20);
+  fill('black')
+  text("Drag and match the shapes to win!", (width / 7), 275, 10);
+
+
+  topImage();
+  bottomImage();
+
+
+
+
+
+ 
+ 
+
 
 }
 
+// The following function displays a random image that appears on the top half of the screen for Activity 2.
+function topImage() {
+ 
+
+  // This part of the function determines a random integer that will dictate which picture will display. 
+  randomImageTopVal = random(1,3);
+  randomImageTopVal = round(randomImageTopVal);
+  int(randomImageTopVal);
+
+  // Ensures that the picture is never the same as the one before.
+if(previousImageTopVal == randomImageTopVal) {
+  topImage();
+}
+
+  switch(randomImageTopVal) {
+    case 1: 
+    image(hay, 200, 120, 200, 200);
+    tint(20, 200);
+    image(hay, 600, 120, 200, 200);
+    noTint();
+    previousImageTopVal = randomImageTopVal;
+    break;
+
+    case 2: 
+    image(farm, 200, 120, 200, 200);
+    tint(20, 200);
+    image(farm, 600, 120, 200, 200);
+    noTint();
+    previousImageTopVal = randomImageTopVal;
+    break;
+
+    case 3: 
+    image(horse, 200, 150, 150, 150);
+    tint(20, 200);
+    image(horse, 600, 150, 175, 175);
+    noTint();
+    previousImageTopVal = randomImageTopVal;
+    break;
+  }
+}
+
+// The following function displays a random image that appears on the bottom half of the screen for Activity 2.
+function bottomImage() {
+  
+  // This part of the function determines a random integer that will dictate which picture will display. 
+  randomImageBottomVal = random(1,3);
+  randomImageBottomVal = round(randomImageBottomVal);
+  int(randomImageBottomVal);
+
+
+  // Ensures that the picture is never the same as the one before.
+  if(previousImageBottomVal == randomImageBottomVal) {
+    bottomImage();
+  }
+
+  switch(randomImageBottomVal) {
+    case 1: 
+    image(pig, 220, 325, 150, 150);
+    tint(20,200);
+    image(pig,620, 325, 150,150);
+    noTint();
+    previousImageBottomVal = randomImageBottomVal;
+    break;
+    case 2: 
+    image(egg, 220, 325, 150, 150);
+    tint(20,200);
+    image(egg, 620, 325, 150, 150);
+    noTint();
+    previousImageBottomVal = randomImageBottomVal;
+    break;
+    case 3:
+      image(milkjug, 220, 325, 175, 175);
+      tint(20,200);
+      image(milkjug, 620, 325, 175, 175);
+      noTint();
+  }
+}
 // The following function paints and operates the activity three page.
 function activityThree() {
   background(activity1BG);
@@ -394,7 +488,7 @@ function home() {
 
   // Title text & Background
   background(mainMenuImg);
-  textSize(50)
+  textSize(55)
   textAlign(CENTER);
   fill(196, 164, 132, 250);
   rect(150, 35, 675, 90, 50);
@@ -462,13 +556,13 @@ function draw() {
 
   // Resets game if user selects try again.
   if (pageSel == "tryAgain" && gameCompleted == true) {
-    if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <=490) {
-      if(tryAgainCC >= 1) {
+    if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
+      if (tryAgainCC >= 1) {
         pageSel = "activity1";
-      gameCompleted = false;
-      activityOne();
+        gameCompleted = false;
+        activityOne();
+      }
     }
-  }
 
   }
 
