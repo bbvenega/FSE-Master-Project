@@ -30,6 +30,43 @@ var previousImageTopVal;
 var randomImageBottomVal;
 var previousImageBottomVal;
 
+// Activity two pictures' position variables 
+  var act2Top = false; // checks if top picture is in place
+  var act2Bot = false; // checks if bottom picture is in place
+
+  // Top Pictures Variabels 
+  var hayX = 200;
+  var hayY = 120;
+  var dHay; // Distance between the HayXY and cursorXY
+    let hayNX = 600;
+    let hayNY = 120;
+    let dNHay; // Distance between the HayXY and Negative HayXY
+    
+  // Top Pictures
+  var farmX = 200;
+  var farmY = 120;
+  var dFarm; // Distance between the FarmXY and cursorXY
+    let farmNX = 600;
+    let farmNY = 120;
+    let dNFarm; // Distance between the FarmXY and Negative FarmXY
+
+
+
+  // Bottom Picture Varibales
+  var cornX = 220;
+  var cornY = 325;
+  var dCorn; // Distance between the CornXY and cursorXY
+    let cornNX = 620;
+    let cornNY = 325;
+    let dNCorn; // Distance between the CornXY and Negative CornXY
+
+  // Bottom Pictures
+  var pigX = 220;
+  var pigY = 325;
+  var dPig; // Distance between the PigXY and cursorXY
+    let pigNX = 620;
+    let pigNY = 325;
+    let dNPig; // Distance between the PigXY and Negative PigXY
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
 function preload() {
@@ -39,7 +76,7 @@ function preload() {
   activity1BG = loadImage("newfarmpic.png");
   moleWHH = loadImage("mole2.png");
   smallMole = loadImage("mole2.png");
-  coinSound = loadSound("coinSound.mp3")
+  coinSound = loadSound("coinSound.mp3");
   wrongAnswer = loadSound("wrongans.mp3");
   hay = loadImage("hay.webp");
   pig = loadImage("pig.png");
@@ -352,7 +389,7 @@ function activityTwo() {
   //Paints the GUI for Act2
   
   background(activity1BG);
-  pageSel = "activityTwo";
+  pageSel = "activity2";
   homeButton.position(50, 50);
   fill(196, 164, 132, 250);
   rect(125, 25, 750, 100, 50);
@@ -457,6 +494,26 @@ function bottomImage() {
       noTint();
   }
 }
+
+function paintActivityTwoBack() {
+  background(activity1BG);
+  homeButton.position(50, 50);
+  fill(196, 164, 132, 250);
+  rect(125, 25, 750, 100, 50);
+  fill('black');
+  textSize(75);
+  //text("Drag and Match", 500, 100);
+    // Test Code
+    text("TEST TEST TEST TEST", 500, 100);
+
+  fill(196, 164, 132, 250);
+  rect(100, 230, 100, 215, 60);
+  textSize(20);
+  fill('black')
+  text("Drag and match the shapes to win!", (width / 7), 275, 10);
+
+}
+
 // The following function paints and operates the activity three page.
 function activityThree() {
   background(activity1BG);
@@ -552,6 +609,111 @@ function draw() {
 
 
 
+  }
+
+  
+
+      
+  // Top Picture Variables 
+    // check distance first
+//    var dFarm = dist(cursorX, cursorY, farmX, farmY); // Distance between the FarmXY and cursorXY
+  
+//    var farmX = cursorX;
+//    var farmY = cursorY;     
+      // check distance last
+//      let dNFarm = dist(farmX, farmY, farmNX, farmNY); // Distance between the FarmXY and Negative FarmXY
+
+      // let farmNX = 600;
+      // let farmNY = 120;
+    
+
+  // Bottom Picture Varibales
+    // check distance first
+//    var dCorn = dist(cursorX, cursorY, cornX, cornY); // Distance between the CornXY and cursorXY
+
+//    var cornX = cursorX;
+//    var cornY = cursorY;
+      // check distance last
+//      let dNCorn = dist(cornX, cornY, cornNX, cornNY); // Distance between the CornXY and Negative CornXY
+  
+      // let cornNX = 620;
+      // let cornNY = 325;
+
+
+  // Bottom Picture Variables 
+    // check distance first
+//    var dPig = dist(cursorX, cursorY, pigX, pigY); // Distance between the PigXY and cursorXY
+
+//    var pigX = cursorX;
+//    var pigY = cursorY;
+      // check distance last
+//      let dNPig = dist(pigX, pigY, pigNX, pigNY); // Distance between the PigXY and Negative PigXY
+
+      // let pigNX = 620;
+      // let pigNY = 325;
+
+
+//================================================================================//
+
+
+  // Activity 2 check of distance, and paints the background
+  if (pageSel == "activity2" && mouseIsPressed == true) { 
+    
+    paintActivityTwoBack();
+      
+      if(int(randomImageTopVal) == 1) { 
+        dHay = dist(mouseX, mouseY, hayX + 100, hayY + 100); // Distance between the HayXY and cursorXY
+        dNHay = dist(hayX, hayY, hayNX, hayNY); // Distance between the HayXY and Negative HayXY
+        textSize(40);
+        text("dNHay: " + dNHay + ", dHay: " + dHay, 400, 275);
+
+        if (dHay < 80 && mouseIsPressed == true) {
+          hayX = mouseX - 100;
+          hayY = mouseY - 100;
+          
+
+          // act2Top = true;
+          // pageSel == "tryAgain";
+          // gameCompleted == true;
+        }
+
+        if (dNHay > 5) {
+          image(hay, hayX, hayY, 200, 200);
+          tint(20, 200);
+          image(hay, 600, 120, 200, 200);
+          noTint();
+          // var hayX = mouseX; // let hayNX = 600;
+          // var hayY = mouseY; // let hayNY = 120;
+        
+          // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+        }
+      } //else {
+//        image(farm, 200, 120, 200, 200);
+//        
+//        while () {
+//  
+//        }
+//        // TOFIX Reset values, Set try again screen
+//
+//      }
+//      
+//      if(int(randomImageBottomVal) == 1) { 
+//        image(pig, 220, 325, 150, 150);
+//        
+//        while () {
+//  
+//        }
+//        // TOFIX Reset values, Set try again screen
+//
+//      } else {
+//        image(corn, 220, 325, 150, 150);
+//        
+//        while () {
+//  
+//        }
+//        // TOFIX Reset values, Set try again screen
+//
+//      }
   }
 
   // Resets game if user selects try again.
