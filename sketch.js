@@ -498,14 +498,14 @@ function bottomImage() {
     previousImageBottomVal = randomImageBottomVal;
     break;
     case 3:
-      image(milkjug, 220, 325, 150, 150);
-      tint(20,200);
-      image(milkjug, 620, 325, 150, 150);
-      noTint();
+    image(milkjug, 220, 325, 150, 150);
+    tint(20,200);
+    image(milkjug, 620, 325, 150, 150);
+    noTint();
   }
 }
 
-function paintActivityTwoBack() {
+function paintActivityTwoBackground() {
   background(activity1BG);
   homeButton.position(50, 50);
   fill(196, 164, 132, 250);
@@ -523,6 +523,30 @@ function paintActivityTwoBack() {
   text("Drag and match the shapes to win!", (width / 7), 275, 10);
 
 }
+
+function resetAct2TopImg() {
+// Top Picture Case 1 Variabels 
+hayX = 200;
+hayY = 120;
+// Top Picture Case 2 Variables 
+farmX = 200;
+farmY = 120;
+// Top Picture Case 3 Variables 
+horseX = 200;
+horseY = 120;
+}
+function resetAct2BotImg() {
+// Bottom Picture Case 1 Varibales
+pigX = 220;
+pigY = 325;
+// Bottom Picture Case 2 Varibales
+eggX = 220;
+eggY = 325;
+// Bottom Picture Case 3 Variables 
+milkX = 220;
+milkY = 325;
+}
+
 // The following function paints and operates the activity three page.
 function activityThree() {
   background(activity1BG);
@@ -588,7 +612,9 @@ function home() {
   fill('black');
   textAlign(CENTER);
   text("Settings", 650, 440);
-
+// Reset Activty 2
+resetAct2TopImg();
+resetAct2BotImg();
 }
 
 
@@ -625,22 +651,7 @@ function draw() {
   // Activity 2 check of distance, and paints the background
   if (pageSel == "activity2" && mouseIsPressed === true) { 
     
-//    paintActivityTwoBack();
-    background(activity1BG);
-    homeButton.position(50, 50);
-    fill(196, 164, 132, 250);
-    rect(125, 25, 750, 100, 50);
-    fill('black');
-    textSize(75);
-    //text("Drag and Match", 500, 100);
-      // Test Code
-      text(pageSel, 500, 100);
-  
-    fill(196, 164, 132, 250);
-    rect(100, 230, 100, 215, 60);
-    textSize(20);
-    fill('black')
-    text("Drag and match the shapes to win!", (width / 7), 275, 10);
+    paintActivityTwoBackground();
 
       //===================TOP===================================//
       if (int(randomImageTopVal) == 1 && act2TopWon == false) { 
@@ -770,7 +781,7 @@ function draw() {
 
         if (dNMilk > 5) {
           tint(20, 200);
-          image(milk, 620, 325, 150, 150);
+          image(milkjug, 620, 325, 150, 150);
           noTint();
           image(milkjug, milkX, milkY, 150, 150);
 
@@ -779,15 +790,7 @@ function draw() {
         }
 
       }
-//      if (act2TopWon == true) {
-//        //tint(255, 255, 224);
-//        tint(255, 0, 0); 
-//        image(topWin, 200, 120, 200, 200);
-//        noTint();
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      }
+
   }     
 
   // Resets game if user selects try again.
@@ -801,23 +804,6 @@ function draw() {
     }
 
   }
-  // Resets game two if user selects try again.
-//  if (pageSel == "tryAgain" && act2TopWon == true && act2BotWon == true) {
-//    resetAct2Top();
-//    resetAct2Bot();
-//    act2TopWon = false; 
-//    act2BotWon = false; 
-//    topWin = "";
-//    botWin = "";
-//
-//    if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
-//      if (tryAgainCC >= 1) {
-//        pageSel = "activity2";
-//        activityTwo();
-//      }
-//    }
-//
-//  }
 
 
 }
