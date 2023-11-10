@@ -547,6 +547,163 @@ milkX = 220;
 milkY = 325;
 }
 
+function dragAndMatch() {
+
+  // TOP
+    // hay (top 1) and pig (bottom 1) are the only pictures that is being for working win state
+  if (int(randomImageTopVal) == 1 && act2TopWon == false) { 
+    dHay = dist(mouseX, mouseY, hayX + 100, hayY + 100); // Distance between the HayXY and cursorXY
+    dNHay = dist(hayX, hayY, hayNX, hayNY); // Distance between the HayXY and Negative HayXY
+    // [TEST CODE TO BE DELETED]
+      // textSize(40);
+      // text("dNHay: " + dNHay + ", dHay: " + dHay, 500, 275);
+
+    if (dHay < 80 && dNHay > 5) {
+      hayX = mouseX - 100;
+      hayY = mouseY - 100;
+    }
+
+    if (dNHay > 5) {
+      tint(20, 200);
+      image(hay, 600, 120, 200, 200);
+      noTint();
+      image(hay, hayX, hayY, 200, 200);
+
+    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+        
+    } else {
+       textSize(40);
+       text("ELSE STATEMENT TOP WORKS", 500, 275);
+       act2TopWon = true; 
+
+       text("act2TopWon: " + act2TopWon, 500, 375);
+
+    }
+  
+  } else if (int(randomImageTopVal) == 2 && act2TopWon == false) {
+    dFarm = dist(mouseX, mouseY, farmX + 100, farmY + 100); // Distance between the FarmXY and cursorXY
+    dNFarm = dist(farmX, farmY, farmNX, farmNY); // Distance between the FarmXY and Negative FarmXY
+    // [TEST CODE TO BE DELETED]
+      // textSize(40);
+      // text("dNFarm: " + dNFarm + ", dFarm: " + dFarm, 500, 275);
+
+    if (dFarm < 80) {
+      farmX = mouseX - 100;
+      farmY = mouseY - 100;
+    }
+
+    if (dNFarm > 5) {
+      tint(20, 200);
+      image(farm, 600, 120, 200, 200);
+      noTint();
+      image(farm, farmX, farmY, 200, 200);
+    
+    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+        
+    }
+
+  } else if (int(randomImageTopVal) == 3 && act2TopWon == false) {
+    dHorse = dist(mouseX, mouseY, horseX + 100, horseY + 100); // Distance between the HorseXY and cursorXY
+    dNHorse = dist(horseX, horseY, horseNX, horseNY); // Distance between the HorseXY and Negative HorseXY
+    // [TEST CODE TO BE DELETED]
+      // textSize(40);
+      // text("dNHorse: " + dNHorse + ", dHorse: " + dHorse, 500, 275);
+
+    if (dHorse < 80) {
+      horseX = mouseX - 100;
+      horseY = mouseY - 100;
+    }
+
+    if (dNHorse > 5) {
+      tint(20, 200);
+      image(horse, 600, 120, 200, 200);
+      noTint();
+      image(horse, horseX, horseY, 200, 200);
+
+    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+        
+    }
+
+  }
+
+  // BOTTOM
+  if (int(randomImageBottomVal) == 1 && act2BotWon == false) { 
+    dPig = dist(mouseX, mouseY, pigX + 75, pigY + 75); // Distance between the PigXY and cursorXY
+    dNPig = dist(pigX, pigY, pigNX, pigNY); // Distance between the PigXY and Negative PigXY
+    // [TEST CODE TO BE DELETED]
+      // textSize(40);
+      // text("dNPig: " + dNPig + ", dPig: " + dPig, 500, 475);
+
+    if (dPig < 65 && dNPig > 5) {
+      pigX = mouseX - 75;
+      pigY = mouseY - 75;
+    }
+
+    if (dNPig > 5) {
+      tint(20, 200);
+      image(pig, 620, 325, 150, 150);
+      noTint();
+      image(pig, pigX, pigY, 150, 150);
+      
+    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+        
+    } else {
+      textSize(40);
+      text("ELSE STATEMENT BOTTOM WORKS", 500, 275);
+
+      act2BotWon = true; 
+
+      text("act2BotWon: " + act2BotWon, 500, 475); 
+   }
+  
+  } else if (int(randomImageBottomVal) == 2 && act2BotWon == false) {
+    dEgg = dist(mouseX, mouseY, eggX + 75, eggY + 75); // Distance between the EggXY and cursorXY
+    dNEgg = dist(eggX, eggY, eggNX, eggNY); // Distance between the EggXY and Negative EggXY
+    // [TEST CODE TO BE DELETED]
+      // textSize(40);
+      // text("dNEgg: " + dNEgg + ", dEgg: " + dEgg, 500, 475);
+
+    if (dEgg < 65) {
+      eggX = mouseX - 75;
+      eggY = mouseY - 75;
+    }
+
+    if (dNEgg > 5) {
+      tint(20, 200);
+      image(egg, 620, 325, 150, 150);
+      noTint();
+      image(egg, eggX, eggY, 150, 150);
+    
+    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+        
+    }
+
+  } else if (int(randomImageBottomVal) == 3 && act2BotWon == false) {
+    dMilk = dist(mouseX, mouseY, milkX + 75, milkY + 75); // Distance between the MilkXY and cursorXY
+    dNMilk = dist(milkX, milkY, milkNX, milkNY); // Distance between the MilkXY and Negative MilkXY
+    // [TEST CODE TO BE DELETED]
+      // textSize(40);
+      // text("dNMilk: " + dNMilk + ", dMilk: " + dMilk, 500, 475);
+
+    if (dMilk < 65) {
+      milkX = mouseX - 75;
+      milkY = mouseY - 75;
+    }
+
+    if (dNMilk > 5) {
+      tint(20, 200);
+      image(milkjug, 620, 325, 150, 150);
+      noTint();
+      image(milkjug, milkX, milkY, 150, 150);
+
+    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+        
+    }
+
+  }
+
+}
+
 // The following function paints and operates the activity three page.
 function activityThree() {
   background(activity1BG);
@@ -612,9 +769,13 @@ function home() {
   fill('black');
   textAlign(CENTER);
   text("Settings", 650, 440);
-// Reset Activty 2
+
+  // Reset Activty 2
 resetAct2TopImg();
 resetAct2BotImg();
+act2TopWon = false; 
+act2BotWon = false; 
+
 }
 
 
@@ -652,145 +813,7 @@ function draw() {
   if (pageSel == "activity2" && mouseIsPressed === true) { 
     
     paintActivityTwoBackground();
-
-      //===================TOP===================================//
-      if (int(randomImageTopVal) == 1 && act2TopWon == false) { 
-        dHay = dist(mouseX, mouseY, hayX + 100, hayY + 100); // Distance between the HayXY and cursorXY
-        dNHay = dist(hayX, hayY, hayNX, hayNY); // Distance between the HayXY and Negative HayXY
-        // [TEST CODE TO BE DELETED]
-          // textSize(40);
-          // text("dNHay: " + dNHay + ", dHay: " + dHay, 500, 275);
-
-        if (dHay < 80) {
-          hayX = mouseX - 100;
-          hayY = mouseY - 100;
-        }
-
-        if (dNHay > 5) {
-          tint(20, 200);
-          image(hay, 600, 120, 200, 200);
-          noTint();
-          image(hay, hayX, hayY, 200, 200);
-
-        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-            
-        }
-      
-      } else if (int(randomImageTopVal) == 2 && act2TopWon == false) {
-        dFarm = dist(mouseX, mouseY, farmX + 100, farmY + 100); // Distance between the FarmXY and cursorXY
-        dNFarm = dist(farmX, farmY, farmNX, farmNY); // Distance between the FarmXY and Negative FarmXY
-        // [TEST CODE TO BE DELETED]
-          // textSize(40);
-          // text("dNFarm: " + dNFarm + ", dFarm: " + dFarm, 500, 275);
-
-        if (dFarm < 80) {
-          farmX = mouseX - 100;
-          farmY = mouseY - 100;
-        }
-
-        if (dNFarm > 5) {
-          tint(20, 200);
-          image(farm, 600, 120, 200, 200);
-          noTint();
-          image(farm, farmX, farmY, 200, 200);
-        
-        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-            
-        }
-
-      } else if (int(randomImageTopVal) == 3 && act2TopWon == false) {
-        dHorse = dist(mouseX, mouseY, horseX + 100, horseY + 100); // Distance between the HorseXY and cursorXY
-        dNHorse = dist(horseX, horseY, horseNX, horseNY); // Distance between the HorseXY and Negative HorseXY
-        // [TEST CODE TO BE DELETED]
-          // textSize(40);
-          // text("dNHorse: " + dNHorse + ", dHorse: " + dHorse, 500, 275);
-
-        if (dHorse < 80) {
-          horseX = mouseX - 100;
-          horseY = mouseY - 100;
-        }
-
-        if (dNHorse > 5) {
-          tint(20, 200);
-          image(horse, 600, 120, 200, 200);
-          noTint();
-          image(horse, horseX, horseY, 200, 200);
-
-        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-            
-        }
-
-      }
-
-      //=======================BOTTOM========================//
-      if (int(randomImageBottomVal) == 1 && act2BotWon == false) { 
-        dPig = dist(mouseX, mouseY, pigX + 75, pigY + 75); // Distance between the PigXY and cursorXY
-        dNPig = dist(pigX, pigY, pigNX, pigNY); // Distance between the PigXY and Negative PigXY
-        // [TEST CODE TO BE DELETED]
-          // textSize(40);
-          // text("dNPig: " + dNPig + ", dPig: " + dPig, 500, 475);
-
-        if (dPig < 65) {
-          pigX = mouseX - 75;
-          pigY = mouseY - 75;
-        }
-
-        if (dNPig > 5) {
-          tint(20, 200);
-          image(pig, 620, 325, 150, 150);
-          noTint();
-          image(pig, pigX, pigY, 150, 150);
-          
-        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-            
-        }
-      
-      } else if (int(randomImageBottomVal) == 2 && act2BotWon == false) {
-        dEgg = dist(mouseX, mouseY, eggX + 75, eggY + 75); // Distance between the EggXY and cursorXY
-        dNEgg = dist(eggX, eggY, eggNX, eggNY); // Distance between the EggXY and Negative EggXY
-        // [TEST CODE TO BE DELETED]
-          // textSize(40);
-          // text("dNEgg: " + dNEgg + ", dEgg: " + dEgg, 500, 475);
-
-        if (dEgg < 65) {
-          eggX = mouseX - 75;
-          eggY = mouseY - 75;
-        }
-
-        if (dNEgg > 5) {
-          tint(20, 200);
-          image(egg, 620, 325, 150, 150);
-          noTint();
-          image(egg, eggX, eggY, 150, 150);
-        
-        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-            
-        }
-
-      } else if (int(randomImageBottomVal) == 3 && act2BotWon == false) {
-        dMilk = dist(mouseX, mouseY, milkX + 75, milkY + 75); // Distance between the MilkXY and cursorXY
-        dNMilk = dist(milkX, milkY, milkNX, milkNY); // Distance between the MilkXY and Negative MilkXY
-        // [TEST CODE TO BE DELETED]
-          // textSize(40);
-          // text("dNMilk: " + dNMilk + ", dMilk: " + dMilk, 500, 475);
-
-        if (dMilk < 65) {
-          milkX = mouseX - 75;
-          milkY = mouseY - 75;
-        }
-
-        if (dNMilk > 5) {
-          tint(20, 200);
-          image(milkjug, 620, 325, 150, 150);
-          noTint();
-          image(milkjug, milkX, milkY, 150, 150);
-
-        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-            
-        }
-
-      }
-
+    dragAndMatch(); 
   }     
 
   // Resets game if user selects try again.
