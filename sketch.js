@@ -31,42 +31,50 @@ var randomImageBottomVal;
 var previousImageBottomVal;
 
 // Activity two pictures' position variables 
-  var act2Top = false; // checks if top picture is in place
-  var act2Bot = false; // checks if bottom picture is in place
-
-  // Top Pictures Variabels 
-  var hayX = 200;
-  var hayY = 120;
-  var dHay; // Distance between the HayXY and cursorXY
-    let hayNX = 600;
-    let hayNY = 120;
-    let dNHay; // Distance between the HayXY and Negative HayXY
-    
-  // Top Pictures
-  var farmX = 200;
-  var farmY = 120;
-  var dFarm; // Distance between the FarmXY and cursorXY
-    let farmNX = 600;
-    let farmNY = 120;
-    let dNFarm; // Distance between the FarmXY and Negative FarmXY
-
-
-
-  // Bottom Picture Varibales
-  var cornX = 220;
-  var cornY = 325;
-  var dCorn; // Distance between the CornXY and cursorXY
-    let cornNX = 620;
-    let cornNY = 325;
-    let dNCorn; // Distance between the CornXY and Negative CornXY
-
-  // Bottom Pictures
-  var pigX = 220;
-  var pigY = 325;
-  var dPig; // Distance between the PigXY and cursorXY
-    let pigNX = 620;
-    let pigNY = 325;
-    let dNPig; // Distance between the PigXY and Negative PigXY
+  var act2TopWon = false; // checks if top picture is in place
+  var act2BotWon = false; // checks if bottom picture is in place
+  // Top Picture Case 1 Variabels 
+    var hayX = 200;
+    var hayY = 120;
+    var dHay; // Distance between the HayXY and cursorXY
+      let hayNX = 600;
+      let hayNY = 120;
+      let dNHay; // Distance between the HayXY and Negative HayXY
+  // Top Picture Case 2 Variables 
+    var farmX = 200;
+    var farmY = 120;
+    var dFarm; // Distance between the FarmXY and cursorXY
+      let farmNX = 600;
+      let farmNY = 120;
+      let dNFarm; // Distance between the FarmXY and Negative FarmXY
+  // Top Picture Case 3 Variables 
+    var horseX = 200;
+    var horseY = 120;
+    var dHorse; // Distance between the HorseXY and cursorXY
+      let horseNX = 600;
+      let horseNY = 120;
+      let dNHorse; // Distance between the HorseXY and Negative HorseXY
+  // Bottom Picture Case 1 Varibales
+    var pigX = 220;
+    var pigY = 325;
+    var dPig; // Distance between the PigXY and cursorXY
+      let pigNX = 620;
+      let pigNY = 325;
+      let dNPig; // Distance between the PigXY and Negative PigXY
+  // Bottom Picture Case 2 Varibales
+    var eggX = 220;
+    var eggY = 325;
+    var dEgg; // Distance between the EggXY and cursorXY
+      let eggNX = 620;
+      let eggNY = 325;
+      let dNEgg; // Distance between the EggXY and Negative EggXY
+  // Bottom Picture Case 3 Variables 
+    var milkX = 220;
+    var milkY = 325;
+    var dMilk; // Distance between the MilkXY and cursorXY
+      let milkNX = 620;
+      let milkNY = 325;
+      let dNMilk; // Distance between the MilkXY and Negative MilkXY  
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
 function preload() {
@@ -74,10 +82,12 @@ function preload() {
   myFont = loadFont('HeehawRegular-PZy7.ttf');
   mainMenuImg = loadImage("farmmainmenu.jpg");
   activity1BG = loadImage("newfarmpic.png");
+  // Activity 1 Pictures
   moleWHH = loadImage("mole2.png");
   smallMole = loadImage("mole2.png");
   coinSound = loadSound("coinSound.mp3");
   wrongAnswer = loadSound("wrongans.mp3");
+  // Activity 2 Pictures
   hay = loadImage("hay.webp");
   pig = loadImage("pig.png");
   farm = loadImage("farm.png");
@@ -449,9 +459,9 @@ if(previousImageTopVal == randomImageTopVal) {
     break;
 
     case 3: 
-    image(horse, 200, 150, 150, 150);
+    image(horse, 200, 120, 200, 200);
     tint(20, 200);
-    image(horse, 600, 150, 175, 175);
+    image(horse, 600, 120, 200, 200);
     noTint();
     previousImageTopVal = randomImageTopVal;
     break;
@@ -476,7 +486,7 @@ function bottomImage() {
     case 1: 
     image(pig, 220, 325, 150, 150);
     tint(20,200);
-    image(pig,620, 325, 150,150);
+    image(pig, 620, 325, 150, 150);
     noTint();
     previousImageBottomVal = randomImageBottomVal;
     break;
@@ -488,9 +498,9 @@ function bottomImage() {
     previousImageBottomVal = randomImageBottomVal;
     break;
     case 3:
-      image(milkjug, 220, 325, 175, 175);
+      image(milkjug, 220, 325, 150, 150);
       tint(20,200);
-      image(milkjug, 620, 325, 175, 175);
+      image(milkjug, 620, 325, 150, 150);
       noTint();
   }
 }
@@ -513,7 +523,6 @@ function paintActivityTwoBack() {
   text("Drag and match the shapes to win!", (width / 7), 275, 10);
 
 }
-
 // The following function paints and operates the activity three page.
 function activityThree() {
   background(activity1BG);
@@ -613,108 +622,173 @@ function draw() {
 
   
 
-      
-  // Top Picture Variables 
-    // check distance first
-//    var dFarm = dist(cursorX, cursorY, farmX, farmY); // Distance between the FarmXY and cursorXY
-  
-//    var farmX = cursorX;
-//    var farmY = cursorY;     
-      // check distance last
-//      let dNFarm = dist(farmX, farmY, farmNX, farmNY); // Distance between the FarmXY and Negative FarmXY
-
-      // let farmNX = 600;
-      // let farmNY = 120;
-    
-
-  // Bottom Picture Varibales
-    // check distance first
-//    var dCorn = dist(cursorX, cursorY, cornX, cornY); // Distance between the CornXY and cursorXY
-
-//    var cornX = cursorX;
-//    var cornY = cursorY;
-      // check distance last
-//      let dNCorn = dist(cornX, cornY, cornNX, cornNY); // Distance between the CornXY and Negative CornXY
-  
-      // let cornNX = 620;
-      // let cornNY = 325;
-
-
-  // Bottom Picture Variables 
-    // check distance first
-//    var dPig = dist(cursorX, cursorY, pigX, pigY); // Distance between the PigXY and cursorXY
-
-//    var pigX = cursorX;
-//    var pigY = cursorY;
-      // check distance last
-//      let dNPig = dist(pigX, pigY, pigNX, pigNY); // Distance between the PigXY and Negative PigXY
-
-      // let pigNX = 620;
-      // let pigNY = 325;
-
-
-//================================================================================//
-
-
   // Activity 2 check of distance, and paints the background
-  if (pageSel == "activity2" && mouseIsPressed == true) { 
+  if (pageSel == "activity2" && mouseIsPressed === true) { 
     
-    paintActivityTwoBack();
-      
-      if(int(randomImageTopVal) == 1) { 
+//    paintActivityTwoBack();
+    background(activity1BG);
+    homeButton.position(50, 50);
+    fill(196, 164, 132, 250);
+    rect(125, 25, 750, 100, 50);
+    fill('black');
+    textSize(75);
+    //text("Drag and Match", 500, 100);
+      // Test Code
+      text(pageSel, 500, 100);
+  
+    fill(196, 164, 132, 250);
+    rect(100, 230, 100, 215, 60);
+    textSize(20);
+    fill('black')
+    text("Drag and match the shapes to win!", (width / 7), 275, 10);
+
+      //===================TOP===================================//
+      if (int(randomImageTopVal) == 1 && act2TopWon == false) { 
         dHay = dist(mouseX, mouseY, hayX + 100, hayY + 100); // Distance between the HayXY and cursorXY
         dNHay = dist(hayX, hayY, hayNX, hayNY); // Distance between the HayXY and Negative HayXY
-        textSize(40);
-        text("dNHay: " + dNHay + ", dHay: " + dHay, 400, 275);
+        // [TEST CODE TO BE DELETED]
+          // textSize(40);
+          // text("dNHay: " + dNHay + ", dHay: " + dHay, 500, 275);
 
-        if (dHay < 80 && mouseIsPressed == true) {
+        if (dHay < 80) {
           hayX = mouseX - 100;
           hayY = mouseY - 100;
-          
-
-          // act2Top = true;
-          // pageSel == "tryAgain";
-          // gameCompleted == true;
         }
 
         if (dNHay > 5) {
-          image(hay, hayX, hayY, 200, 200);
           tint(20, 200);
           image(hay, 600, 120, 200, 200);
           noTint();
-          // var hayX = mouseX; // let hayNX = 600;
-          // var hayY = mouseY; // let hayNY = 120;
-        
-          // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+          image(hay, hayX, hayY, 200, 200);
+
+        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+            
         }
-      } //else {
-//        image(farm, 200, 120, 200, 200);
-//        
-//        while () {
-//  
+      
+      } else if (int(randomImageTopVal) == 2 && act2TopWon == false) {
+        dFarm = dist(mouseX, mouseY, farmX + 100, farmY + 100); // Distance between the FarmXY and cursorXY
+        dNFarm = dist(farmX, farmY, farmNX, farmNY); // Distance between the FarmXY and Negative FarmXY
+        // [TEST CODE TO BE DELETED]
+          // textSize(40);
+          // text("dNFarm: " + dNFarm + ", dFarm: " + dFarm, 500, 275);
+
+        if (dFarm < 80) {
+          farmX = mouseX - 100;
+          farmY = mouseY - 100;
+        }
+
+        if (dNFarm > 5) {
+          tint(20, 200);
+          image(farm, 600, 120, 200, 200);
+          noTint();
+          image(farm, farmX, farmY, 200, 200);
+        
+        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+            
+        }
+
+      } else if (int(randomImageTopVal) == 3 && act2TopWon == false) {
+        dHorse = dist(mouseX, mouseY, horseX + 100, horseY + 100); // Distance between the HorseXY and cursorXY
+        dNHorse = dist(horseX, horseY, horseNX, horseNY); // Distance between the HorseXY and Negative HorseXY
+        // [TEST CODE TO BE DELETED]
+          // textSize(40);
+          // text("dNHorse: " + dNHorse + ", dHorse: " + dHorse, 500, 275);
+
+        if (dHorse < 80) {
+          horseX = mouseX - 100;
+          horseY = mouseY - 100;
+        }
+
+        if (dNHorse > 5) {
+          tint(20, 200);
+          image(horse, 600, 120, 200, 200);
+          noTint();
+          image(horse, horseX, horseY, 200, 200);
+
+        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+            
+        }
+
+      }
+
+      //=======================BOTTOM========================//
+      if (int(randomImageBottomVal) == 1 && act2BotWon == false) { 
+        dPig = dist(mouseX, mouseY, pigX + 75, pigY + 75); // Distance between the PigXY and cursorXY
+        dNPig = dist(pigX, pigY, pigNX, pigNY); // Distance between the PigXY and Negative PigXY
+        // [TEST CODE TO BE DELETED]
+          // textSize(40);
+          // text("dNPig: " + dNPig + ", dPig: " + dPig, 500, 475);
+
+        if (dPig < 65) {
+          pigX = mouseX - 75;
+          pigY = mouseY - 75;
+        }
+
+        if (dNPig > 5) {
+          tint(20, 200);
+          image(pig, 620, 325, 150, 150);
+          noTint();
+          image(pig, pigX, pigY, 150, 150);
+          
+        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+            
+        }
+      
+      } else if (int(randomImageBottomVal) == 2 && act2BotWon == false) {
+        dEgg = dist(mouseX, mouseY, eggX + 75, eggY + 75); // Distance between the EggXY and cursorXY
+        dNEgg = dist(eggX, eggY, eggNX, eggNY); // Distance between the EggXY and Negative EggXY
+        // [TEST CODE TO BE DELETED]
+          // textSize(40);
+          // text("dNEgg: " + dNEgg + ", dEgg: " + dEgg, 500, 475);
+
+        if (dEgg < 65) {
+          eggX = mouseX - 75;
+          eggY = mouseY - 75;
+        }
+
+        if (dNEgg > 5) {
+          tint(20, 200);
+          image(egg, 620, 325, 150, 150);
+          noTint();
+          image(egg, eggX, eggY, 150, 150);
+        
+        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+            
+        }
+
+      } else if (int(randomImageBottomVal) == 3 && act2BotWon == false) {
+        dMilk = dist(mouseX, mouseY, milkX + 75, milkY + 75); // Distance between the MilkXY and cursorXY
+        dNMilk = dist(milkX, milkY, milkNX, milkNY); // Distance between the MilkXY and Negative MilkXY
+        // [TEST CODE TO BE DELETED]
+          // textSize(40);
+          // text("dNMilk: " + dNMilk + ", dMilk: " + dMilk, 500, 475);
+
+        if (dMilk < 65) {
+          milkX = mouseX - 75;
+          milkY = mouseY - 75;
+        }
+
+        if (dNMilk > 5) {
+          tint(20, 200);
+          image(milk, 620, 325, 150, 150);
+          noTint();
+          image(milkjug, milkX, milkY, 150, 150);
+
+        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+            
+        }
+
+      }
+//      if (act2TopWon == true) {
+//        //tint(255, 255, 224);
+//        tint(255, 0, 0); 
+//        image(topWin, 200, 120, 200, 200);
+//        noTint();
 //        }
 //        // TOFIX Reset values, Set try again screen
 //
 //      }
-//      
-//      if(int(randomImageBottomVal) == 1) { 
-//        image(pig, 220, 325, 150, 150);
-//        
-//        while () {
-//  
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      } else {
-//        image(corn, 220, 325, 150, 150);
-//        
-//        while () {
-//  
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      }
-  }
+  }     
 
   // Resets game if user selects try again.
   if (pageSel == "tryAgain" && gameCompleted == true) {
@@ -727,6 +801,23 @@ function draw() {
     }
 
   }
+  // Resets game two if user selects try again.
+//  if (pageSel == "tryAgain" && act2TopWon == true && act2BotWon == true) {
+//    resetAct2Top();
+//    resetAct2Bot();
+//    act2TopWon = false; 
+//    act2BotWon = false; 
+//    topWin = "";
+//    botWin = "";
+//
+//    if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
+//      if (tryAgainCC >= 1) {
+//        pageSel = "activity2";
+//        activityTwo();
+//      }
+//    }
+//
+//  }
 
 
 }
