@@ -523,7 +523,13 @@ function paintActivityTwoBackground() {
   text("Drag and match the shapes to win!", (width / 7), 275, 10);
 
 }
-
+function resetAct2() {
+  // Reset Activty 2
+resetAct2TopImg();
+resetAct2BotImg();
+act2TopWon = false;
+act2BotWon = false;
+}
 function resetAct2TopImg() {
 // Top Picture Case 1 Variabels 
 hayX = 200;
@@ -550,7 +556,6 @@ milkY = 325;
 function dragAndMatch() {
 
   // TOP
-    // hay (top 1) and pig (bottom 1) are the only pictures that is being for working win state
   if (int(randomImageTopVal) == 1 && act2TopWon == false) { 
     dHay = dist(mouseX, mouseY, hayX + 100, hayY + 100); // Distance between the HayXY and cursorXY
     dNHay = dist(hayX, hayY, hayNX, hayNY); // Distance between the HayXY and Negative HayXY
@@ -569,15 +574,8 @@ function dragAndMatch() {
       noTint();
       image(hay, hayX, hayY, 200, 200);
 
-    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-        
     } else {
-       textSize(40);
-       text("ELSE STATEMENT TOP WORKS", 500, 275);
-       act2TopWon = true; 
-
-       text("act2TopWon: " + act2TopWon, 500, 375);
-
+      act2TopWon = true; 
     }
   
   } else if (int(randomImageTopVal) == 2 && act2TopWon == false) {
@@ -587,7 +585,7 @@ function dragAndMatch() {
       // textSize(40);
       // text("dNFarm: " + dNFarm + ", dFarm: " + dFarm, 500, 275);
 
-    if (dFarm < 80) {
+    if (dFarm < 80 && dNFarm > 5) {
       farmX = mouseX - 100;
       farmY = mouseY - 100;
     }
@@ -598,8 +596,8 @@ function dragAndMatch() {
       noTint();
       image(farm, farmX, farmY, 200, 200);
     
-    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-        
+    } else {
+      act2TopWon = true;
     }
 
   } else if (int(randomImageTopVal) == 3 && act2TopWon == false) {
@@ -609,7 +607,7 @@ function dragAndMatch() {
       // textSize(40);
       // text("dNHorse: " + dNHorse + ", dHorse: " + dHorse, 500, 275);
 
-    if (dHorse < 80) {
+    if (dHorse < 80 && dNHorse > 5) {
       horseX = mouseX - 100;
       horseY = mouseY - 100;
     }
@@ -620,8 +618,8 @@ function dragAndMatch() {
       noTint();
       image(horse, horseX, horseY, 200, 200);
 
-    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-        
+    } else {
+      act2TopWon = true;
     }
 
   }
@@ -645,16 +643,9 @@ function dragAndMatch() {
       noTint();
       image(pig, pigX, pigY, 150, 150);
       
-    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-        
     } else {
-      textSize(40);
-      text("ELSE STATEMENT BOTTOM WORKS", 500, 275);
-
       act2BotWon = true; 
-
-      text("act2BotWon: " + act2BotWon, 500, 475); 
-   }
+    }
   
   } else if (int(randomImageBottomVal) == 2 && act2BotWon == false) {
     dEgg = dist(mouseX, mouseY, eggX + 75, eggY + 75); // Distance between the EggXY and cursorXY
@@ -663,7 +654,7 @@ function dragAndMatch() {
       // textSize(40);
       // text("dNEgg: " + dNEgg + ", dEgg: " + dEgg, 500, 475);
 
-    if (dEgg < 65) {
+    if (dEgg < 65 && dNEgg > 5) {
       eggX = mouseX - 75;
       eggY = mouseY - 75;
     }
@@ -674,8 +665,8 @@ function dragAndMatch() {
       noTint();
       image(egg, eggX, eggY, 150, 150);
     
-    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-        
+    } else {
+      act2BotWon = true;
     }
 
   } else if (int(randomImageBottomVal) == 3 && act2BotWon == false) {
@@ -685,7 +676,7 @@ function dragAndMatch() {
       // textSize(40);
       // text("dNMilk: " + dNMilk + ", dMilk: " + dMilk, 500, 475);
 
-    if (dMilk < 65) {
+    if (dMilk < 65 && dNMilk > 5) {
       milkX = mouseX - 75;
       milkY = mouseY - 75;
     }
@@ -696,12 +687,30 @@ function dragAndMatch() {
       noTint();
       image(milkjug, milkX, milkY, 150, 150);
 
-    // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-        
+    } else {
+      act2BotWon = true; 
     }
 
   }
 
+  // paint the unmovable red images
+  tint('red'); 
+  if (int(randomImageTopVal) == 1 && act2TopWon == true) {
+    image(hay, 600, 120, 200, 200);
+  } else if (int(randomImageTopVal) == 2 && act2TopWon == true) {
+    image(farm, 600, 120, 200, 200);
+  } else if (int(randomImageTopVal) == 3 && act2TopWon == true) {
+    image(horse, 600, 120, 200, 200);
+  }
+  if (int(randomImageBottomVal) == 1 && act2BotWon == true) {
+    image(pig, 620, 325, 150, 150);
+  } else if (int(randomImageBottomVal) == 2 && act2BotWon == true) {
+    image(egg, 620, 325, 150, 150);
+  } else if (int(randomImageBottomVal) == 3 && act2BotWon == true) {
+    image(milkjug, 620, 325, 150, 150)
+  }
+  noTint();
+  
 }
 
 // The following function paints and operates the activity three page.
@@ -771,10 +780,7 @@ function home() {
   text("Settings", 650, 440);
 
   // Reset Activty 2
-resetAct2TopImg();
-resetAct2BotImg();
-act2TopWon = false; 
-act2BotWon = false; 
+  resetAct2();
 
 }
 
@@ -814,6 +820,11 @@ function draw() {
     
     paintActivityTwoBackground();
     dragAndMatch(); 
+    
+    // Boolean Test code
+    textSize(40);
+    text("act2TopWon: " + act2TopWon, 500, 375);
+    text("act2BotWon: " + act2BotWon, 500, 475); 
   }     
 
   // Resets game if user selects try again.
