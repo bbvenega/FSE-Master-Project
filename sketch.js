@@ -31,42 +31,42 @@ var randomImageBottomVal;
 var previousImageBottomVal;
 
 // Activity two pictures' position variables 
-  var act2Top = false; // checks if top picture is in place
-  var act2Bot = false; // checks if bottom picture is in place
+var act2Top = false; // checks if top picture is in place
+var act2Bot = false; // checks if bottom picture is in place
 
-  // Top Pictures Variabels 
-  var hayX = 200;
-  var hayY = 120;
-  var dHay; // Distance between the HayXY and cursorXY
-    let hayNX = 600;
-    let hayNY = 120;
-    let dNHay; // Distance between the HayXY and Negative HayXY
-    
-  // Top Pictures
-  var farmX = 200;
-  var farmY = 120;
-  var dFarm; // Distance between the FarmXY and cursorXY
-    let farmNX = 600;
-    let farmNY = 120;
-    let dNFarm; // Distance between the FarmXY and Negative FarmXY
+// Top Pictures Variabels 
+var hayX = 200;
+var hayY = 120;
+var dHay; // Distance between the HayXY and cursorXY
+let hayNX = 600;
+let hayNY = 120;
+let dNHay; // Distance between the HayXY and Negative HayXY
+
+// Top Pictures
+var farmX = 200;
+var farmY = 120;
+var dFarm; // Distance between the FarmXY and cursorXY
+let farmNX = 600;
+let farmNY = 120;
+let dNFarm; // Distance between the FarmXY and Negative FarmXY
 
 
 
-  // Bottom Picture Varibales
-  var cornX = 220;
-  var cornY = 325;
-  var dCorn; // Distance between the CornXY and cursorXY
-    let cornNX = 620;
-    let cornNY = 325;
-    let dNCorn; // Distance between the CornXY and Negative CornXY
+// Bottom Picture Varibales
+var cornX = 220;
+var cornY = 325;
+var dCorn; // Distance between the CornXY and cursorXY
+let cornNX = 620;
+let cornNY = 325;
+let dNCorn; // Distance between the CornXY and Negative CornXY
 
-  // Bottom Pictures
-  var pigX = 220;
-  var pigY = 325;
-  var dPig; // Distance between the PigXY and cursorXY
-    let pigNX = 620;
-    let pigNY = 325;
-    let dNPig; // Distance between the PigXY and Negative PigXY
+// Bottom Pictures
+var pigX = 220;
+var pigY = 325;
+var dPig; // Distance between the PigXY and cursorXY
+let pigNX = 620;
+let pigNY = 325;
+let dNPig; // Distance between the PigXY and Negative PigXY
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
 function preload() {
@@ -156,7 +156,7 @@ function mouseClicked() {
   // The following segment of code determines if activity 1 is active and if so determines if the user is clicking close enough to each mole. 
   // If so, it plays a coin noise, adds to the score, and calls whackAMole
   // If not, it plays an error noise.
-  if (pageSel == "activity1" & game1On == true) {
+  if (pageSel == "activity1" && game1On == true) {
     correctGuess = true;
     let d = dist(mouseX, mouseY, molePosX, molePosY);
     if (d <= 30) {
@@ -174,7 +174,9 @@ function mouseClicked() {
     }
   }
 
-
+  if(pageSel == "activity3") {
+    let mouseYd = dist(mouseX,mouseY,widith/2,height/2);
+  }
 
 
 
@@ -387,7 +389,7 @@ function WhackAMole() {
 // The following function paints and operates the activity two page.
 function activityTwo() {
   //Paints the GUI for Act2
-  
+
   background(activity1BG);
   pageSel = "activity2";
   homeButton.position(50, 50);
@@ -411,85 +413,85 @@ function activityTwo() {
 
 
 
- 
- 
+
+
 
 
 }
 
 // The following function displays a random image that appears on the top half of the screen for Activity 2.
 function topImage() {
- 
+
 
   // This part of the function determines a random integer that will dictate which picture will display. 
-  randomImageTopVal = random(1,3);
+  randomImageTopVal = random(1, 3);
   randomImageTopVal = round(randomImageTopVal);
   int(randomImageTopVal);
 
   // Ensures that the picture is never the same as the one before.
-if(previousImageTopVal == randomImageTopVal) {
-  topImage();
-}
+  if (previousImageTopVal == randomImageTopVal) {
+    topImage();
+  }
 
-  switch(randomImageTopVal) {
-    case 1: 
-    image(hay, 200, 120, 200, 200);
-    tint(20, 200);
-    image(hay, 600, 120, 200, 200);
-    noTint();
-    previousImageTopVal = randomImageTopVal;
-    break;
+  switch (randomImageTopVal) {
+    case 1:
+      image(hay, 200, 120, 200, 200);
+      tint(20, 200);
+      image(hay, 600, 120, 200, 200);
+      noTint();
+      previousImageTopVal = randomImageTopVal;
+      break;
 
-    case 2: 
-    image(farm, 200, 120, 200, 200);
-    tint(20, 200);
-    image(farm, 600, 120, 200, 200);
-    noTint();
-    previousImageTopVal = randomImageTopVal;
-    break;
+    case 2:
+      image(farm, 200, 120, 200, 200);
+      tint(20, 200);
+      image(farm, 600, 120, 200, 200);
+      noTint();
+      previousImageTopVal = randomImageTopVal;
+      break;
 
-    case 3: 
-    image(horse, 200, 150, 150, 150);
-    tint(20, 200);
-    image(horse, 600, 150, 175, 175);
-    noTint();
-    previousImageTopVal = randomImageTopVal;
-    break;
+    case 3:
+      image(horse, 200, 150, 150, 150);
+      tint(20, 200);
+      image(horse, 600, 150, 175, 175);
+      noTint();
+      previousImageTopVal = randomImageTopVal;
+      break;
   }
 }
 
 // The following function displays a random image that appears on the bottom half of the screen for Activity 2.
 function bottomImage() {
-  
+
   // This part of the function determines a random integer that will dictate which picture will display. 
-  randomImageBottomVal = random(1,3);
+  randomImageBottomVal = random(1, 3);
   randomImageBottomVal = round(randomImageBottomVal);
   int(randomImageBottomVal);
 
 
   // Ensures that the picture is never the same as the one before.
-  if(previousImageBottomVal == randomImageBottomVal) {
+  if (previousImageBottomVal == randomImageBottomVal) {
     bottomImage();
   }
 
-  switch(randomImageBottomVal) {
-    case 1: 
-    image(pig, 220, 325, 150, 150);
-    tint(20,200);
-    image(pig,620, 325, 150,150);
-    noTint();
-    previousImageBottomVal = randomImageBottomVal;
-    break;
-    case 2: 
-    image(egg, 220, 325, 150, 150);
-    tint(20,200);
-    image(egg, 620, 325, 150, 150);
-    noTint();
-    previousImageBottomVal = randomImageBottomVal;
-    break;
+  switch (randomImageBottomVal) {
+    case 1:
+      image(pig, 220, 325, 150, 150);
+      tint(20, 200);
+      image(pig, 620, 325, 150, 150);
+      noTint();
+      previousImageBottomVal = randomImageBottomVal;
+      break;
+    case 2:
+      image(egg, 220, 325, 150, 150);
+      tint(20, 200);
+      image(egg, 620, 325, 150, 150);
+      noTint();
+      previousImageBottomVal = randomImageBottomVal;
+      break;
     case 3:
       image(milkjug, 220, 325, 175, 175);
-      tint(20,200);
+      tint(20, 200);
       image(milkjug, 620, 325, 175, 175);
       noTint();
   }
@@ -503,8 +505,8 @@ function paintActivityTwoBack() {
   fill('black');
   textSize(75);
   //text("Drag and Match", 500, 100);
-    // Test Code
-    text("TEST TEST TEST TEST", 500, 100);
+  // Test Code
+  text("TEST TEST TEST TEST", 500, 100);
 
   fill(196, 164, 132, 250);
   rect(100, 230, 100, 215, 60);
@@ -519,7 +521,9 @@ function activityThree() {
   background(activity1BG);
   homeButton.position(50, 50);
   text("Activity 3", 500, 100);
-  pageSel = "activityThree";
+  pageSel = "activity3";
+  noFill();
+  rect(width / 2, height / 2, 100, 100);
 
 }
 // The following function paints and operates the settings page.
@@ -611,109 +615,109 @@ function draw() {
 
   }
 
-  
 
-      
+
+
   // Top Picture Variables 
-    // check distance first
-//    var dFarm = dist(cursorX, cursorY, farmX, farmY); // Distance between the FarmXY and cursorXY
-  
-//    var farmX = cursorX;
-//    var farmY = cursorY;     
-      // check distance last
-//      let dNFarm = dist(farmX, farmY, farmNX, farmNY); // Distance between the FarmXY and Negative FarmXY
+  // check distance first
+  //    var dFarm = dist(cursorX, cursorY, farmX, farmY); // Distance between the FarmXY and cursorXY
 
-      // let farmNX = 600;
-      // let farmNY = 120;
-    
+  //    var farmX = cursorX;
+  //    var farmY = cursorY;     
+  // check distance last
+  //      let dNFarm = dist(farmX, farmY, farmNX, farmNY); // Distance between the FarmXY and Negative FarmXY
+
+  // let farmNX = 600;
+  // let farmNY = 120;
+
 
   // Bottom Picture Varibales
-    // check distance first
-//    var dCorn = dist(cursorX, cursorY, cornX, cornY); // Distance between the CornXY and cursorXY
+  // check distance first
+  //    var dCorn = dist(cursorX, cursorY, cornX, cornY); // Distance between the CornXY and cursorXY
 
-//    var cornX = cursorX;
-//    var cornY = cursorY;
-      // check distance last
-//      let dNCorn = dist(cornX, cornY, cornNX, cornNY); // Distance between the CornXY and Negative CornXY
-  
-      // let cornNX = 620;
-      // let cornNY = 325;
+  //    var cornX = cursorX;
+  //    var cornY = cursorY;
+  // check distance last
+  //      let dNCorn = dist(cornX, cornY, cornNX, cornNY); // Distance between the CornXY and Negative CornXY
+
+  // let cornNX = 620;
+  // let cornNY = 325;
 
 
   // Bottom Picture Variables 
-    // check distance first
-//    var dPig = dist(cursorX, cursorY, pigX, pigY); // Distance between the PigXY and cursorXY
+  // check distance first
+  //    var dPig = dist(cursorX, cursorY, pigX, pigY); // Distance between the PigXY and cursorXY
 
-//    var pigX = cursorX;
-//    var pigY = cursorY;
-      // check distance last
-//      let dNPig = dist(pigX, pigY, pigNX, pigNY); // Distance between the PigXY and Negative PigXY
+  //    var pigX = cursorX;
+  //    var pigY = cursorY;
+  // check distance last
+  //      let dNPig = dist(pigX, pigY, pigNX, pigNY); // Distance between the PigXY and Negative PigXY
 
-      // let pigNX = 620;
-      // let pigNY = 325;
+  // let pigNX = 620;
+  // let pigNY = 325;
 
 
-//================================================================================//
+  //================================================================================//
 
 
   // Activity 2 check of distance, and paints the background
-  if (pageSel == "activity2" && mouseIsPressed == true) { 
-    
+  if (pageSel == "activity2" && mouseIsPressed == true) {
+
     paintActivityTwoBack();
-      
-      if(int(randomImageTopVal) == 1) { 
-        dHay = dist(mouseX, mouseY, hayX + 100, hayY + 100); // Distance between the HayXY and cursorXY
-        dNHay = dist(hayX, hayY, hayNX, hayNY); // Distance between the HayXY and Negative HayXY
-        textSize(40);
-        text("dNHay: " + dNHay + ", dHay: " + dHay, 400, 275);
 
-        if (dHay < 80 && mouseIsPressed == true) {
-          hayX = mouseX - 100;
-          hayY = mouseY - 100;
-          
+    if (int(randomImageTopVal) == 1) {
+      dHay = dist(mouseX, mouseY, hayX + 100, hayY + 100); // Distance between the HayXY and cursorXY
+      dNHay = dist(hayX, hayY, hayNX, hayNY); // Distance between the HayXY and Negative HayXY
+      textSize(40);
+      text("dNHay: " + dNHay + ", dHay: " + dHay, 400, 275);
 
-          // act2Top = true;
-          // pageSel == "tryAgain";
-          // gameCompleted == true;
-        }
+      if (dHay < 80 && mouseIsPressed == true) {
+        hayX = mouseX - 100;
+        hayY = mouseY - 100;
 
-        if (dNHay > 5) {
-          image(hay, hayX, hayY, 200, 200);
-          tint(20, 200);
-          image(hay, 600, 120, 200, 200);
-          noTint();
-          // var hayX = mouseX; // let hayNX = 600;
-          // var hayY = mouseY; // let hayNY = 120;
-        
-          // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-        }
-      } //else {
-//        image(farm, 200, 120, 200, 200);
-//        
-//        while () {
-//  
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      }
-//      
-//      if(int(randomImageBottomVal) == 1) { 
-//        image(pig, 220, 325, 150, 150);
-//        
-//        while () {
-//  
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      } else {
-//        image(corn, 220, 325, 150, 150);
-//        
-//        while () {
-//  
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      }
+
+        // act2Top = true;
+        // pageSel == "tryAgain";
+        // gameCompleted == true;
+      }
+
+      if (dNHay > 5) {
+        image(hay, hayX, hayY, 200, 200);
+        tint(20, 200);
+        image(hay, 600, 120, 200, 200);
+        noTint();
+        // var hayX = mouseX; // let hayNX = 600;
+        // var hayY = mouseY; // let hayNY = 120;
+
+        // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
+      }
+    } //else {
+    //        image(farm, 200, 120, 200, 200);
+    //        
+    //        while () {
+    //  
+    //        }
+    //        // TOFIX Reset values, Set try again screen
+    //
+    //      }
+    //      
+    //      if(int(randomImageBottomVal) == 1) { 
+    //        image(pig, 220, 325, 150, 150);
+    //        
+    //        while () {
+    //  
+    //        }
+    //        // TOFIX Reset values, Set try again screen
+    //
+    //      } else {
+    //        image(corn, 220, 325, 150, 150);
+    //        
+    //        while () {
+    //  
+    //        }
+    //        // TOFIX Reset values, Set try again screen
+    //
+    //      }
   }
 
   // Resets game if user selects try again.
@@ -729,9 +733,32 @@ function draw() {
   }
 
 
+  if (pageSel == "activity3" && mouseIsPressed == true) {
+    strokeWeight(10);
+    if (mouseX >= (width / 2) - 10 && mouseX <= (width / 2) + 110 && mouseY>= (height / 2) - 10 && mouseY <= (height / 2) + 10) {
+      stroke('green');
+      point(mouseX, mouseY);
+      } else if(mouseX >= (width / 2)  - 10 && mouseX <= (width / 2) + 110 && mouseY>= (height / 2) +90 && mouseY <= (height / 2) + 110) {
+        stroke('green');
+        point(mouseX, mouseY);
+      }else if(mouseX >= (width / 2) - 10 && mouseX <= (width / 2) + 10 && mouseY>= (height / 2) - 10 && mouseY <= (height / 2) + 110) {
+        stroke('green');
+        point(mouseX, mouseY);
+
+      } else if(mouseX >= (width / 2) + 90 && mouseX <= (width / 2) + 110 && mouseY>= (height / 2) -10  && mouseY <= (height / 2) + 110){
+        stroke('green');
+        point(mouseX, mouseY);
+      } else {
+        stroke('red');
+        point(mouseX, mouseY);
+      }
+    }
+
+
 }
 
 
 
 
+  
 
