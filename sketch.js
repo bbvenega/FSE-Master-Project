@@ -68,6 +68,10 @@ let pigNX = 620;
 let pigNY = 325;
 let dNPig; // Distance between the PigXY and Negative PigXY
 
+// Activity Three Variables
+var sqrX = 350;
+var sqrY = 150;
+
 // The function preload contains all of our visual assets that need to be loaded before running the application
 function preload() {
 
@@ -89,7 +93,7 @@ function preload() {
 }
 // The setup function creates and prints the entire home page
 function setup() {
-
+  strokeWeight(0);
   textFont(myFont);
   pageSel = "home";
   createCanvas(1000, 500);
@@ -218,7 +222,7 @@ function activityOne() {
 
 
   fill("#6e4f32");
-  strokeWeight(1);
+
   circle(300, 250, 75);
   circle(450, 250, 75);
   circle(600, 250, 75);
@@ -523,7 +527,8 @@ function activityThree() {
   text("Activity 3", 500, 100);
   pageSel = "activity3";
   noFill();
-  rect(width / 2, height / 2, 100, 100);
+  rect(sqrX, sqrY, 300, 300);
+  strokeWeight(15);
 
 }
 // The following function paints and operates the settings page.
@@ -537,6 +542,7 @@ function settings() {
 
 // The following function paints and operates the home page.
 function home() {
+
   pageSel = "home";
 
   // Moves unecessary buttons off screen.
@@ -546,6 +552,10 @@ function home() {
   textFont(myFont);
 
   createCanvas(1000, 500);
+  if(strokeWeight != 0) {
+    strokeWeight(0);
+  }
+
 
   // Title text & Background
   background(mainMenuImg);
@@ -734,23 +744,25 @@ function draw() {
 
 
   if (pageSel == "activity3" && mouseIsPressed == true) {
-    strokeWeight(10);
-    if (mouseX >= (width / 2) - 10 && mouseX <= (width / 2) + 110 && mouseY>= (height / 2) - 10 && mouseY <= (height / 2) + 10) {
+
+    if (mouseX >= sqrX - 10 && mouseX <= sqrX + 310 && mouseY>= (sqrY) - 10 && mouseY <= (sqrY) + 10) {
       stroke('green');
       point(mouseX, mouseY);
-      } else if(mouseX >= (width / 2)  - 10 && mouseX <= (width / 2) + 110 && mouseY>= (height / 2) +90 && mouseY <= (height / 2) + 110) {
+      } else if(mouseX >= sqrX  - 10 && mouseX <= sqrX + 310 && mouseY>= (sqrY) +290 && mouseY <= (sqrY) + 310) {
         stroke('green');
         point(mouseX, mouseY);
-      }else if(mouseX >= (width / 2) - 10 && mouseX <= (width / 2) + 10 && mouseY>= (height / 2) - 10 && mouseY <= (height / 2) + 110) {
+      }else if(mouseX >= sqrX - 10 && mouseX <= sqrX + 10 && mouseY>= (sqrY) - 10 && mouseY <= (sqrY) + 310) {
         stroke('green');
         point(mouseX, mouseY);
 
-      } else if(mouseX >= (width / 2) + 90 && mouseX <= (width / 2) + 110 && mouseY>= (height / 2) -10  && mouseY <= (height / 2) + 110){
+      } else if(mouseX >= sqrX + 290 && mouseX <= sqrX + 310 && mouseY>= (sqrY) -10  && mouseY <= (sqrY) + 310){
         stroke('green');
         point(mouseX, mouseY);
       } else {
+        stroke(0);
         stroke('red');
         point(mouseX, mouseY);
+
       }
     }
 
