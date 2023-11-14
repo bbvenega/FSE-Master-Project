@@ -106,8 +106,10 @@ function setup() {
 
   // The code below creates the necessary buttons 
   homeButton = createButton("Go home");
+  homeButton.position(999, 999);
   homeButton.mouseClicked(home);
   act1Button = createButton("Begin game");
+  act1Button.position(999, 999);
   act1Button.mouseClicked(startWhackAMole);
 
   // Title text & Background
@@ -159,7 +161,7 @@ function mouseClicked() {
 
 
 
-  if (pageSel == "tryAgain") {
+  if (pageSel == "tryAgain" || pageSel == "tryAgain2") {
     tryAgainCC++;
   }
 
@@ -376,7 +378,7 @@ function WhackAMole() {
     text("Try Again?", (width / 2), 475);
 
 
-    act1Button.position(900, 900);
+    act1Button.position(999, 999);
     game1On = false;
     score = 0;
     correctGuess = true;
@@ -512,9 +514,7 @@ function paintActivityTwoBackground() {
   rect(125, 25, 750, 100, 50);
   fill('black');
   textSize(75);
-  //text("Drag and Match", 500, 100);
-    // Test Code
-    text("TEST TEST TEST TEST", 500, 100);
+  text("Drag and Match", 500, 100);
 
   fill(196, 164, 132, 250);
   rect(100, 230, 100, 215, 60);
@@ -710,7 +710,35 @@ function dragAndMatch() {
     image(milkjug, 620, 325, 150, 150)
   }
   noTint();
-  
+
+  if (act2TopWon == true && act2BotWon == true) {
+    pageSel = "tryAgain2";
+    tryAgainCC = 0;
+    
+    background(activity1BG);
+    homeButton.position(50, 50);
+
+    fill(196, 164, 132, 250);
+    rect(125, 25, 750, 100, 50);
+    fill('black');
+    textSize(75);
+    text("Drag and Match", 500, 100);
+
+    fill(196, 164, 132, 250);
+    rect((width / 4), 215, (width / 2), 100, 50);
+
+    fill('black');
+    text("YOU WIN!", 500, 300);
+
+    textSize(70);
+
+    fill(196, 164, 132, 250);
+    rect((width / 4), 390, (width / 2), 100, 50);
+
+    fill('black');
+    text("Try Again?", (width / 2), 475);
+  }
+
 }
 
 // The following function paints and operates the activity three page.
@@ -735,8 +763,8 @@ function home() {
   pageSel = "home";
 
   // Moves unecessary buttons off screen.
-  act1Button.position(0, 510);
-  homeButton.position(0, 501);
+  act1Button.position(999, 999);
+  homeButton.position(999, 999);
 
   textFont(myFont);
 
@@ -790,6 +818,9 @@ function draw() {
 
   // Decides which page is opened based on click position.
   if (pageSel == "home") {
+    homeButton.position(999, 999);
+    act1Button.position(999, 999);
+
     if (cursorX >= 150 && cursorX <= 450 && cursorY >= 250 && cursorY <= 350) {
       pageSel = "activity1";
       activityOne();
@@ -817,20 +848,15 @@ function draw() {
 
   // Activity 2 check of distance, and paints the background
   if (pageSel == "activity2" && mouseIsPressed === true) { 
-    
     paintActivityTwoBackground();
     dragAndMatch(); 
-    
-    // Boolean Test code
-    textSize(40);
-    text("act2TopWon: " + act2TopWon, 500, 375);
-    text("act2BotWon: " + act2BotWon, 500, 475); 
   }     
 
   // Resets game if user selects try again.
   if (pageSel == "tryAgain" && gameCompleted == true) {
     if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
       if (tryAgainCC >= 1) {
+        act1Button.position(999, 999);
         pageSel = "activity1";
         gameCompleted = false;
         activityOne();
@@ -839,6 +865,16 @@ function draw() {
 
   }
 
+  if (pageSel == "tryAgain2" && act2TopWon == true && act2BotWon == true) {
+    if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
+      if (tryAgainCC >= 2) {
+        pageSel = "activity2";
+        activityTwo();
+        resetAct2();
+      }
+    }
+
+  }
 
 }
 
