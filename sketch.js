@@ -71,6 +71,12 @@ let dNPig; // Distance between the PigXY and Negative PigXY
 // Activity Three Variables
 var sqrX = 350;
 var sqrY = 150;
+var shapeSize = 300;
+var randomShape;
+var prevRandomShape = -1;
+var circleD;
+var circleRad = shapeSize / 2;
+
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
 function preload() {
@@ -88,6 +94,8 @@ function preload() {
   horse = loadImage("horse.png");
   milkjug = loadImage("milkjug.png");
   egg = loadImage("egg.png");
+  truck = loadImage('truck.png');
+  apple = loadImage('apple.png');
 
 
 }
@@ -178,16 +186,20 @@ function mouseClicked() {
     }
   }
 
-  if(pageSel == "activity3") {
-    let mouseYd = dist(mouseX,mouseY,widith/2,height/2);
-  }
+
+
 
 
 
 }
 
 
-
+// function mouseMoved() {
+//   if (pageSel == "activity3") {
+//     circleD = dist(500, 250, cursorX, cursorY);
+//     text("work" ,250, 250); 
+//   }
+// }
 
 // The following function paints and operates the activity one page.
 function activityOne() {
@@ -526,10 +538,50 @@ function activityThree() {
   homeButton.position(50, 50);
   text("Activity 3", 500, 100);
   pageSel = "activity3";
-  noFill();
-  rect(sqrX, sqrY, 300, 300);
-  strokeWeight(15);
+  randomShapeGenerator();
 
+
+
+}
+
+function randomShapeGenerator() {
+
+
+  // This part of the function determines a random integer that will dictate which picture will display. 
+  randomShape = random(1, 3);
+  randomShape = round(randomShape);
+  int(randomShape);
+
+  // Ensures that the picture is never the same as the one before.
+  if (randomShape == prevRandomShape) {
+    randomShapeGenerator();
+  }
+
+  switch (randomShape) {
+    case 1:
+      noFill();
+      image(hay, sqrX - 50 , sqrY - 50, shapeSize + 75, shapeSize + 75);
+      rect(sqrX, sqrY, shapeSize, shapeSize);
+      prevRandomShape = randomShape;
+      break;
+
+    case 2:
+      noFill();
+      rect(sqrX, sqrY + 50, shapeSize, shapeSize / 2);
+      prevRandomShape = randomShape;
+      break;
+
+    case 3:
+      imageMode(CENTER);
+      image(apple, width / 2, height / 2 + 50, shapeSize, shapeSize);
+      noFill();
+      ellipseMode(CENTER);
+      ellipse(width / 2, height / 2 + 50, shapeSize);
+      // triangle(sqrX, sqrY + shapeSize, sqrX + shapeSize, sqrY + shapeSize, sqrX + (shapeSize / 2), sqrY)
+      prevRandomShape = randomShape;
+      imageMode(CORNER);
+      break;
+  }
 }
 // The following function paints and operates the settings page.
 function settings() {
@@ -542,7 +594,9 @@ function settings() {
 
 // The following function paints and operates the home page.
 function home() {
-
+if(pageSel == "activity3") {
+  strokeWeight(0);
+}
   pageSel = "home";
 
   // Moves unecessary buttons off screen.
@@ -552,9 +606,7 @@ function home() {
   textFont(myFont);
 
   createCanvas(1000, 500);
-  if(strokeWeight != 0) {
-    strokeWeight(0);
-  }
+
 
 
   // Title text & Background
@@ -599,7 +651,7 @@ function home() {
 
 function draw() {
 
-
+  circleD = dist(width / 2, height / 2 + 50, mouseX, mouseY);
   // Decides which page is opened based on click position.
   if (pageSel == "home") {
     if (cursorX >= 150 && cursorX <= 450 && cursorY >= 250 && cursorY <= 350) {
@@ -744,33 +796,80 @@ function draw() {
 
 
   if (pageSel == "activity3" && mouseIsPressed == true) {
+    strokeWeight(15);
+    if (randomShape == 1) {
 
-    if (mouseX >= sqrX - 10 && mouseX <= sqrX + 310 && mouseY>= (sqrY) - 10 && mouseY <= (sqrY) + 10) {
-      stroke('green');
-      point(mouseX, mouseY);
-      } else if(mouseX >= sqrX  - 10 && mouseX <= sqrX + 310 && mouseY>= (sqrY) +290 && mouseY <= (sqrY) + 310) {
+      // Paints green for top size
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + 20) {
         stroke('green');
         point(mouseX, mouseY);
-      }else if(mouseX >= sqrX - 10 && mouseX <= sqrX + 10 && mouseY>= (sqrY) - 10 && mouseY <= (sqrY) + 310) {
+        // Paints green for bottom side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY) + 280 && mouseY <= (sqrY) + 320) {
         stroke('green');
         point(mouseX, mouseY);
 
-      } else if(mouseX >= sqrX + 290 && mouseX <= sqrX + 310 && mouseY>= (sqrY) -10  && mouseY <= (sqrY) + 310){
+        // Paints green for left side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + (shapeSize + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        // Paints green for right side
+      } else if (mouseX >= sqrX + 280 && mouseX <= sqrX + 320 && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + (shapeSize + 20)) {
         stroke('green');
         point(mouseX, mouseY);
       } else {
         stroke(0);
         stroke('red');
         point(mouseX, mouseY);
-
       }
-    }
+    } else if (randomShape == 2) {
+      // Paints green for top size
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY+ 50) - 20 && mouseY <= (sqrY + 50) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        // Paints green for bottom side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= ((sqrY + 50)+ shapeSize / 2) - 20 && mouseY <= ((sqrY + 50)+ shapeSize / 2) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
 
+        // Paints green for left side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + ((shapeSize / 2) + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        // Paints green for right side
+      } else if (mouseX >= sqrX + 280 && mouseX <= sqrX + 320 && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50 ) + ((shapeSize / 2) + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+      } else {
+        stroke(0);
+        stroke('red');
+        point(mouseX, mouseY);
+      }
+    } else if(randomShape == 3) {
+
+      if(circleD >= circleRad - 20 && circleD <= circleRad + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+      } else {
+        stroke(0);
+        stroke('red');
+        point(mouseX, mouseY);
+      }
+   }
+     
+
+    else {
+      stroke(0);
+      stroke('red');
+      point(mouseX, mouseY);
+
+    }
+  }
+  
 
 }
 
 
 
 
-  
+
 
