@@ -76,6 +76,8 @@ var randomShape;
 var prevRandomShape = -1;
 var circleD;
 var circleRad = shapeSize / 2;
+var tracing = false;
+var sameShape = false;
 
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
@@ -548,19 +550,20 @@ function randomShapeGenerator() {
 
 
   // This part of the function determines a random integer that will dictate which picture will display. 
-  randomShape = random(1, 3);
-  randomShape = round(randomShape);
-  int(randomShape);
+  if (sameShape == false) {
+    randomShape = random(1, 3);
+    randomShape = round(randomShape);
+    int(randomShape);
 
-  // Ensures that the picture is never the same as the one before.
-  if (randomShape == prevRandomShape) {
-    randomShapeGenerator();
+    // Ensures that the picture is never the same as the one before.
+    if (randomShape == prevRandomShape) {
+      randomShapeGenerator();
+    }
   }
-
   switch (randomShape) {
     case 1:
       noFill();
-      image(hay, sqrX - 50 , sqrY - 50, shapeSize + 75, shapeSize + 75);
+      image(hay, sqrX - 50, sqrY - 50, shapeSize + 75, shapeSize + 75);
       rect(sqrX, sqrY, shapeSize, shapeSize);
       prevRandomShape = randomShape;
       break;
@@ -594,9 +597,7 @@ function settings() {
 
 // The following function paints and operates the home page.
 function home() {
-if(pageSel == "activity3") {
-  strokeWeight(0);
-}
+  sameShape = false;
   pageSel = "home";
 
   // Moves unecessary buttons off screen.
@@ -796,6 +797,7 @@ function draw() {
 
 
   if (pageSel == "activity3" && mouseIsPressed == true) {
+    tracing = true;
     strokeWeight(15);
     if (randomShape == 1) {
 
@@ -823,11 +825,11 @@ function draw() {
       }
     } else if (randomShape == 2) {
       // Paints green for top size
-      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY+ 50) - 20 && mouseY <= (sqrY + 50) + 20) {
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + 20) {
         stroke('green');
         point(mouseX, mouseY);
         // Paints green for bottom side
-      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= ((sqrY + 50)+ shapeSize / 2) - 20 && mouseY <= ((sqrY + 50)+ shapeSize / 2) + 20) {
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= ((sqrY + 50) + shapeSize / 2) - 20 && mouseY <= ((sqrY + 50) + shapeSize / 2) + 20) {
         stroke('green');
         point(mouseX, mouseY);
 
@@ -836,7 +838,7 @@ function draw() {
         stroke('green');
         point(mouseX, mouseY);
         // Paints green for right side
-      } else if (mouseX >= sqrX + 280 && mouseX <= sqrX + 320 && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50 ) + ((shapeSize / 2) + 20)) {
+      } else if (mouseX >= sqrX + 280 && mouseX <= sqrX + 320 && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + ((shapeSize / 2) + 20)) {
         stroke('green');
         point(mouseX, mouseY);
       } else {
@@ -844,9 +846,9 @@ function draw() {
         stroke('red');
         point(mouseX, mouseY);
       }
-    } else if(randomShape == 3) {
+    } else if (randomShape == 3) {
 
-      if(circleD >= circleRad - 20 && circleD <= circleRad + 20) {
+      if (circleD >= circleRad - 20 && circleD <= circleRad + 20) {
         stroke('green');
         point(mouseX, mouseY);
       } else {
@@ -854,8 +856,8 @@ function draw() {
         stroke('red');
         point(mouseX, mouseY);
       }
-   }
-     
+    }
+
 
     else {
       stroke(0);
@@ -864,8 +866,23 @@ function draw() {
 
     }
   }
-  
 
+
+
+}
+
+function mouseReleased() {
+  if (pageSel == "activity3" && tracing == true) {
+    sameShape = true;
+    stroke('black');
+    strokeWeight(1);
+    fill('black');
+    tracing = false;
+    text("work", 250, 250);
+    tracing = false;
+    activityThree();
+
+  }
 }
 
 
