@@ -31,50 +31,50 @@ var randomImageBottomVal;
 var previousImageBottomVal;
 
 
-  var act2TopWon = false; // checks if top picture is in place
-  var act2BotWon = false; // checks if bottom picture is in place
-  // Top Picture Case 1 Variabels 
-    var hayX = 200;
-    var hayY = 120;
-    var dHay; // Distance between the HayXY and cursorXY
-      let hayNX = 600;
-      let hayNY = 120;
-      let dNHay; // Distance between the HayXY and Negative HayXY
-  // Top Picture Case 2 Variables 
-    var farmX = 200;
-    var farmY = 120;
-    var dFarm; // Distance between the FarmXY and cursorXY
-      let farmNX = 600;
-      let farmNY = 120;
-      let dNFarm; // Distance between the FarmXY and Negative FarmXY
-  // Top Picture Case 3 Variables 
-    var horseX = 200;
-    var horseY = 120;
-    var dHorse; // Distance between the HorseXY and cursorXY
-      let horseNX = 600;
-      let horseNY = 120;
-      let dNHorse; // Distance between the HorseXY and Negative HorseXY
-  // Bottom Picture Case 1 Varibales
-    var pigX = 220;
-    var pigY = 325;
-    var dPig; // Distance between the PigXY and cursorXY
-      let pigNX = 620;
-      let pigNY = 325;
-      let dNPig; // Distance between the PigXY and Negative PigXY
-  // Bottom Picture Case 2 Varibales
-    var eggX = 220;
-    var eggY = 325;
-    var dEgg; // Distance between the EggXY and cursorXY
-      let eggNX = 620;
-      let eggNY = 325;
-      let dNEgg; // Distance between the EggXY and Negative EggXY
-  // Bottom Picture Case 3 Variables 
-    var milkX = 220;
-    var milkY = 325;
-    var dMilk; // Distance between the MilkXY and cursorXY
-      let milkNX = 620;
-      let milkNY = 325;
-      let dNMilk; // Distance between the MilkXY and Negative MilkXY  
+var act2TopWon = false; // checks if top picture is in place
+var act2BotWon = false; // checks if bottom picture is in place
+// Top Picture Case 1 Variabels 
+var hayX = 200;
+var hayY = 120;
+var dHay; // Distance between the HayXY and cursorXY
+let hayNX = 600;
+let hayNY = 120;
+let dNHay; // Distance between the HayXY and Negative HayXY
+// Top Picture Case 2 Variables 
+var farmX = 200;
+var farmY = 120;
+var dFarm; // Distance between the FarmXY and cursorXY
+let farmNX = 600;
+let farmNY = 120;
+let dNFarm; // Distance between the FarmXY and Negative FarmXY
+// Top Picture Case 3 Variables 
+var horseX = 200;
+var horseY = 120;
+var dHorse; // Distance between the HorseXY and cursorXY
+let horseNX = 600;
+let horseNY = 120;
+let dNHorse; // Distance between the HorseXY and Negative HorseXY
+// Bottom Picture Case 1 Varibales
+var pigX = 220;
+var pigY = 325;
+var dPig; // Distance between the PigXY and cursorXY
+let pigNX = 620;
+let pigNY = 325;
+let dNPig; // Distance between the PigXY and Negative PigXY
+// Bottom Picture Case 2 Varibales
+var eggX = 220;
+var eggY = 325;
+var dEgg; // Distance between the EggXY and cursorXY
+let eggNX = 620;
+let eggNY = 325;
+let dNEgg; // Distance between the EggXY and Negative EggXY
+// Bottom Picture Case 3 Variables 
+var milkX = 220;
+var milkY = 325;
+var dMilk; // Distance between the MilkXY and cursorXY
+let milkNX = 620;
+let milkNY = 325;
+let dNMilk; // Distance between the MilkXY and Negative MilkXY  
 
 // Activity Three Variables
 var sqrX = 350;
@@ -113,7 +113,6 @@ function preload() {
 }
 // The setup function creates and prints the entire home page
 function setup() {
-  strokeWeight(0);
   textFont(myFont);
   pageSel = "home";
   createCanvas(1000, 500);
@@ -463,30 +462,30 @@ function topImage() {
     topImage();
   }
 
-  switch(randomImageTopVal) {
-    case 1: 
-    image(hay, 200, 120, 200, 200);
-    tint(20, 200);
-    image(hay, 600, 120, 200, 200);
-    noTint();
-    previousImageTopVal = randomImageTopVal;
-    break;
+  switch (randomImageTopVal) {
+    case 1:
+      image(hay, 200, 120, 200, 200);
+      tint(20, 200);
+      image(hay, 600, 120, 200, 200);
+      noTint();
+      previousImageTopVal = randomImageTopVal;
+      break;
 
-    case 2: 
-    image(farm, 200, 120, 200, 200);
-    tint(20, 200);
-    image(farm, 600, 120, 200, 200);
-    noTint();
-    previousImageTopVal = randomImageTopVal;
-    break;
+    case 2:
+      image(farm, 200, 120, 200, 200);
+      tint(20, 200);
+      image(farm, 600, 120, 200, 200);
+      noTint();
+      previousImageTopVal = randomImageTopVal;
+      break;
 
-    case 3: 
-    image(horse, 200, 120, 200, 200);
-    tint(20, 200);
-    image(horse, 600, 120, 200, 200);
-    noTint();
-    previousImageTopVal = randomImageTopVal;
-    break;
+    case 3:
+      image(horse, 200, 120, 200, 200);
+      tint(20, 200);
+      image(horse, 600, 120, 200, 200);
+      noTint();
+      previousImageTopVal = randomImageTopVal;
+      break;
 
   }
 }
@@ -505,26 +504,26 @@ function bottomImage() {
     bottomImage();
   }
 
-  switch(randomImageBottomVal) {
-    case 1: 
-    image(pig, 220, 325, 150, 150);
-    tint(20,200);
-    image(pig, 620, 325, 150, 150);
-    noTint();
-    previousImageBottomVal = randomImageBottomVal;
-    break;
-    case 2: 
-    image(egg, 220, 325, 150, 150);
-    tint(20,200);
-    image(egg, 620, 325, 150, 150);
-    noTint();
-    previousImageBottomVal = randomImageBottomVal;
-    break;
+  switch (randomImageBottomVal) {
+    case 1:
+      image(pig, 220, 325, 150, 150);
+      tint(20, 200);
+      image(pig, 620, 325, 150, 150);
+      noTint();
+      previousImageBottomVal = randomImageBottomVal;
+      break;
+    case 2:
+      image(egg, 220, 325, 150, 150);
+      tint(20, 200);
+      image(egg, 620, 325, 150, 150);
+      noTint();
+      previousImageBottomVal = randomImageBottomVal;
+      break;
     case 3:
-    image(milkjug, 220, 325, 150, 150);
-    tint(20,200);
-    image(milkjug, 620, 325, 150, 150);
-    noTint();
+      image(milkjug, 220, 325, 150, 150);
+      tint(20, 200);
+      image(milkjug, 620, 325, 150, 150);
+      noTint();
 
   }
 }
@@ -549,43 +548,43 @@ function paintActivityTwoBackground() {
 }
 function resetAct2() {
   // Reset Activty 2
-resetAct2TopImg();
-resetAct2BotImg();
-act2TopWon = false;
-act2BotWon = false;
+  resetAct2TopImg();
+  resetAct2BotImg();
+  act2TopWon = false;
+  act2BotWon = false;
 }
 function resetAct2TopImg() {
-// Top Picture Case 1 Variabels 
-hayX = 200;
-hayY = 120;
-// Top Picture Case 2 Variables 
-farmX = 200;
-farmY = 120;
-// Top Picture Case 3 Variables 
-horseX = 200;
-horseY = 120;
+  // Top Picture Case 1 Variabels 
+  hayX = 200;
+  hayY = 120;
+  // Top Picture Case 2 Variables 
+  farmX = 200;
+  farmY = 120;
+  // Top Picture Case 3 Variables 
+  horseX = 200;
+  horseY = 120;
 }
 function resetAct2BotImg() {
-// Bottom Picture Case 1 Varibales
-pigX = 220;
-pigY = 325;
-// Bottom Picture Case 2 Varibales
-eggX = 220;
-eggY = 325;
-// Bottom Picture Case 3 Variables 
-milkX = 220;
-milkY = 325;
+  // Bottom Picture Case 1 Varibales
+  pigX = 220;
+  pigY = 325;
+  // Bottom Picture Case 2 Varibales
+  eggX = 220;
+  eggY = 325;
+  // Bottom Picture Case 3 Variables 
+  milkX = 220;
+  milkY = 325;
 }
 
 function dragAndMatch() {
 
   // TOP
-  if (int(randomImageTopVal) == 1 && act2TopWon == false) { 
+  if (int(randomImageTopVal) == 1 && act2TopWon == false) {
     dHay = dist(mouseX, mouseY, hayX + 100, hayY + 100); // Distance between the HayXY and cursorXY
     dNHay = dist(hayX, hayY, hayNX, hayNY); // Distance between the HayXY and Negative HayXY
     // [TEST CODE TO BE DELETED]
-      // textSize(40);
-      // text("dNHay: " + dNHay + ", dHay: " + dHay, 500, 275);
+    // textSize(40);
+    // text("dNHay: " + dNHay + ", dHay: " + dHay, 500, 275);
 
     if (dHay < 80 && dNHay > 5) {
       hayX = mouseX - 100;
@@ -599,15 +598,15 @@ function dragAndMatch() {
       image(hay, hayX, hayY, 200, 200);
 
     } else {
-      act2TopWon = true; 
+      act2TopWon = true;
     }
-  
+
   } else if (int(randomImageTopVal) == 2 && act2TopWon == false) {
     dFarm = dist(mouseX, mouseY, farmX + 100, farmY + 100); // Distance between the FarmXY and cursorXY
     dNFarm = dist(farmX, farmY, farmNX, farmNY); // Distance between the FarmXY and Negative FarmXY
     // [TEST CODE TO BE DELETED]
-      // textSize(40);
-      // text("dNFarm: " + dNFarm + ", dFarm: " + dFarm, 500, 275);
+    // textSize(40);
+    // text("dNFarm: " + dNFarm + ", dFarm: " + dFarm, 500, 275);
 
     if (dFarm < 80 && dNFarm > 5) {
       farmX = mouseX - 100;
@@ -619,7 +618,7 @@ function dragAndMatch() {
       image(farm, 600, 120, 200, 200);
       noTint();
       image(farm, farmX, farmY, 200, 200);
-    
+
     } else {
       act2TopWon = true;
     }
@@ -628,8 +627,8 @@ function dragAndMatch() {
     dHorse = dist(mouseX, mouseY, horseX + 100, horseY + 100); // Distance between the HorseXY and cursorXY
     dNHorse = dist(horseX, horseY, horseNX, horseNY); // Distance between the HorseXY and Negative HorseXY
     // [TEST CODE TO BE DELETED]
-      // textSize(40);
-      // text("dNHorse: " + dNHorse + ", dHorse: " + dHorse, 500, 275);
+    // textSize(40);
+    // text("dNHorse: " + dNHorse + ", dHorse: " + dHorse, 500, 275);
 
     if (dHorse < 80 && dNHorse > 5) {
       horseX = mouseX - 100;
@@ -649,12 +648,12 @@ function dragAndMatch() {
   }
 
   // BOTTOM
-  if (int(randomImageBottomVal) == 1 && act2BotWon == false) { 
+  if (int(randomImageBottomVal) == 1 && act2BotWon == false) {
     dPig = dist(mouseX, mouseY, pigX + 75, pigY + 75); // Distance between the PigXY and cursorXY
     dNPig = dist(pigX, pigY, pigNX, pigNY); // Distance between the PigXY and Negative PigXY
     // [TEST CODE TO BE DELETED]
-      // textSize(40);
-      // text("dNPig: " + dNPig + ", dPig: " + dPig, 500, 475);
+    // textSize(40);
+    // text("dNPig: " + dNPig + ", dPig: " + dPig, 500, 475);
 
     if (dPig < 65 && dNPig > 5) {
       pigX = mouseX - 75;
@@ -666,17 +665,17 @@ function dragAndMatch() {
       image(pig, 620, 325, 150, 150);
       noTint();
       image(pig, pigX, pigY, 150, 150);
-      
+
     } else {
-      act2BotWon = true; 
+      act2BotWon = true;
     }
-  
+
   } else if (int(randomImageBottomVal) == 2 && act2BotWon == false) {
     dEgg = dist(mouseX, mouseY, eggX + 75, eggY + 75); // Distance between the EggXY and cursorXY
     dNEgg = dist(eggX, eggY, eggNX, eggNY); // Distance between the EggXY and Negative EggXY
     // [TEST CODE TO BE DELETED]
-      // textSize(40);
-      // text("dNEgg: " + dNEgg + ", dEgg: " + dEgg, 500, 475);
+    // textSize(40);
+    // text("dNEgg: " + dNEgg + ", dEgg: " + dEgg, 500, 475);
 
     if (dEgg < 65 && dNEgg > 5) {
       eggX = mouseX - 75;
@@ -688,7 +687,7 @@ function dragAndMatch() {
       image(egg, 620, 325, 150, 150);
       noTint();
       image(egg, eggX, eggY, 150, 150);
-    
+
     } else {
       act2BotWon = true;
     }
@@ -697,8 +696,8 @@ function dragAndMatch() {
     dMilk = dist(mouseX, mouseY, milkX + 75, milkY + 75); // Distance between the MilkXY and cursorXY
     dNMilk = dist(milkX, milkY, milkNX, milkNY); // Distance between the MilkXY and Negative MilkXY
     // [TEST CODE TO BE DELETED]
-      // textSize(40);
-      // text("dNMilk: " + dNMilk + ", dMilk: " + dMilk, 500, 475);
+    // textSize(40);
+    // text("dNMilk: " + dNMilk + ", dMilk: " + dMilk, 500, 475);
 
     if (dMilk < 65 && dNMilk > 5) {
       milkX = mouseX - 75;
@@ -712,13 +711,13 @@ function dragAndMatch() {
       image(milkjug, milkX, milkY, 150, 150);
 
     } else {
-      act2BotWon = true; 
+      act2BotWon = true;
     }
 
   }
 
   // paint the unmovable red images
-  tint('red'); 
+  tint('red');
   if (int(randomImageTopVal) == 1 && act2TopWon == true) {
     image(hay, 600, 120, 200, 200);
   } else if (int(randomImageTopVal) == 2 && act2TopWon == true) {
@@ -738,7 +737,7 @@ function dragAndMatch() {
   if (act2TopWon == true && act2BotWon == true) {
     pageSel = "tryAgain2";
     tryAgainCC = 0;
-    
+
     background(activity1BG);
     homeButton.position(50, 50);
 
@@ -918,10 +917,10 @@ function draw() {
 
 
   // Activity 2 check of distance, and paints the background
-  if (pageSel == "activity2" && mouseIsPressed === true) { 
+  if (pageSel == "activity2" && mouseIsPressed === true) {
     paintActivityTwoBackground();
-    dragAndMatch(); 
-  }     
+    dragAndMatch();
+  }
 
 
   // Resets game if user selects try again.
