@@ -30,7 +30,7 @@ var previousImageTopVal;
 var randomImageBottomVal;
 var previousImageBottomVal;
 
-// Activity two pictures' position variables 
+
   var act2TopWon = false; // checks if top picture is in place
   var act2BotWon = false; // checks if bottom picture is in place
   // Top Picture Case 1 Variabels 
@@ -76,6 +76,19 @@ var previousImageBottomVal;
       let milkNY = 325;
       let dNMilk; // Distance between the MilkXY and Negative MilkXY  
 
+// Activity Three Variables
+var sqrX = 350;
+var sqrY = 150;
+var shapeSize = 300;
+var randomShape;
+var prevRandomShape = -1;
+var circleD;
+var circleRad = shapeSize / 2;
+var tracing = false;
+var sameShape = false;
+
+
+
 // The function preload contains all of our visual assets that need to be loaded before running the application
 function preload() {
 
@@ -94,12 +107,13 @@ function preload() {
   horse = loadImage("horse.png");
   milkjug = loadImage("milkjug.png");
   egg = loadImage("egg.png");
+  apple = loadImage('apple.png');
 
 
 }
 // The setup function creates and prints the entire home page
 function setup() {
-
+  strokeWeight(0);
   textFont(myFont);
   pageSel = "home";
   createCanvas(1000, 500);
@@ -168,7 +182,7 @@ function mouseClicked() {
   // The following segment of code determines if activity 1 is active and if so determines if the user is clicking close enough to each mole. 
   // If so, it plays a coin noise, adds to the score, and calls whackAMole
   // If not, it plays an error noise.
-  if (pageSel == "activity1" & game1On == true) {
+  if (pageSel == "activity1" && game1On == true) {
     correctGuess = true;
     let d = dist(mouseX, mouseY, molePosX, molePosY);
     if (d <= 30) {
@@ -190,10 +204,16 @@ function mouseClicked() {
 
 
 
+
 }
 
 
-
+// function mouseMoved() {
+//   if (pageSel == "activity3") {
+//     circleD = dist(500, 250, cursorX, cursorY);
+//     text("work" ,250, 250); 
+//   }
+// }
 
 // The following function paints and operates the activity one page.
 function activityOne() {
@@ -228,7 +248,7 @@ function activityOne() {
 
 
   fill("#6e4f32");
-  strokeWeight(1);
+
   circle(300, 250, 75);
   circle(450, 250, 75);
   circle(600, 250, 75);
@@ -399,7 +419,7 @@ function WhackAMole() {
 // The following function paints and operates the activity two page.
 function activityTwo() {
   //Paints the GUI for Act2
-  
+
   background(activity1BG);
   pageSel = "activity2";
   homeButton.position(50, 50);
@@ -423,25 +443,25 @@ function activityTwo() {
 
 
 
- 
- 
+
+
 
 
 }
 
 // The following function displays a random image that appears on the top half of the screen for Activity 2.
 function topImage() {
- 
+
 
   // This part of the function determines a random integer that will dictate which picture will display. 
-  randomImageTopVal = random(1,3);
+  randomImageTopVal = random(1, 3);
   randomImageTopVal = round(randomImageTopVal);
   int(randomImageTopVal);
 
   // Ensures that the picture is never the same as the one before.
-if(previousImageTopVal == randomImageTopVal) {
-  topImage();
-}
+  if (previousImageTopVal == randomImageTopVal) {
+    topImage();
+  }
 
   switch(randomImageTopVal) {
     case 1: 
@@ -467,20 +487,21 @@ if(previousImageTopVal == randomImageTopVal) {
     noTint();
     previousImageTopVal = randomImageTopVal;
     break;
+
   }
 }
 
 // The following function displays a random image that appears on the bottom half of the screen for Activity 2.
 function bottomImage() {
-  
+
   // This part of the function determines a random integer that will dictate which picture will display. 
-  randomImageBottomVal = random(1,3);
+  randomImageBottomVal = random(1, 3);
   randomImageBottomVal = round(randomImageBottomVal);
   int(randomImageBottomVal);
 
 
   // Ensures that the picture is never the same as the one before.
-  if(previousImageBottomVal == randomImageBottomVal) {
+  if (previousImageBottomVal == randomImageBottomVal) {
     bottomImage();
   }
 
@@ -504,6 +525,7 @@ function bottomImage() {
     tint(20,200);
     image(milkjug, 620, 325, 150, 150);
     noTint();
+
   }
 }
 
@@ -514,7 +536,9 @@ function paintActivityTwoBackground() {
   rect(125, 25, 750, 100, 50);
   fill('black');
   textSize(75);
+
   text("Drag and Match", 500, 100);
+
 
   fill(196, 164, 132, 250);
   rect(100, 230, 100, 215, 60);
@@ -746,8 +770,52 @@ function activityThree() {
   background(activity1BG);
   homeButton.position(50, 50);
   text("Activity 3", 500, 100);
-  pageSel = "activityThree";
+  pageSel = "activity3";
+  randomShapeGenerator();
 
+
+
+}
+
+function randomShapeGenerator() {
+
+
+  // This part of the function determines a random integer that will dictate which picture will display. 
+  if (sameShape == false) {
+    randomShape = random(1, 3);
+    randomShape = round(randomShape);
+    int(randomShape);
+
+    // Ensures that the picture is never the same as the one before.
+    if (randomShape == prevRandomShape) {
+      randomShapeGenerator();
+    }
+  }
+  switch (randomShape) {
+    case 1:
+      noFill();
+      image(hay, sqrX - 50, sqrY - 50, shapeSize + 75, shapeSize + 75);
+      rect(sqrX, sqrY, shapeSize, shapeSize);
+      prevRandomShape = randomShape;
+      break;
+
+    case 2:
+      noFill();
+      rect(sqrX, sqrY + 50, shapeSize, shapeSize / 2);
+      prevRandomShape = randomShape;
+      break;
+
+    case 3:
+      imageMode(CENTER);
+      image(apple, width / 2, height / 2 + 50, shapeSize, shapeSize);
+      noFill();
+      ellipseMode(CENTER);
+      ellipse(width / 2, height / 2 + 50, shapeSize);
+      // triangle(sqrX, sqrY + shapeSize, sqrX + shapeSize, sqrY + shapeSize, sqrX + (shapeSize / 2), sqrY)
+      prevRandomShape = randomShape;
+      imageMode(CORNER);
+      break;
+  }
 }
 // The following function paints and operates the settings page.
 function settings() {
@@ -760,6 +828,7 @@ function settings() {
 
 // The following function paints and operates the home page.
 function home() {
+  sameShape = false;
   pageSel = "home";
 
   // Moves unecessary buttons off screen.
@@ -769,6 +838,8 @@ function home() {
   textFont(myFont);
 
   createCanvas(1000, 500);
+
+
 
   // Title text & Background
   background(mainMenuImg);
@@ -815,7 +886,7 @@ function home() {
 
 function draw() {
 
-
+  circleD = dist(width / 2, height / 2 + 50, mouseX, mouseY);
   // Decides which page is opened based on click position.
   if (pageSel == "home") {
     homeButton.position(999, 999);
@@ -844,13 +915,14 @@ function draw() {
 
   }
 
-  
+
 
   // Activity 2 check of distance, and paints the background
   if (pageSel == "activity2" && mouseIsPressed === true) { 
     paintActivityTwoBackground();
     dragAndMatch(); 
   }     
+
 
   // Resets game if user selects try again.
   if (pageSel == "tryAgain" && gameCompleted == true) {
@@ -876,7 +948,95 @@ function draw() {
 
   }
 
+  if (pageSel == "activity3" && mouseIsPressed == true) {
+    tracing = true;
+    strokeWeight(15);
+    if (randomShape == 1) {
+
+      // Paints green for top size
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        // Paints green for bottom side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY) + 280 && mouseY <= (sqrY) + 320) {
+        stroke('green');
+        point(mouseX, mouseY);
+
+        // Paints green for left side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + (shapeSize + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        // Paints green for right side
+      } else if (mouseX >= sqrX + 280 && mouseX <= sqrX + 320 && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + (shapeSize + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+      } else {
+        stroke(0);
+        stroke('red');
+        point(mouseX, mouseY);
+      }
+    } else if (randomShape == 2) {
+      // Paints green for top size
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        // Paints green for bottom side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= ((sqrY + 50) + shapeSize / 2) - 20 && mouseY <= ((sqrY + 50) + shapeSize / 2) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+
+        // Paints green for left side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + ((shapeSize / 2) + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        // Paints green for right side
+      } else if (mouseX >= sqrX + 280 && mouseX <= sqrX + 320 && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + ((shapeSize / 2) + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+      } else {
+        stroke(0);
+        stroke('red');
+        point(mouseX, mouseY);
+      }
+    } else if (randomShape == 3) {
+
+      if (circleD >= circleRad - 20 && circleD <= circleRad + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+      } else {
+        stroke(0);
+        stroke('red');
+        point(mouseX, mouseY);
+      }
+    }
+
+
+    else {
+      stroke(0);
+      stroke('red');
+      point(mouseX, mouseY);
+
+    }
+  }
+
+
+
 }
+
+function mouseReleased() {
+  if (pageSel == "activity3" && tracing == true) {
+    sameShape = true;
+    stroke('black');
+    strokeWeight(1);
+    fill('black');
+    tracing = false;
+    text("work", 250, 250);
+    tracing = false;
+    activityThree();
+
+  }
+}
+
 
 
 
