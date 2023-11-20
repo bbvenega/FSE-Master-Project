@@ -207,12 +207,7 @@ function mouseClicked() {
 }
 
 
-// function mouseMoved() {
-//   if (pageSel == "activity3") {
-//     circleD = dist(500, 250, cursorX, cursorY);
-//     text("work" ,250, 250); 
-//   }
-// }
+
 
 // The following function paints and operates the activity one page.
 function activityOne() {
@@ -229,15 +224,19 @@ function activityOne() {
   rect(125, 25, 750, 100, 50);
 
   fill('black');
+  strokeWeight(0);
   text("Whack-a-Mole", 500, 100);
+  strokeWeight(1);
   textSize(35);
   fill(196, 164, 132, 250);
   rect(650, 210, 330, 175, 50);
 
   fill('black');
+  strokeWeight(0);
   text("Get " + TARGETSCORE + " to Win!", 810, 275);
   textSize(30);
   text("Current score: " + score, 820, 350);
+  strokeWeight(1);
 
 
 
@@ -262,7 +261,9 @@ function activityOne() {
   fill(196, 164, 132, 250);
   rect(100, 230, 100, 215, 60);
   fill('black')
+  strokeWeight(0);
   text("Tap the mole to win!", (width / 7), 275, 10);
+  strokeWeight(1);
 
 }
 
@@ -422,16 +423,19 @@ function activityTwo() {
   background(activity1BG);
   pageSel = "activity2";
   homeButton.position(50, 50);
+  strokeWeight(1);
   fill(196, 164, 132, 250);
   rect(125, 25, 750, 100, 50);
   fill('black');
   textSize(75);
+  strokeWeight(0);
   text("Drag and Match", 500, 100);
-
+  strokeWeight(1);
   fill(196, 164, 132, 250);
   rect(100, 230, 100, 215, 60);
   textSize(20);
   fill('black')
+  strokeWeight(0);
   text("Drag and match the shapes to win!", (width / 7), 275, 10);
 
 
@@ -768,8 +772,24 @@ function dragAndMatch() {
 function activityThree() {
   background(activity1BG);
   homeButton.position(50, 50);
-  text("Activity 3", 500, 100);
   pageSel = "activity3";
+  strokeWeight(1);
+  fill(196, 164, 132, 250);
+  rect(125, 25, 750, 100, 50);
+
+  fill('black');
+  textSize(75);
+  strokeWeight(0);
+  text("Trace the Picture", 500, 100);
+  strokeWeight(1);
+  fill(196, 164, 132, 250);
+  rect(100, 230, 100, 215, 60);
+  textSize(25);
+  fill('black')
+  strokeWeight(0);
+  text("Trace the Picture to Win!", (width / 7), 275, 10);
+
+
   randomShapeGenerator();
 
 
@@ -793,14 +813,18 @@ function randomShapeGenerator() {
   switch (randomShape) {
     case 1:
       noFill();
+      strokeWeight(1);
       image(hay, sqrX - 50, sqrY - 50, shapeSize + 75, shapeSize + 75);
       rect(sqrX, sqrY, shapeSize, shapeSize);
+      strokeWeight(0);
       prevRandomShape = randomShape;
       break;
 
     case 2:
       noFill();
+      strokeWeight(1);
       rect(sqrX, sqrY + 50, shapeSize, shapeSize / 2);
+      strokeWeight(0);
       prevRandomShape = randomShape;
       break;
 
@@ -809,7 +833,9 @@ function randomShapeGenerator() {
       image(apple, width / 2, height / 2 + 50, shapeSize, shapeSize);
       noFill();
       ellipseMode(CENTER);
+      strokeWeight(1);
       ellipse(width / 2, height / 2 + 50, shapeSize);
+      strokeWeight(0);
       // triangle(sqrX, sqrY + shapeSize, sqrX + shapeSize, sqrY + shapeSize, sqrX + (shapeSize / 2), sqrY)
       prevRandomShape = randomShape;
       imageMode(CORNER);
@@ -827,6 +853,7 @@ function settings() {
 
 // The following function paints and operates the home page.
 function home() {
+
   sameShape = false;
   pageSel = "home";
 
@@ -842,40 +869,50 @@ function home() {
 
   // Title text & Background
   background(mainMenuImg);
-  textSize(55)
+  textSize(50)
   textAlign(CENTER);
   fill(196, 164, 132, 250);
   rect(150, 35, 675, 90, 50);
   fill('black');
+  strokeWeight(0);
   text("FSE Master Project ", 500, 100);
+  strokeWeight(1);
 
   textSize(40);
 
   // Menu buttons
   fill(196, 164, 132, 250);
   rect(150, 250, 300, 100, 50);
+    strokeWeight(0);
   fill('black');
   textAlign(CENTER);
+  strokeWeight(0);
   text("Activity 1", 300, 315);
-
+  strokeWeight(1);
 
   fill(196, 164, 132, 250);
   rect(500, 250, 300, 100, 50)
   fill('black');
   textAlign(CENTER);
+  strokeWeight(0);
   text("Activity 2", 650, 315);
+  strokeWeight(1);
 
   fill(196, 164, 132, 250);
   rect(150, 375, 300, 100, 50)
   fill('black');
   textAlign(CENTER);
+  strokeWeight(0);
   text("Activity 3", 300, 440);
+  strokeWeight(1);
 
   fill(196, 164, 132, 250);
   rect(500, 375, 300, 100, 50)
   fill('black');
   textAlign(CENTER);
+  strokeWeight(0);
   text("Settings", 650, 440);
+  strokeWeight(1);
 
   // Reset Activty 2
   resetAct2();
@@ -885,6 +922,7 @@ function home() {
 
 function draw() {
 
+  strokeWeight(0);
   circleD = dist(width / 2, height / 2 + 50, mouseX, mouseY);
   // Decides which page is opened based on click position.
   if (pageSel == "home") {
@@ -1024,9 +1062,9 @@ function draw() {
 
 function mouseReleased() {
   if (pageSel == "activity3" && tracing == true) {
+    strokeWeight(0);
     sameShape = true;
     stroke('black');
-    strokeWeight(1);
     fill('black');
     tracing = false;
     text("work", 250, 250);
