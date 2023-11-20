@@ -6,7 +6,9 @@ let cursorX = 0;
 let cursorY = 0;
 let homeButton;
 var tryAgainCC = 0;
-let gainSlider, muteButton, muteState;
+let gainSlider; 
+let muteButton;
+let muteState = false;
 let player;
 //Main menu variables
 
@@ -101,6 +103,8 @@ function setup() {
   homeButton.mouseClicked(home);
   act1Button = createButton("Begin game");
   act1Button.mouseClicked(startWhackAMole);
+  muteButton = createButton("mute all sounds"); //mute button
+  muteButton.mousePressed(tog);
 
   // Title text & Background
   background(mainMenuImg);
@@ -534,40 +538,39 @@ function settings() {
   textSize(75);
   text("Settings", 500, 100);
   if(pageSel =="settings"){
-     muteState = false;
-     muteButton = createButton("mute all sounds"); //mute button
+
      muteButton.position(175, 350);
      muteButton.mousePressed(tog);
 
      gainSlider = createSlider(-60, 12, 0, 1); //volume slider
      gainSlider.position(0, 350);
-     console.log(muteState); //are we currently mutes?
      text("this controls the volume", 30, 350);
     if (muteState != true) { //run volume normally when not muted
         volume();
   }
-    function volume() { //volume corresponds to the lsider
-      player.volume.value = gainSlider.value();
-    }
-    function playsound() { //triggers sound playback
-      player.start();
-    }
-    function tog() { //calls certain funcitons depending on if we are mutes
-      if (muteState === true) {
-        muteoff(); //turns mute off
-        muteState = false;//adjusts state variable
-      } else {
-        muteon(); //turns mute on
-        muteState = true; //adjusts state variable
-      }
-    }
-    function muteon() {
-      player.volume.value = -60;
-    }
-    function muteoff() {
-      volume();
-    }
+    
   }
+}
+function volume() { //volume corresponds to the lsider
+  player.volume.value = gainSlider.value();
+}
+function playsound() { //triggers sound playback
+  player.start();
+}
+function tog() { //calls certain funcitons depending on if we are mutes
+  if (muteState === true) {
+    muteoff(); //turns mute off
+    muteState = false;//adjusts state variable
+  } else {
+    muteon(); //turns mute on
+    muteState = true; //adjusts state variable
+  }
+}
+function muteon() {
+  player.volume.value = -60;
+}
+function muteoff() {
+  volume();
 }
 
 // The following function paints and operates the home page.
