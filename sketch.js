@@ -106,6 +106,8 @@ function setup() {
   muteButton = createButton("mute all sounds"); //mute button
   muteButton.mousePressed(tog);
   gainSlider = createSlider(0, 2, 1, 0); //volume slider
+  gainSlider.addClass("mySlider");
+  gainSlider.style('width', '240px');
 
   // Title text & Background
   background(mainMenuImg);
@@ -542,9 +544,10 @@ function settings() {
   textSize(75);
   text("Settings", 500, 100);
 
-    muteButton.position(175, 350);
-    gainSlider.position(0, 350);
-  text("this controls the volume", 30, 350);
+    muteButton.position((width/2) + 170, height/2);
+    gainSlider.position((width/2) - 170, height/2);
+    textSize(50);
+    text("this controls the volume", width/2, 150);
   
 }
 
@@ -565,6 +568,8 @@ function home() {
   // Moves unecessary buttons off screen.
   act1Button.position(0, 510);
   homeButton.position(0, 501);
+  gainSlider.position(9999, 9999);
+  muteButton.position(9999, 9999);
 
   textFont(myFont);
 
