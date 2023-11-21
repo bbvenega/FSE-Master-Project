@@ -30,43 +30,64 @@ var previousImageTopVal;
 var randomImageBottomVal;
 var previousImageBottomVal;
 
-// Activity two pictures' position variables 
-  var act2Top = false; // checks if top picture is in place
-  var act2Bot = false; // checks if bottom picture is in place
 
-  // Top Pictures Variabels 
-  var hayX = 200;
-  var hayY = 120;
-  var dHay; // Distance between the HayXY and cursorXY
-    let hayNX = 600;
-    let hayNY = 120;
-    let dNHay; // Distance between the HayXY and Negative HayXY
-    
-  // Top Pictures
-  var farmX = 200;
-  var farmY = 120;
-  var dFarm; // Distance between the FarmXY and cursorXY
-    let farmNX = 600;
-    let farmNY = 120;
-    let dNFarm; // Distance between the FarmXY and Negative FarmXY
+var act2TopWon = false; // checks if top picture is in place
+var act2BotWon = false; // checks if bottom picture is in place
+// Top Picture Case 1 Variabels 
+var hayX = 200;
+var hayY = 120;
+var dHay; // Distance between the HayXY and cursorXY
+let hayNX = 600;
+let hayNY = 120;
+let dNHay; // Distance between the HayXY and Negative HayXY
+// Top Picture Case 2 Variables 
+var farmX = 200;
+var farmY = 120;
+var dFarm; // Distance between the FarmXY and cursorXY
+let farmNX = 600;
+let farmNY = 120;
+let dNFarm; // Distance between the FarmXY and Negative FarmXY
+// Top Picture Case 3 Variables 
+var horseX = 200;
+var horseY = 120;
+var dHorse; // Distance between the HorseXY and cursorXY
+let horseNX = 600;
+let horseNY = 120;
+let dNHorse; // Distance between the HorseXY and Negative HorseXY
+// Bottom Picture Case 1 Varibales
+var pigX = 220;
+var pigY = 325;
+var dPig; // Distance between the PigXY and cursorXY
+let pigNX = 620;
+let pigNY = 325;
+let dNPig; // Distance between the PigXY and Negative PigXY
+// Bottom Picture Case 2 Varibales
+var eggX = 220;
+var eggY = 325;
+var dEgg; // Distance between the EggXY and cursorXY
+let eggNX = 620;
+let eggNY = 325;
+let dNEgg; // Distance between the EggXY and Negative EggXY
+// Bottom Picture Case 3 Variables 
+var milkX = 220;
+var milkY = 325;
+var dMilk; // Distance between the MilkXY and cursorXY
+let milkNX = 620;
+let milkNY = 325;
+let dNMilk; // Distance between the MilkXY and Negative MilkXY  
+
+// Activity Three Variables
+var sqrX = 350;
+var sqrY = 150;
+var shapeSize = 300;
+var randomShape;
+var prevRandomShape = -1;
+var circleD;
+var circleRad = shapeSize / 2;
+var tracing = false;
+var sameShape = false;
 
 
-
-  // Bottom Picture Varibales
-  var cornX = 220;
-  var cornY = 325;
-  var dCorn; // Distance between the CornXY and cursorXY
-    let cornNX = 620;
-    let cornNY = 325;
-    let dNCorn; // Distance between the CornXY and Negative CornXY
-
-  // Bottom Pictures
-  var pigX = 220;
-  var pigY = 325;
-  var dPig; // Distance between the PigXY and cursorXY
-    let pigNX = 620;
-    let pigNY = 325;
-    let dNPig; // Distance between the PigXY and Negative PigXY
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
 function preload() {
@@ -74,30 +95,34 @@ function preload() {
   myFont = loadFont('HeehawRegular-PZy7.ttf');
   mainMenuImg = loadImage("farmmainmenu.jpg");
   activity1BG = loadImage("newfarmpic.png");
+  // Activity 1 Pictures
   moleWHH = loadImage("mole2.png");
   smallMole = loadImage("mole2.png");
   coinSound = loadSound("coinSound.mp3");
   wrongAnswer = loadSound("wrongans.mp3");
+  // Activity 2 Pictures
   hay = loadImage("hay.webp");
   pig = loadImage("pig.png");
   farm = loadImage("farm.png");
   horse = loadImage("horse.png");
   milkjug = loadImage("milkjug.png");
   egg = loadImage("egg.png");
+  apple = loadImage('apple.png');
 
 
 }
 // The setup function creates and prints the entire home page
 function setup() {
-
   textFont(myFont);
   pageSel = "home";
   createCanvas(1000, 500);
 
   // The code below creates the necessary buttons 
   homeButton = createButton("Go home");
+  homeButton.position(999, 999);
   homeButton.mouseClicked(home);
   act1Button = createButton("Begin game");
+  act1Button.position(999, 999);
   act1Button.mouseClicked(startWhackAMole);
 
   // Title text & Background
@@ -149,14 +174,14 @@ function mouseClicked() {
 
 
 
-  if (pageSel == "tryAgain") {
+  if (pageSel == "tryAgain" || pageSel == "tryAgain2") {
     tryAgainCC++;
   }
 
   // The following segment of code determines if activity 1 is active and if so determines if the user is clicking close enough to each mole. 
   // If so, it plays a coin noise, adds to the score, and calls whackAMole
   // If not, it plays an error noise.
-  if (pageSel == "activity1" & game1On == true) {
+  if (pageSel == "activity1" && game1On == true) {
     correctGuess = true;
     let d = dist(mouseX, mouseY, molePosX, molePosY);
     if (d <= 30) {
@@ -178,10 +203,16 @@ function mouseClicked() {
 
 
 
+
 }
 
 
-
+// function mouseMoved() {
+//   if (pageSel == "activity3") {
+//     circleD = dist(500, 250, cursorX, cursorY);
+//     text("work" ,250, 250); 
+//   }
+// }
 
 // The following function paints and operates the activity one page.
 function activityOne() {
@@ -216,7 +247,7 @@ function activityOne() {
 
 
   fill("#6e4f32");
-  strokeWeight(1);
+
   circle(300, 250, 75);
   circle(450, 250, 75);
   circle(600, 250, 75);
@@ -366,7 +397,7 @@ function WhackAMole() {
     text("Try Again?", (width / 2), 475);
 
 
-    act1Button.position(900, 900);
+    act1Button.position(999, 999);
     game1On = false;
     score = 0;
     correctGuess = true;
@@ -387,7 +418,7 @@ function WhackAMole() {
 // The following function paints and operates the activity two page.
 function activityTwo() {
   //Paints the GUI for Act2
-  
+
   background(activity1BG);
   pageSel = "activity2";
   homeButton.position(50, 50);
@@ -411,100 +442,102 @@ function activityTwo() {
 
 
 
- 
- 
+
+
 
 
 }
 
 // The following function displays a random image that appears on the top half of the screen for Activity 2.
 function topImage() {
- 
+
 
   // This part of the function determines a random integer that will dictate which picture will display. 
-  randomImageTopVal = random(1,3);
+  randomImageTopVal = random(1, 3);
   randomImageTopVal = round(randomImageTopVal);
   int(randomImageTopVal);
 
   // Ensures that the picture is never the same as the one before.
-if(previousImageTopVal == randomImageTopVal) {
-  topImage();
-}
+  if (previousImageTopVal == randomImageTopVal) {
+    topImage();
+  }
 
-  switch(randomImageTopVal) {
-    case 1: 
-    image(hay, 200, 120, 200, 200);
-    tint(20, 200);
-    image(hay, 600, 120, 200, 200);
-    noTint();
-    previousImageTopVal = randomImageTopVal;
-    break;
+  switch (randomImageTopVal) {
+    case 1:
+      image(hay, 200, 120, 200, 200);
+      tint(20, 200);
+      image(hay, 600, 120, 200, 200);
+      noTint();
+      previousImageTopVal = randomImageTopVal;
+      break;
 
-    case 2: 
-    image(farm, 200, 120, 200, 200);
-    tint(20, 200);
-    image(farm, 600, 120, 200, 200);
-    noTint();
-    previousImageTopVal = randomImageTopVal;
-    break;
+    case 2:
+      image(farm, 200, 120, 200, 200);
+      tint(20, 200);
+      image(farm, 600, 120, 200, 200);
+      noTint();
+      previousImageTopVal = randomImageTopVal;
+      break;
 
-    case 3: 
-    image(horse, 200, 150, 150, 150);
-    tint(20, 200);
-    image(horse, 600, 150, 175, 175);
-    noTint();
-    previousImageTopVal = randomImageTopVal;
-    break;
+    case 3:
+      image(horse, 200, 120, 200, 200);
+      tint(20, 200);
+      image(horse, 600, 120, 200, 200);
+      noTint();
+      previousImageTopVal = randomImageTopVal;
+      break;
+
   }
 }
 
 // The following function displays a random image that appears on the bottom half of the screen for Activity 2.
 function bottomImage() {
-  
+
   // This part of the function determines a random integer that will dictate which picture will display. 
-  randomImageBottomVal = random(1,3);
+  randomImageBottomVal = random(1, 3);
   randomImageBottomVal = round(randomImageBottomVal);
   int(randomImageBottomVal);
 
 
   // Ensures that the picture is never the same as the one before.
-  if(previousImageBottomVal == randomImageBottomVal) {
+  if (previousImageBottomVal == randomImageBottomVal) {
     bottomImage();
   }
 
-  switch(randomImageBottomVal) {
-    case 1: 
-    image(pig, 220, 325, 150, 150);
-    tint(20,200);
-    image(pig,620, 325, 150,150);
-    noTint();
-    previousImageBottomVal = randomImageBottomVal;
-    break;
-    case 2: 
-    image(egg, 220, 325, 150, 150);
-    tint(20,200);
-    image(egg, 620, 325, 150, 150);
-    noTint();
-    previousImageBottomVal = randomImageBottomVal;
-    break;
-    case 3:
-      image(milkjug, 220, 325, 175, 175);
-      tint(20,200);
-      image(milkjug, 620, 325, 175, 175);
+  switch (randomImageBottomVal) {
+    case 1:
+      image(pig, 220, 325, 150, 150);
+      tint(20, 200);
+      image(pig, 620, 325, 150, 150);
       noTint();
+      previousImageBottomVal = randomImageBottomVal;
+      break;
+    case 2:
+      image(egg, 220, 325, 150, 150);
+      tint(20, 200);
+      image(egg, 620, 325, 150, 150);
+      noTint();
+      previousImageBottomVal = randomImageBottomVal;
+      break;
+    case 3:
+      image(milkjug, 220, 325, 150, 150);
+      tint(20, 200);
+      image(milkjug, 620, 325, 150, 150);
+      noTint();
+
   }
 }
 
-function paintActivityTwoBack() {
+function paintActivityTwoBackground() {
   background(activity1BG);
   homeButton.position(50, 50);
   fill(196, 164, 132, 250);
   rect(125, 25, 750, 100, 50);
   fill('black');
   textSize(75);
-  //text("Drag and Match", 500, 100);
-    // Test Code
-    text("TEST TEST TEST TEST", 500, 100);
+
+  text("Drag and Match", 500, 100);
+
 
   fill(196, 164, 132, 250);
   rect(100, 230, 100, 215, 60);
@@ -513,14 +546,275 @@ function paintActivityTwoBack() {
   text("Drag and match the shapes to win!", (width / 7), 275, 10);
 
 }
+function resetAct2() {
+  // Reset Activty 2
+  resetAct2TopImg();
+  resetAct2BotImg();
+  act2TopWon = false;
+  act2BotWon = false;
+}
+function resetAct2TopImg() {
+  // Top Picture Case 1 Variabels 
+  hayX = 200;
+  hayY = 120;
+  // Top Picture Case 2 Variables 
+  farmX = 200;
+  farmY = 120;
+  // Top Picture Case 3 Variables 
+  horseX = 200;
+  horseY = 120;
+}
+function resetAct2BotImg() {
+  // Bottom Picture Case 1 Varibales
+  pigX = 220;
+  pigY = 325;
+  // Bottom Picture Case 2 Varibales
+  eggX = 220;
+  eggY = 325;
+  // Bottom Picture Case 3 Variables 
+  milkX = 220;
+  milkY = 325;
+}
+
+function dragAndMatch() {
+
+  // TOP
+  if (int(randomImageTopVal) == 1 && act2TopWon == false) {
+    dHay = dist(mouseX, mouseY, hayX + 100, hayY + 100); // Distance between the HayXY and cursorXY
+    dNHay = dist(hayX, hayY, hayNX, hayNY); // Distance between the HayXY and Negative HayXY
+    // [TEST CODE TO BE DELETED]
+    // textSize(40);
+    // text("dNHay: " + dNHay + ", dHay: " + dHay, 500, 275);
+
+    if (dHay < 80 && dNHay > 5) {
+      hayX = mouseX - 100;
+      hayY = mouseY - 100;
+    }
+
+    if (dNHay > 5) {
+      tint(20, 200);
+      image(hay, 600, 120, 200, 200);
+      noTint();
+      image(hay, hayX, hayY, 200, 200);
+
+    } else {
+      act2TopWon = true;
+    }
+
+  } else if (int(randomImageTopVal) == 2 && act2TopWon == false) {
+    dFarm = dist(mouseX, mouseY, farmX + 100, farmY + 100); // Distance between the FarmXY and cursorXY
+    dNFarm = dist(farmX, farmY, farmNX, farmNY); // Distance between the FarmXY and Negative FarmXY
+    // [TEST CODE TO BE DELETED]
+    // textSize(40);
+    // text("dNFarm: " + dNFarm + ", dFarm: " + dFarm, 500, 275);
+
+    if (dFarm < 80 && dNFarm > 5) {
+      farmX = mouseX - 100;
+      farmY = mouseY - 100;
+    }
+
+    if (dNFarm > 5) {
+      tint(20, 200);
+      image(farm, 600, 120, 200, 200);
+      noTint();
+      image(farm, farmX, farmY, 200, 200);
+
+    } else {
+      act2TopWon = true;
+    }
+
+  } else if (int(randomImageTopVal) == 3 && act2TopWon == false) {
+    dHorse = dist(mouseX, mouseY, horseX + 100, horseY + 100); // Distance between the HorseXY and cursorXY
+    dNHorse = dist(horseX, horseY, horseNX, horseNY); // Distance between the HorseXY and Negative HorseXY
+    // [TEST CODE TO BE DELETED]
+    // textSize(40);
+    // text("dNHorse: " + dNHorse + ", dHorse: " + dHorse, 500, 275);
+
+    if (dHorse < 80 && dNHorse > 5) {
+      horseX = mouseX - 100;
+      horseY = mouseY - 100;
+    }
+
+    if (dNHorse > 5) {
+      tint(20, 200);
+      image(horse, 600, 120, 200, 200);
+      noTint();
+      image(horse, horseX, horseY, 200, 200);
+
+    } else {
+      act2TopWon = true;
+    }
+
+  }
+
+  // BOTTOM
+  if (int(randomImageBottomVal) == 1 && act2BotWon == false) {
+    dPig = dist(mouseX, mouseY, pigX + 75, pigY + 75); // Distance between the PigXY and cursorXY
+    dNPig = dist(pigX, pigY, pigNX, pigNY); // Distance between the PigXY and Negative PigXY
+    // [TEST CODE TO BE DELETED]
+    // textSize(40);
+    // text("dNPig: " + dNPig + ", dPig: " + dPig, 500, 475);
+
+    if (dPig < 65 && dNPig > 5) {
+      pigX = mouseX - 75;
+      pigY = mouseY - 75;
+    }
+
+    if (dNPig > 5) {
+      tint(20, 200);
+      image(pig, 620, 325, 150, 150);
+      noTint();
+      image(pig, pigX, pigY, 150, 150);
+
+    } else {
+      act2BotWon = true;
+    }
+
+  } else if (int(randomImageBottomVal) == 2 && act2BotWon == false) {
+    dEgg = dist(mouseX, mouseY, eggX + 75, eggY + 75); // Distance between the EggXY and cursorXY
+    dNEgg = dist(eggX, eggY, eggNX, eggNY); // Distance between the EggXY and Negative EggXY
+    // [TEST CODE TO BE DELETED]
+    // textSize(40);
+    // text("dNEgg: " + dNEgg + ", dEgg: " + dEgg, 500, 475);
+
+    if (dEgg < 65 && dNEgg > 5) {
+      eggX = mouseX - 75;
+      eggY = mouseY - 75;
+    }
+
+    if (dNEgg > 5) {
+      tint(20, 200);
+      image(egg, 620, 325, 150, 150);
+      noTint();
+      image(egg, eggX, eggY, 150, 150);
+
+    } else {
+      act2BotWon = true;
+    }
+
+  } else if (int(randomImageBottomVal) == 3 && act2BotWon == false) {
+    dMilk = dist(mouseX, mouseY, milkX + 75, milkY + 75); // Distance between the MilkXY and cursorXY
+    dNMilk = dist(milkX, milkY, milkNX, milkNY); // Distance between the MilkXY and Negative MilkXY
+    // [TEST CODE TO BE DELETED]
+    // textSize(40);
+    // text("dNMilk: " + dNMilk + ", dMilk: " + dMilk, 500, 475);
+
+    if (dMilk < 65 && dNMilk > 5) {
+      milkX = mouseX - 75;
+      milkY = mouseY - 75;
+    }
+
+    if (dNMilk > 5) {
+      tint(20, 200);
+      image(milkjug, 620, 325, 150, 150);
+      noTint();
+      image(milkjug, milkX, milkY, 150, 150);
+
+    } else {
+      act2BotWon = true;
+    }
+
+  }
+
+  // paint the unmovable red images
+  tint('red');
+  if (int(randomImageTopVal) == 1 && act2TopWon == true) {
+    image(hay, 600, 120, 200, 200);
+  } else if (int(randomImageTopVal) == 2 && act2TopWon == true) {
+    image(farm, 600, 120, 200, 200);
+  } else if (int(randomImageTopVal) == 3 && act2TopWon == true) {
+    image(horse, 600, 120, 200, 200);
+  }
+  if (int(randomImageBottomVal) == 1 && act2BotWon == true) {
+    image(pig, 620, 325, 150, 150);
+  } else if (int(randomImageBottomVal) == 2 && act2BotWon == true) {
+    image(egg, 620, 325, 150, 150);
+  } else if (int(randomImageBottomVal) == 3 && act2BotWon == true) {
+    image(milkjug, 620, 325, 150, 150)
+  }
+  noTint();
+
+  if (act2TopWon == true && act2BotWon == true) {
+    pageSel = "tryAgain2";
+    tryAgainCC = 0;
+
+    background(activity1BG);
+    homeButton.position(50, 50);
+
+    fill(196, 164, 132, 250);
+    rect(125, 25, 750, 100, 50);
+    fill('black');
+    textSize(75);
+    text("Drag and Match", 500, 100);
+
+    fill(196, 164, 132, 250);
+    rect((width / 4), 215, (width / 2), 100, 50);
+
+    fill('black');
+    text("YOU WIN!", 500, 300);
+
+    textSize(70);
+
+    fill(196, 164, 132, 250);
+    rect((width / 4), 390, (width / 2), 100, 50);
+
+    fill('black');
+    text("Try Again?", (width / 2), 475);
+  }
+
+}
 
 // The following function paints and operates the activity three page.
 function activityThree() {
   background(activity1BG);
   homeButton.position(50, 50);
   text("Activity 3", 500, 100);
-  pageSel = "activityThree";
+  pageSel = "activity3";
+  randomShapeGenerator();
 
+
+
+}
+
+function randomShapeGenerator() {
+
+
+  // This part of the function determines a random integer that will dictate which picture will display. 
+  if (sameShape == false) {
+    randomShape = random(1, 3);
+    randomShape = round(randomShape);
+    int(randomShape);
+
+    // Ensures that the picture is never the same as the one before.
+    if (randomShape == prevRandomShape) {
+      randomShapeGenerator();
+    }
+  }
+  switch (randomShape) {
+    case 1:
+      noFill();
+      image(hay, sqrX - 50, sqrY - 50, shapeSize + 75, shapeSize + 75);
+      rect(sqrX, sqrY, shapeSize, shapeSize);
+      prevRandomShape = randomShape;
+      break;
+
+    case 2:
+      noFill();
+      rect(sqrX, sqrY + 50, shapeSize, shapeSize / 2);
+      prevRandomShape = randomShape;
+      break;
+
+    case 3:
+      imageMode(CENTER);
+      image(apple, width / 2, height / 2 + 50, shapeSize, shapeSize);
+      noFill();
+      ellipseMode(CENTER);
+      ellipse(width / 2, height / 2 + 50, shapeSize);
+      // triangle(sqrX, sqrY + shapeSize, sqrX + shapeSize, sqrY + shapeSize, sqrX + (shapeSize / 2), sqrY)
+      prevRandomShape = randomShape;
+      imageMode(CORNER);
+      break;
+  }
 }
 // The following function paints and operates the settings page.
 function settings() {
@@ -533,15 +827,18 @@ function settings() {
 
 // The following function paints and operates the home page.
 function home() {
+  sameShape = false;
   pageSel = "home";
 
   // Moves unecessary buttons off screen.
-  act1Button.position(0, 510);
-  homeButton.position(0, 501);
+  act1Button.position(999, 999);
+  homeButton.position(999, 999);
 
   textFont(myFont);
 
   createCanvas(1000, 500);
+
+
 
   // Title text & Background
   background(mainMenuImg);
@@ -580,14 +877,20 @@ function home() {
   textAlign(CENTER);
   text("Settings", 650, 440);
 
+  // Reset Activty 2
+  resetAct2();
+
 }
 
 
 function draw() {
 
-
+  circleD = dist(width / 2, height / 2 + 50, mouseX, mouseY);
   // Decides which page is opened based on click position.
   if (pageSel == "home") {
+    homeButton.position(999, 999);
+    act1Button.position(999, 999);
+
     if (cursorX >= 150 && cursorX <= 450 && cursorY >= 250 && cursorY <= 350) {
       pageSel = "activity1";
       activityOne();
@@ -611,115 +914,20 @@ function draw() {
 
   }
 
-  
-
-      
-  // Top Picture Variables 
-    // check distance first
-//    var dFarm = dist(cursorX, cursorY, farmX, farmY); // Distance between the FarmXY and cursorXY
-  
-//    var farmX = cursorX;
-//    var farmY = cursorY;     
-      // check distance last
-//      let dNFarm = dist(farmX, farmY, farmNX, farmNY); // Distance between the FarmXY and Negative FarmXY
-
-      // let farmNX = 600;
-      // let farmNY = 120;
-    
-
-  // Bottom Picture Varibales
-    // check distance first
-//    var dCorn = dist(cursorX, cursorY, cornX, cornY); // Distance between the CornXY and cursorXY
-
-//    var cornX = cursorX;
-//    var cornY = cursorY;
-      // check distance last
-//      let dNCorn = dist(cornX, cornY, cornNX, cornNY); // Distance between the CornXY and Negative CornXY
-  
-      // let cornNX = 620;
-      // let cornNY = 325;
-
-
-  // Bottom Picture Variables 
-    // check distance first
-//    var dPig = dist(cursorX, cursorY, pigX, pigY); // Distance between the PigXY and cursorXY
-
-//    var pigX = cursorX;
-//    var pigY = cursorY;
-      // check distance last
-//      let dNPig = dist(pigX, pigY, pigNX, pigNY); // Distance between the PigXY and Negative PigXY
-
-      // let pigNX = 620;
-      // let pigNY = 325;
-
-
-//================================================================================//
 
 
   // Activity 2 check of distance, and paints the background
-  if (pageSel == "activity2" && mouseIsPressed == true) { 
-    
-    paintActivityTwoBack();
-      
-      if(int(randomImageTopVal) == 1) { 
-        dHay = dist(mouseX, mouseY, hayX + 100, hayY + 100); // Distance between the HayXY and cursorXY
-        dNHay = dist(hayX, hayY, hayNX, hayNY); // Distance between the HayXY and Negative HayXY
-        textSize(40);
-        text("dNHay: " + dNHay + ", dHay: " + dHay, 400, 275);
-
-        if (dHay < 80 && mouseIsPressed == true) {
-          hayX = mouseX - 100;
-          hayY = mouseY - 100;
-          
-
-          // act2Top = true;
-          // pageSel == "tryAgain";
-          // gameCompleted == true;
-        }
-
-        if (dNHay > 5) {
-          image(hay, hayX, hayY, 200, 200);
-          tint(20, 200);
-          image(hay, 600, 120, 200, 200);
-          noTint();
-          // var hayX = mouseX; // let hayNX = 600;
-          // var hayY = mouseY; // let hayNY = 120;
-        
-          // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
-        }
-      } //else {
-//        image(farm, 200, 120, 200, 200);
-//        
-//        while () {
-//  
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      }
-//      
-//      if(int(randomImageBottomVal) == 1) { 
-//        image(pig, 220, 325, 150, 150);
-//        
-//        while () {
-//  
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      } else {
-//        image(corn, 220, 325, 150, 150);
-//        
-//        while () {
-//  
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      }
+  if (pageSel == "activity2" && mouseIsPressed === true) {
+    paintActivityTwoBackground();
+    dragAndMatch();
   }
+
 
   // Resets game if user selects try again.
   if (pageSel == "tryAgain" && gameCompleted == true) {
     if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
       if (tryAgainCC >= 1) {
+        act1Button.position(999, 999);
         pageSel = "activity1";
         gameCompleted = false;
         activityOne();
@@ -728,8 +936,106 @@ function draw() {
 
   }
 
+  if (pageSel == "tryAgain2" && act2TopWon == true && act2BotWon == true) {
+    if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
+      if (tryAgainCC >= 2) {
+        pageSel = "activity2";
+        activityTwo();
+        resetAct2();
+      }
+    }
+
+  }
+
+  if (pageSel == "activity3" && mouseIsPressed == true) {
+    tracing = true;
+    strokeWeight(15);
+    if (randomShape == 1) {
+
+      // Paints green for top size
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        // Paints green for bottom side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY) + 280 && mouseY <= (sqrY) + 320) {
+        stroke('green');
+        point(mouseX, mouseY);
+
+        // Paints green for left side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + (shapeSize + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        // Paints green for right side
+      } else if (mouseX >= sqrX + 280 && mouseX <= sqrX + 320 && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + (shapeSize + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+      } else {
+        stroke(0);
+        stroke('red');
+        point(mouseX, mouseY);
+      }
+    } else if (randomShape == 2) {
+      // Paints green for top size
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        // Paints green for bottom side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= ((sqrY + 50) + shapeSize / 2) - 20 && mouseY <= ((sqrY + 50) + shapeSize / 2) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+
+        // Paints green for left side
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + ((shapeSize / 2) + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        // Paints green for right side
+      } else if (mouseX >= sqrX + 280 && mouseX <= sqrX + 320 && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + ((shapeSize / 2) + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+      } else {
+        stroke(0);
+        stroke('red');
+        point(mouseX, mouseY);
+      }
+    } else if (randomShape == 3) {
+
+      if (circleD >= circleRad - 20 && circleD <= circleRad + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+      } else {
+        stroke(0);
+        stroke('red');
+        point(mouseX, mouseY);
+      }
+    }
+
+
+    else {
+      stroke(0);
+      stroke('red');
+      point(mouseX, mouseY);
+
+    }
+  }
+
+
 
 }
+
+function mouseReleased() {
+  if (pageSel == "activity3" && tracing == true) {
+    sameShape = true;
+    stroke('black');
+    strokeWeight(1);
+    fill('black');
+    tracing = false;
+    text("work", 250, 250);
+    tracing = false;
+    activityThree();
+
+  }
+}
+
 
 
 
