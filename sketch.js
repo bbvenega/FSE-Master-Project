@@ -9,7 +9,7 @@ var tryAgainCC = 0;
 let gainSlider; 
 let muteButton;
 let muteState = false;
-let player;
+let muteStateN = 1;
 //Main menu variables
 
 // Activity One Variables
@@ -74,7 +74,7 @@ var previousImageBottomVal;
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
 function preload() {
-
+  mainMusic = loadSound("pop-corn.mp3");
   myFont = loadFont('HeehawRegular-PZy7.ttf');
   mainMenuImg = loadImage("farmmainmenu.jpg");
   activity1BG = loadImage("newfarmpic.png");
@@ -105,6 +105,7 @@ function setup() {
   act1Button.mouseClicked(startWhackAMole);
   muteButton = createButton("mute all sounds"); //mute button
   muteButton.mousePressed(tog);
+  gainSlider = createSlider(0, 2, 1, 0); //volume slider
 
   // Title text & Background
   background(mainMenuImg);
@@ -143,6 +144,9 @@ function setup() {
   fill('black');
   textAlign(CENTER);
   text("Settings", 650, 440);
+
+  mainMusic.setVolume(0.1);
+  mainMusic.play();
 }
 
 
@@ -166,14 +170,14 @@ function mouseClicked() {
     correctGuess = true;
     let d = dist(mouseX, mouseY, molePosX, molePosY);
     if (d <= 30) {
-      coinSound.setVolume(0.05);
+      coinSound.setVolume(0.05 * gainSlider.value() * muteStateN);
       coinSound.play();
       score++;
       WhackAMole();
     } else if (game1On == true) {
       clickCount++;
       if (clickCount >= 2) {
-        wrongAnswer.setVolume(0.4);
+        wrongAnswer.setVolume(0.4 * gainSlider.value() * muteStateN);
         wrongAnswer.play();
       }
 
@@ -537,40 +541,21 @@ function settings() {
   fill('black');
   textSize(75);
   text("Settings", 500, 100);
-  if(pageSel =="settings"){
 
-     muteButton.position(175, 350);
-     muteButton.mousePressed(tog);
+    muteButton.position(175, 350);
+    gainSlider.position(0, 350);
+  text("this controls the volume", 30, 350);
+  
+}
 
-     gainSlider = createSlider(-60, 12, 0, 1); //volume slider
-     gainSlider.position(0, 350);
-     text("this controls the volume", 30, 350);
-    if (muteState != true) { //run volume normally when not muted
-        volume();
-  }
-    
-  }
-}
-function volume() { //volume corresponds to the lsider
-  player.volume.value = gainSlider.value();
-}
-function playsound() { //triggers sound playback
-  player.start();
-}
 function tog() { //calls certain funcitons depending on if we are mutes
-  if (muteState === true) {
-    muteoff(); //turns mute off
+  if (muteState == true) {
+    muteStateN = 1; //turns mute off
     muteState = false;//adjusts state variable
   } else {
-    muteon(); //turns mute on
+    muteStateN = 0; //turns mute on
     muteState = true; //adjusts state variable
   }
-}
-function muteon() {
-  player.volume.value = -60;
-}
-function muteoff() {
-  volume();
 }
 
 // The following function paints and operates the home page.
@@ -626,7 +611,7 @@ function home() {
 
 
 function draw() {
-
+  mainMusic.setVolume(0.1 * gainSlider.value() * muteStateN);
 
   // Decides which page is opened based on click position.
   if (pageSel == "home") {
@@ -652,50 +637,6 @@ function draw() {
 
 
   }
-
-  
-
-      
-  // Top Picture Variables 
-    // check distance first
-//    var dFarm = dist(cursorX, cursorY, farmX, farmY); // Distance between the FarmXY and cursorXY
-  
-//    var farmX = cursorX;
-//    var farmY = cursorY;     
-      // check distance last
-//      let dNFarm = dist(farmX, farmY, farmNX, farmNY); // Distance between the FarmXY and Negative FarmXY
-
-      // let farmNX = 600;
-      // let farmNY = 120;
-    
-
-  // Bottom Picture Varibales
-    // check distance first
-//    var dCorn = dist(cursorX, cursorY, cornX, cornY); // Distance between the CornXY and cursorXY
-
-//    var cornX = cursorX;
-//    var cornY = cursorY;
-      // check distance last
-//      let dNCorn = dist(cornX, cornY, cornNX, cornNY); // Distance between the CornXY and Negative CornXY
-  
-      // let cornNX = 620;
-      // let cornNY = 325;
-
-
-  // Bottom Picture Variables 
-    // check distance first
-//    var dPig = dist(cursorX, cursorY, pigX, pigY); // Distance between the PigXY and cursorXY
-
-//    var pigX = cursorX;
-//    var pigY = cursorY;
-      // check distance last
-//      let dNPig = dist(pigX, pigY, pigNX, pigNY); // Distance between the PigXY and Negative PigXY
-
-      // let pigNX = 620;
-      // let pigNY = 325;
-
-
-//================================================================================//
 
 
   // Activity 2 check of distance, and paints the background
@@ -729,33 +670,7 @@ function draw() {
         
           // TOFIX Reset values, execute win state, set try again screen, reset variables' X and Y values
         }
-      } //else {
-//        image(farm, 200, 120, 200, 200);
-//        
-//        while () {
-//  
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      }
-//      
-//      if(int(randomImageBottomVal) == 1) { 
-//        image(pig, 220, 325, 150, 150);
-//        
-//        while () {
-//  
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      } else {
-//        image(corn, 220, 325, 150, 150);
-//        
-//        while () {
-//  
-//        }
-//        // TOFIX Reset values, Set try again screen
-//
-//      }
+      }
   }
 
   // Resets game if user selects try again.
