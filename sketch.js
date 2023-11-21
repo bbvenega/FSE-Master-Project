@@ -535,18 +535,20 @@ function bottomImage() {
 function paintActivityTwoBackground() {
   background(activity1BG);
   homeButton.position(50, 50);
+  strokeWeight(1);
   fill(196, 164, 132, 250);
   rect(125, 25, 750, 100, 50);
   fill('black');
   textSize(75);
-
+  strokeWeight(0);
   text("Drag and Match", 500, 100);
 
-
+  strokeWeight(1);
   fill(196, 164, 132, 250);
   rect(100, 230, 100, 215, 60);
   textSize(20);
   fill('black')
+  strokeWeight(0);
   text("Drag and match the shapes to win!", (width / 7), 275, 10);
 
 }
@@ -745,23 +747,25 @@ function dragAndMatch() {
     background(activity1BG);
     homeButton.position(50, 50);
 
+    strokeWeight(1);
     fill(196, 164, 132, 250);
     rect(125, 25, 750, 100, 50);
     fill('black');
     textSize(75);
+    strokeWeight(0);
     text("Drag and Match", 500, 100);
-
+    strokeWeight(1);
     fill(196, 164, 132, 250);
     rect((width / 4), 215, (width / 2), 100, 50);
-
+    strokeWeight(0);
     fill('black');
     text("YOU WIN!", 500, 300);
 
     textSize(70);
-
+    strokeWeight(1);
     fill(196, 164, 132, 250);
     rect((width / 4), 390, (width / 2), 100, 50);
-
+    strokeWeight(0);
     fill('black');
     text("Try Again?", (width / 2), 475);
   }
