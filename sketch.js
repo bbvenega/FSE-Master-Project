@@ -544,10 +544,13 @@ function settings() {
   textSize(75);
   text("Settings", 500, 100);
 
-    muteButton.position((width/2) + 170, height/2);
-    gainSlider.position((width/2) - 170, height/2);
+    muteButton.position((width/2) + 170, height/2+70);
+    gainSlider.position((width/2) - 170, height/2+70);
     textSize(50);
-    text("this controls the volume", width/2, 150);
+    fill(196, 164, 132, 250);
+    rect(75, 180, 850, 100, 350);
+    fill('black');
+    text("this controls the volume", width/2, 250);
   
 }
 
