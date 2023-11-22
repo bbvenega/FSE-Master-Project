@@ -129,8 +129,10 @@ function setup() {
   act1Button.position(999, 999);
   act1Button.mouseClicked(startWhackAMole);
   muteButton = createButton("mute all sounds"); //mute button
+  muteButton.position(999, 999);
   muteButton.mousePressed(tog);
   gainSlider = createSlider(0, 2, 1, 0); //volume slider
+  gainSlider.position(999, 999);
   gainSlider.addClass("mySlider");
   gainSlider.style('width', '240px');
 
