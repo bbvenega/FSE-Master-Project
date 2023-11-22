@@ -1051,8 +1051,33 @@ function draw() {
         point(mouseX, mouseY);
       }
     } else if (randomShape == 2) {
+      // Checks if top left corner is passed
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck1 = true;
+      }
+      // Checks if top right corner is passed
+      else if (mouseX >= sqrX + (shapeSize - 20) && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck2 = true;
+        // Checks if bottom left corner is passed
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 50) + ((shapeSize / 2) - 20) && mouseY <= (sqrY + 50) + ((shapeSize / 2) + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck3 = true;
+      } else if (mouseX >= sqrX + (shapeSize - 20) && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY + 50) + ((shapeSize / 2) - 20) && mouseY <= (sqrY + 50) + ((shapeSize / 2) + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck4 = true;
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 60) - 20 && mouseY <= (sqrY + 60) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck5 = true;
+      }
       // Paints green for top size
-      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + 20) {
+      else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + 20) {
         stroke('green');
         point(mouseX, mouseY);
         // Paints green for bottom side
@@ -1074,8 +1099,34 @@ function draw() {
         point(mouseX, mouseY);
       }
     } else if (randomShape == 3) {
-
-      if (circleD >= circleRad - 20 && circleD <= circleRad + 20) {
+      // strokeWeight(1);
+      // stroke('black');
+      // text(mouseX + " " + mouseY, 250, 250);
+      if (mouseX >= 465 - 20 && mouseX <= 465 + 20 && mouseY >= 150 - 20 && mouseY <= 150 + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck1 = true;
+      }
+      // Checks if top right corner is passed
+      else if (mouseX >= 530 - 20 && mouseX <= 530 + 20 && mouseY >= 150 - 20 && mouseY <= 150 + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck2 = true;
+        // Checks if bottom left corner is passed
+      } else if (mouseX >= 650 - 20 && mouseX <= 650 + 20 && mouseY >= 305 - 20 && mouseY <= 305+ 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck3 = true;
+      } else if (mouseX >= 350 - 20 && mouseX <= 350 + 20 && mouseY >= 305 - 20 && mouseY <= 305+ 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck4 = true;
+      } else if (mouseX >= 500 - 20 && mouseX <= 500 + 20 && mouseY >= 450 - 20 && mouseY <= 450+ 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck5 = true;
+      }
+       else if (circleD >= circleRad - 20 && circleD <= circleRad + 20) {
         stroke('green');
         point(mouseX, mouseY);
       } else {
@@ -1108,6 +1159,7 @@ function draw() {
   }
 
   if (pageSel == "activity3" && squareChecks == true) {
+    stroke('black');
     tryAgainCC = 0;
     pageSel = "tryAgain3";
     tracing = false;
@@ -1150,21 +1202,21 @@ function draw() {
 
 function mouseReleased() {
 
-   if (pageSel == "activity3" && tracing == true) {
- {
-    strokeWeight(0);
-    sameShape = true;
-    stroke('black');
-    fill('black');
-    activityThree();
-     squareCheck1 = false;
-     squareCheck2 = false;
-     squareCheck3 = false;
-     squareCheck4 = false;
-     squareCheck5 = false;
-    tracing = false;
+  if (pageSel == "activity3" && tracing == true) {
+    {
+      strokeWeight(0);
+      sameShape = true;
+      stroke('black');
+      fill('black');
+      activityThree();
+      squareCheck1 = false;
+      squareCheck2 = false;
+      squareCheck3 = false;
+      squareCheck4 = false;
+      squareCheck5 = false;
+      tracing = false;
+    }
   }
-}
 }
 
 function resetAct3() {
@@ -1176,9 +1228,9 @@ function resetAct3() {
   squareCheck4 = false;
   squareCheck5 = false;
   squareChecks = false;
- tracing = false;
- sameShape = false;
- stroke('black');
+  tracing = false;
+  sameShape = false;
+  stroke('black');
 }
 
 
