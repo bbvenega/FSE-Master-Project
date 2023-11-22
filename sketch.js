@@ -933,7 +933,7 @@ function home() {
 
 function draw() {
 
-  strokeWeight(0);
+
   circleD = dist(width / 2, height / 2 + 50, mouseX, mouseY);
   // Decides which page is opened based on click position.
   if (pageSel == "home") {
@@ -1005,26 +1005,26 @@ function draw() {
     if (randomShape == 1) {
 
       // Checks if top left corner is passed
-      if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= sqrY - 20  && mouseY <= sqrY + 20) {
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= sqrY - 20 && mouseY <= sqrY + 20) {
         stroke('green');
         point(mouseX, mouseY);
         squareCheck1 = true;
       }
       // Checks if top right corner is passed
-      else if (mouseX >= sqrX + (shapeSize-20) && mouseX <= sqrX + (shapeSize + 20) && mouseY >= sqrY - 20 && mouseY <= sqrY + 20) {
+      else if (mouseX >= sqrX + (shapeSize - 20) && mouseX <= sqrX + (shapeSize + 20) && mouseY >= sqrY - 20 && mouseY <= sqrY + 20) {
         stroke('green');
         point(mouseX, mouseY);
         squareCheck2 = true;
         // Checks if bottom left corner is passed
-      } else if(mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= sqrY +(shapeSize - 20) && mouseY <= sqrY + (shapeSize + 20)){
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= sqrY + (shapeSize - 20) && mouseY <= sqrY + (shapeSize + 20)) {
         stroke('green');
         point(mouseX, mouseY);
         squareCheck3 = true;
-      } else if(mouseX >= sqrX + (shapeSize - 20) && mouseX <= sqrX + (shapeSize +20) && mouseY >= sqrY +(shapeSize - 20) && mouseY <= sqrY + (shapeSize + 20)) {
+      } else if (mouseX >= sqrX + (shapeSize - 20) && mouseX <= sqrX + (shapeSize + 20) && mouseY >= sqrY + (shapeSize - 20) && mouseY <= sqrY + (shapeSize + 20)) {
         stroke('green');
         point(mouseX, mouseY);
         squareCheck4 = true;
-      } else if(mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 10) - 20  && mouseY <= (sqrY + 10) + 20) {
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 10) - 20 && mouseY <= (sqrY + 10) + 20) {
         stroke('green');
         point(mouseX, mouseY);
         squareCheck5 = true;
@@ -1099,18 +1099,18 @@ function draw() {
 
 
 
-  if ( squareCheck1 == true && squareCheck2 == true && squareCheck3 == true && squareCheck4 == true && squareCheck5 == true) {
-    text("testsetststse", 250, 250);
+  if (squareCheck1 == true && squareCheck2 == true && squareCheck3 == true && squareCheck4 == true && squareCheck5 == true) {
     squareChecks = true;
-    tryAgainCC = 0;
+
+
 
 
   }
 
   if (pageSel == "activity3" && squareChecks == true) {
-    text("testsetststse", 500, 250);
-
-
+    tryAgainCC = 0;
+    pageSel = "tryAgain3";
+    tracing = false;
     background(activity1BG);
     strokeWeight(1);
     fill(196, 164, 132, 250);
@@ -1133,47 +1133,54 @@ function draw() {
     strokeWeight(0);
     fill('black');
     text("Try Again?", (width / 2), 475);
-    pageSel = "tryAgain3";
+
+    resetAct3();
+
 
   }
-if(pageSel == "tryAgain3") {
-  if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
-    if (tryAgainCC >= 2) {
-      pageSel = "activity3";
-      activityThree();
-      tryAgainCC = 0;
+  if (pageSel == "tryAgain3") {
+    if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
+      if (tryAgainCC >= 2) {
+        activityThree();
+        tryAgainCC = 0;
+      }
     }
   }
-  } 
 }
 
 function mouseReleased() {
-  if (pageSel == "activity3" && tracing == true) {
+
+   if (pageSel == "activity3" && tracing == true) {
+ {
     strokeWeight(0);
     sameShape = true;
     stroke('black');
     fill('black');
-    text("work", 250, 250);
     activityThree();
-    var squareCheck1 = false;
-    var squareCheck2 = false;
-    var squareCheck3 = false;
-    var squareCheck4 = false;
-    var squareCheck5 = false;
+     squareCheck1 = false;
+     squareCheck2 = false;
+     squareCheck3 = false;
+     squareCheck4 = false;
+     squareCheck5 = false;
     tracing = false;
   }
 }
+}
 
 function resetAct3() {
-  strokeWeight(0);
-  sameShape = true;
-  var squareCheck1 = false;
-  var squareCheck2 = false;
-  var squareCheck3 = false;
-  var squareCheck4 = false;
-  var squareCheck5 = false;
-  tracing = false;
+
+
+  squareCheck1 = false;
+  squareCheck2 = false;
+  squareCheck3 = false;
+  squareCheck4 = false;
+  squareCheck5 = false;
+  squareChecks = false;
+ tracing = false;
+ sameShape = false;
+ stroke('black');
 }
+
 
 function paintAct3BG() {
   background(activity1BG);
