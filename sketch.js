@@ -86,6 +86,12 @@ var circleD;
 var circleRad = shapeSize / 2;
 var tracing = false;
 var sameShape = false;
+var squareCheck1 = false;
+var squareCheck2 = false;
+var squareCheck3 = false;
+var squareCheck4 = false;
+var squareCheck5 = false;
+var squareChecks = false;
 
 
 
@@ -174,7 +180,7 @@ function mouseClicked() {
 
 
 
-  if (pageSel == "tryAgain" || pageSel == "tryAgain2") {
+  if (pageSel == "tryAgain" || pageSel == "tryAgain2" || pageSel == "tryAgain3") {
     tryAgainCC++;
   }
 
@@ -798,6 +804,7 @@ function activityThree() {
 
 
 
+
 }
 
 function randomShapeGenerator() {
@@ -887,7 +894,7 @@ function home() {
   // Menu buttons
   fill(196, 164, 132, 250);
   rect(150, 250, 300, 100, 50);
-    strokeWeight(0);
+  strokeWeight(0);
   fill('black');
   textAlign(CENTER);
   strokeWeight(0);
@@ -984,18 +991,46 @@ function draw() {
         pageSel = "activity2";
         activityTwo();
         resetAct2();
+        tryAgainCC = 0;
       }
     }
 
   }
+
+
 
   if (pageSel == "activity3" && mouseIsPressed == true) {
     tracing = true;
     strokeWeight(15);
     if (randomShape == 1) {
 
+      // Checks if top left corner is passed
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= sqrY - 20  && mouseY <= sqrY + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck1 = true;
+      }
+      // Checks if top right corner is passed
+      else if (mouseX >= sqrX + (shapeSize-20) && mouseX <= sqrX + (shapeSize + 20) && mouseY >= sqrY - 20 && mouseY <= sqrY + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck2 = true;
+        // Checks if bottom left corner is passed
+      } else if(mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= sqrY +(shapeSize - 20) && mouseY <= sqrY + (shapeSize + 20)){
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck3 = true;
+      } else if(mouseX >= sqrX + (shapeSize - 20) && mouseX <= sqrX + (shapeSize +20) && mouseY >= sqrY +(shapeSize - 20) && mouseY <= sqrY + (shapeSize + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck4 = true;
+      } else if(mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 10) - 20  && mouseY <= (sqrY + 10) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck5 = true;
+      }
       // Paints green for top size
-      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + 20) {
+      else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + 20) {
         stroke('green');
         point(mouseX, mouseY);
         // Paints green for bottom side
@@ -1012,7 +1047,6 @@ function draw() {
         stroke('green');
         point(mouseX, mouseY);
       } else {
-        stroke(0);
         stroke('red');
         point(mouseX, mouseY);
       }
@@ -1062,6 +1096,55 @@ function draw() {
 
 
 
+
+
+
+  if ( squareCheck1 == true && squareCheck2 == true && squareCheck3 == true && squareCheck4 == true && squareCheck5 == true) {
+    text("testsetststse", 250, 250);
+    squareChecks = true;
+    tryAgainCC = 0;
+
+
+  }
+
+  if (pageSel == "activity3" && squareChecks == true) {
+    text("testsetststse", 500, 250);
+
+
+    background(activity1BG);
+    strokeWeight(1);
+    fill(196, 164, 132, 250);
+    rect(125, 25, 750, 100, 50);
+    fill('black');
+    textSize(75);
+    strokeWeight(0);
+    text("Tracing", 500, 100);
+    strokeWeight(1);
+    fill(196, 164, 132, 250);
+    rect((width / 4), 215, (width / 2), 100, 50);
+    strokeWeight(0);
+    fill('black');
+    text("YOU WIN!", 500, 300);
+
+    textSize(70);
+    strokeWeight(1);
+    fill(196, 164, 132, 250);
+    rect((width / 4), 390, (width / 2), 100, 50);
+    strokeWeight(0);
+    fill('black');
+    text("Try Again?", (width / 2), 475);
+    pageSel = "tryAgain3";
+
+  }
+if(pageSel == "tryAgain3") {
+  if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
+    if (tryAgainCC >= 2) {
+      pageSel = "activity3";
+      activityThree();
+      tryAgainCC = 0;
+    }
+  }
+  } 
 }
 
 function mouseReleased() {
@@ -1070,15 +1153,48 @@ function mouseReleased() {
     sameShape = true;
     stroke('black');
     fill('black');
-    tracing = false;
     text("work", 250, 250);
-    tracing = false;
     activityThree();
-
+    var squareCheck1 = false;
+    var squareCheck2 = false;
+    var squareCheck3 = false;
+    var squareCheck4 = false;
+    var squareCheck5 = false;
+    tracing = false;
   }
 }
 
+function resetAct3() {
+  strokeWeight(0);
+  sameShape = true;
+  var squareCheck1 = false;
+  var squareCheck2 = false;
+  var squareCheck3 = false;
+  var squareCheck4 = false;
+  var squareCheck5 = false;
+  tracing = false;
+}
 
+function paintAct3BG() {
+  background(activity1BG);
+  homeButton.position(50, 50);
+  pageSel = "activity3";
+  strokeWeight(1);
+  fill(196, 164, 132, 250);
+  rect(125, 25, 750, 100, 50);
+
+  fill('black');
+  textSize(75);
+  strokeWeight(0);
+  text("Trace the Picture", 500, 100);
+  strokeWeight(1);
+  fill(196, 164, 132, 250);
+  rect(100, 230, 100, 215, 60);
+  textSize(25);
+  fill('black')
+  strokeWeight(0);
+  text("Trace the Picture to Win!", (width / 7), 275, 10);
+}
 
 
 
