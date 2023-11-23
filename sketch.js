@@ -6,6 +6,10 @@ let cursorX = 0;
 let cursorY = 0;
 let homeButton;
 var tryAgainCC = 0;
+let gainSlider; 
+let muteButton;
+let muteState = false;
+let muteStateN = 1;
 //Main menu variables
 
 // Activity One Variables
@@ -101,7 +105,7 @@ var sameColor = false;
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
 function preload() {
-
+  mainMusic = loadSound("pop-corn.mp3");
   myFont = loadFont('HeehawRegular-PZy7.ttf');
   mainMenuImg = loadImage("farmmainmenu.jpg");
   activity1BG = loadImage("newfarmpic.png");
@@ -135,6 +139,13 @@ function setup() {
   act1Button = createButton("Begin game");
   act1Button.position(999, 999);
   act1Button.mouseClicked(startWhackAMole);
+  muteButton = createButton("mute all sounds"); //mute button
+  muteButton.position(999, 999);
+  muteButton.mousePressed(tog);
+  gainSlider = createSlider(0, 2, 1, 0); //volume slider
+  gainSlider.position(999, 999);
+  gainSlider.addClass("mySlider");
+  gainSlider.style('width', '240px');
 
   // Title text & Background
   background(mainMenuImg);
@@ -173,6 +184,9 @@ function setup() {
   fill('black');
   textAlign(CENTER);
   text("Settings", 650, 440);
+
+  mainMusic.setVolume(0.1);
+  mainMusic.play();
 }
 
 
@@ -196,14 +210,14 @@ function mouseClicked() {
     correctGuess = true;
     let d = dist(mouseX, mouseY, molePosX, molePosY);
     if (d <= 30) {
-      coinSound.setVolume(0.05);
+      coinSound.setVolume(0.05 * gainSlider.value() * muteStateN);
       coinSound.play();
       score++;
       WhackAMole();
     } else if (game1On == true) {
       clickCount++;
       if (clickCount >= 2) {
-        wrongAnswer.setVolume(0.4);
+        wrongAnswer.setVolume(0.4 * gainSlider.value() * muteStateN);
         wrongAnswer.play();
       }
 
@@ -934,9 +948,30 @@ function randomShapeGenerator() {
 function settings() {
   background(activity1BG);
   homeButton.position(50, 50);
+  fill(196, 164, 132, 250);
+  rect(125, 25, 750, 100, 50);
+  fill('black');
+  textSize(75);
   text("Settings", 500, 100);
-  pageSel = "settings";
 
+    muteButton.position((width/2) + 170, height/2+70);
+    gainSlider.position((width/2) - 170, height/2+70);
+    textSize(50);
+    fill(196, 164, 132, 250);
+    rect(75, 180, 850, 100, 350);
+    fill('black');
+    text("this controls the volume", width/2, 250);
+  
+}
+
+function tog() { //calls certain funcitons depending on if we are mutes
+  if (muteState == true) {
+    muteStateN = 1; //turns mute off
+    muteState = false;//adjusts state variable
+  } else {
+    muteStateN = 0; //turns mute on
+    muteState = true; //adjusts state variable
+  }
 }
 
 // The following function paints and operates the home page.
@@ -946,8 +981,11 @@ function home() {
   pageSel = "home";
 
   // Moves unecessary buttons off screen.
-  act1Button.position(999, 999);
-  homeButton.position(999, 999);
+  act1Button.position(0, 510);
+  homeButton.position(0, 501);
+  gainSlider.position(9999, 9999);
+  muteButton.position(9999, 9999);
+
 
   textFont(myFont);
 
@@ -1011,7 +1049,11 @@ function home() {
 function draw() {
 
 
+  mainMusic.setVolume(0.1 * gainSlider.value() * muteStateN);
+  strokeWeight(0);
+
   circleD = dist(width / 2, height / 2 + 50, mouseX, mouseY);
+  
   // Decides which page is opened based on click position.
   if (pageSel == "home") {
     homeButton.position(999, 999);
@@ -1039,6 +1081,8 @@ function draw() {
 
 
   }
+
+
 
 
 
