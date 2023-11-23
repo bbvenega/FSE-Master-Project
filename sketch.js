@@ -6,6 +6,10 @@ let cursorX = 0;
 let cursorY = 0;
 let homeButton;
 var tryAgainCC = 0;
+let gainSlider; 
+let muteButton;
+let muteState = false;
+let muteStateN = 1;
 //Main menu variables
 
 // Activity One Variables
@@ -81,17 +85,27 @@ var sqrX = 350;
 var sqrY = 150;
 var shapeSize = 300;
 var randomShape;
+var randomColorVal;
+var randomColor;
+
 var prevRandomShape = -1;
 var circleD;
 var circleRad = shapeSize / 2;
 var tracing = false;
 var sameShape = false;
+var squareCheck1 = false;
+var squareCheck2 = false;
+var squareCheck3 = false;
+var squareCheck4 = false;
+var squareCheck5 = false;
+var squareChecks = false;
+var sameColor = false;
 
 
 
 // The function preload contains all of our visual assets that need to be loaded before running the application
 function preload() {
-
+  mainMusic = loadSound("pop-corn.mp3");
   myFont = loadFont('HeehawRegular-PZy7.ttf');
   mainMenuImg = loadImage("farmmainmenu.jpg");
   activity1BG = loadImage("newfarmpic.png");
@@ -113,6 +127,7 @@ function preload() {
 }
 // The setup function creates and prints the entire home page
 function setup() {
+
   textFont(myFont);
   pageSel = "home";
   createCanvas(1000, 500);
@@ -124,6 +139,13 @@ function setup() {
   act1Button = createButton("Begin game");
   act1Button.position(999, 999);
   act1Button.mouseClicked(startWhackAMole);
+  muteButton = createButton("mute all sounds"); //mute button
+  muteButton.position(999, 999);
+  muteButton.mousePressed(tog);
+  gainSlider = createSlider(0, 2, 1, 0); //volume slider
+  gainSlider.position(999, 999);
+  gainSlider.addClass("mySlider");
+  gainSlider.style('width', '240px');
 
   // Title text & Background
   background(mainMenuImg);
@@ -162,6 +184,9 @@ function setup() {
   fill('black');
   textAlign(CENTER);
   text("Settings", 650, 440);
+
+  mainMusic.setVolume(0.1);
+  mainMusic.play();
 }
 
 
@@ -174,7 +199,7 @@ function mouseClicked() {
 
 
 
-  if (pageSel == "tryAgain" || pageSel == "tryAgain2") {
+  if (pageSel == "tryAgain" || pageSel == "tryAgain2" || pageSel == "tryAgain3") {
     tryAgainCC++;
   }
 
@@ -185,14 +210,14 @@ function mouseClicked() {
     correctGuess = true;
     let d = dist(mouseX, mouseY, molePosX, molePosY);
     if (d <= 30) {
-      coinSound.setVolume(0.05);
+      coinSound.setVolume(0.05 * gainSlider.value() * muteStateN);
       coinSound.play();
       score++;
       WhackAMole();
     } else if (game1On == true) {
       clickCount++;
       if (clickCount >= 2) {
-        wrongAnswer.setVolume(0.4);
+        wrongAnswer.setVolume(0.4 * gainSlider.value() * muteStateN);
         wrongAnswer.play();
       }
 
@@ -381,20 +406,25 @@ function WhackAMole() {
     fill(196, 164, 132, 250);
     rect(125, 25, 750, 100, 50);
     fill('black');
+    strokeWeight(0);
     text("Whack-a-Mole", 500, 100);
     fill(200, 0, 0);
     image(smallMole, 999, 999, 1, 1);
+    strokeWeight(1);
     fill(196, 164, 132, 250);
+    
     rect((width / 4), 215, (width / 2), 100, 50);
     fill('black');
+    strokeWeight(0);
     text("YOU WIN!", 500, 300);
     textSize(70);
 
-
+    strokeWeight(1);
     fill(196, 164, 132, 250);
     rect((width / 4), 390, (width / 2), 100, 50);
 
     fill('black');
+    strokeWeight(0);
     text("Try Again?", (width / 2), 475);
 
 
@@ -782,67 +812,135 @@ function activityThree() {
   rect(125, 25, 750, 100, 50);
 
   fill('black');
-  textSize(75);
+  textSize(70);
   strokeWeight(0);
-  text("Trace the Picture", 500, 100);
+  text("Trace the Shape", 500, 100);
   strokeWeight(1);
   fill(196, 164, 132, 250);
-  rect(100, 230, 100, 215, 60);
-  textSize(25);
+  rect(100, 210, 150, 215, 50);
+  textSize(30);
   fill('black')
   strokeWeight(0);
-  text("Trace the Picture to Win!", (width / 7), 275, 10);
+  text("Trace the Shape to Win!", 165, 260, 10);
 
+  textSize(35);
+  strokeWeight(1);
+  fill(196, 164, 132, 250);
+  rect(675, 210, 300, 175, 50);
+
+  fill('black');
+  strokeWeight(0);
+  text("Start at the Green Dot", 675, 270,290);
+
+
+  if (sameShape == false) {
+    randomColorGenerator();
+  }
 
   randomShapeGenerator();
 
 
 
+
 }
 
+function randomColorGenerator() {
+  if (sameColor == false) {
+    randomColorVal = random(1, 5);
+    randomColorVal = round(randomColorVal);
+    int(randomColorVal);
+
+
+  }
+
+  switch (randomColorVal) {
+    case 1:
+      randomColor = color(144, 238, 144);
+
+      break;
+    case 2:
+      randomColor = color(255, 182, 193);
+
+      break;
+    case 3:
+      randomColor = color(173,216,230);
+
+      break;
+    case 4:
+      randomColor = color(203, 195, 227);
+
+      break;
+    case 5:
+      randomColor = color(255, 252, 187);
+
+      break;
+
+  }
+
+}
 function randomShapeGenerator() {
 
 
-  // This part of the function determines a random integer that will dictate which picture will display. 
+ 
   if (sameShape == false) {
     randomShape = random(1, 3);
     randomShape = round(randomShape);
     int(randomShape);
 
-    // Ensures that the picture is never the same as the one before.
+
     if (randomShape == prevRandomShape) {
       randomShapeGenerator();
     }
   }
+
+
+
+
   switch (randomShape) {
     case 1:
-      noFill();
-      strokeWeight(1);
-      image(hay, sqrX - 50, sqrY - 50, shapeSize + 75, shapeSize + 75);
+
+      // noFill();
+      // image(hay, sqrX - 50, sqrY - 50, shapeSize + 75, shapeSize + 75);
+      strokeWeight(3);
+      fill(randomColor);
       rect(sqrX, sqrY, shapeSize, shapeSize);
       strokeWeight(0);
+      ellipseMode(CENTER);
+      fill('green');
+      ellipse(sqrX, sqrY, 15);
       prevRandomShape = randomShape;
+      fill('black');
       break;
 
     case 2:
-      noFill();
-      strokeWeight(1);
+      // noFill();
+      strokeWeight(3);
+      fill(randomColor);
       rect(sqrX, sqrY + 50, shapeSize, shapeSize / 2);
       strokeWeight(0);
+      ellipseMode(CENTER);
+      fill('green');
+      ellipse(sqrX, sqrY+50, 15);
       prevRandomShape = randomShape;
+      fill('black');
       break;
 
     case 3:
-      imageMode(CENTER);
-      image(apple, width / 2, height / 2 + 50, shapeSize, shapeSize);
-      noFill();
-      ellipseMode(CENTER);
       strokeWeight(1);
+      imageMode(CENTER);
+      // image(apple, width / 2, height / 2 + 50, shapeSize, shapeSize);
+      // noFill();
+      fill(randomColor);
+      ellipseMode(CENTER);
+      strokeWeight(3);
       ellipse(width / 2, height / 2 + 50, shapeSize);
       strokeWeight(0);
-      // triangle(sqrX, sqrY + shapeSize, sqrX + shapeSize, sqrY + shapeSize, sqrX + (shapeSize / 2), sqrY)
+      ellipseMode(CENTER);
+      fill('green');
+      ellipse(500, 150, 15);
       prevRandomShape = randomShape;
       imageMode(CORNER);
+      fill('black');
       break;
   }
 }
@@ -850,20 +948,48 @@ function randomShapeGenerator() {
 function settings() {
   background(activity1BG);
   homeButton.position(50, 50);
+  fill(196, 164, 132, 250);
+  strokeWeight(1);
+  rect(125, 25, 750, 100, 50);
+  fill('black');
+  textSize(75);
+  strokeWeight(0);
   text("Settings", 500, 100);
-  pageSel = "settings";
 
+    muteButton.position((width/2) + 170, height/2+70);
+    gainSlider.position((width/2) - 170, height/2+70);
+    textSize(50);
+    fill(196, 164, 132, 250);
+    strokeWeight(1);
+    rect(75, 180, 850, 100, 350);
+    fill('black');
+    strokeWeight(0);
+    text("this controls the volume", width/2, 250);
+  
+}
+
+function tog() { //calls certain funcitons depending on if we are mutes
+  if (muteState == true) {
+    muteStateN = 1; //turns mute off
+    muteState = false;//adjusts state variable
+  } else {
+    muteStateN = 0; //turns mute on
+    muteState = true; //adjusts state variable
+  }
 }
 
 // The following function paints and operates the home page.
 function home() {
-
+  sameColor = false;
   sameShape = false;
   pageSel = "home";
 
   // Moves unecessary buttons off screen.
-  act1Button.position(999, 999);
-  homeButton.position(999, 999);
+  act1Button.position(0, 510);
+  homeButton.position(0, 501);
+  gainSlider.position(9999, 9999);
+  muteButton.position(9999, 9999);
+
 
   textFont(myFont);
 
@@ -887,7 +1013,7 @@ function home() {
   // Menu buttons
   fill(196, 164, 132, 250);
   rect(150, 250, 300, 100, 50);
-    strokeWeight(0);
+  strokeWeight(0);
   fill('black');
   textAlign(CENTER);
   strokeWeight(0);
@@ -926,8 +1052,12 @@ function home() {
 
 function draw() {
 
+
+  mainMusic.setVolume(0.1 * gainSlider.value() * muteStateN);
   strokeWeight(0);
+
   circleD = dist(width / 2, height / 2 + 50, mouseX, mouseY);
+  
   // Decides which page is opened based on click position.
   if (pageSel == "home") {
     homeButton.position(999, 999);
@@ -958,6 +1088,8 @@ function draw() {
 
 
 
+
+
   // Activity 2 check of distance, and paints the background
   if (pageSel == "activity2" && mouseIsPressed === true) {
     paintActivityTwoBackground();
@@ -984,18 +1116,46 @@ function draw() {
         pageSel = "activity2";
         activityTwo();
         resetAct2();
+        tryAgainCC = 0;
       }
     }
 
   }
+
+
 
   if (pageSel == "activity3" && mouseIsPressed == true) {
     tracing = true;
     strokeWeight(15);
     if (randomShape == 1) {
 
+      // Checks if top left corner is passed
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= sqrY - 20 && mouseY <= sqrY + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck1 = true;
+      }
+      // Checks if top right corner is passed
+      else if (mouseX >= sqrX + (shapeSize - 20) && mouseX <= sqrX + (shapeSize + 20) && mouseY >= sqrY - 20 && mouseY <= sqrY + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck2 = true;
+        // Checks if bottom left corner is passed
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= sqrY + (shapeSize - 20) && mouseY <= sqrY + (shapeSize + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck3 = true;
+      } else if (mouseX >= sqrX + (shapeSize - 20) && mouseX <= sqrX + (shapeSize + 20) && mouseY >= sqrY + (shapeSize - 20) && mouseY <= sqrY + (shapeSize + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck4 = true;
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 10) - 20 && mouseY <= (sqrY + 10) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck5 = true;
+      }
       // Paints green for top size
-      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + 20) {
+      else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY) - 20 && mouseY <= (sqrY) + 20) {
         stroke('green');
         point(mouseX, mouseY);
         // Paints green for bottom side
@@ -1012,13 +1172,37 @@ function draw() {
         stroke('green');
         point(mouseX, mouseY);
       } else {
-        stroke(0);
         stroke('red');
         point(mouseX, mouseY);
       }
     } else if (randomShape == 2) {
+      // Checks if top left corner is passed
+      if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck1 = true;
+      }
+      // Checks if top right corner is passed
+      else if (mouseX >= sqrX + (shapeSize - 20) && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck2 = true;
+        // Checks if bottom left corner is passed
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 50) + ((shapeSize / 2) - 20) && mouseY <= (sqrY + 50) + ((shapeSize / 2) + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck3 = true;
+      } else if (mouseX >= sqrX + (shapeSize - 20) && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY + 50) + ((shapeSize / 2) - 20) && mouseY <= (sqrY + 50) + ((shapeSize / 2) + 20)) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck4 = true;
+      } else if (mouseX >= sqrX - 20 && mouseX <= sqrX + 20 && mouseY >= (sqrY + 60) - 20 && mouseY <= (sqrY + 60) + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck5 = true;
+      }
       // Paints green for top size
-      if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + 20) {
+      else if (mouseX >= sqrX - 20 && mouseX <= sqrX + (shapeSize + 20) && mouseY >= (sqrY + 50) - 20 && mouseY <= (sqrY + 50) + 20) {
         stroke('green');
         point(mouseX, mouseY);
         // Paints green for bottom side
@@ -1040,8 +1224,34 @@ function draw() {
         point(mouseX, mouseY);
       }
     } else if (randomShape == 3) {
-
-      if (circleD >= circleRad - 20 && circleD <= circleRad + 20) {
+      // strokeWeight(1);
+      // stroke('black');
+      // text(mouseX + " " + mouseY, 250, 250);
+      if (mouseX >= 465 - 20 && mouseX <= 465 + 20 && mouseY >= 150 - 20 && mouseY <= 150 + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck1 = true;
+      }
+      // Checks if top right corner is passed
+      else if (mouseX >= 530 - 20 && mouseX <= 530 + 20 && mouseY >= 150 - 20 && mouseY <= 150 + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck2 = true;
+        // Checks if bottom left corner is passed
+      } else if (mouseX >= 650 - 20 && mouseX <= 650 + 20 && mouseY >= 305 - 20 && mouseY <= 305 + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck3 = true;
+      } else if (mouseX >= 350 - 20 && mouseX <= 350 + 20 && mouseY >= 305 - 20 && mouseY <= 305 + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck4 = true;
+      } else if (mouseX >= 500 - 20 && mouseX <= 500 + 20 && mouseY >= 450 - 20 && mouseY <= 450 + 20) {
+        stroke('green');
+        point(mouseX, mouseY);
+        squareCheck5 = true;
+      }
+      else if (circleD >= circleRad - 20 && circleD <= circleRad + 20) {
         stroke('green');
         point(mouseX, mouseY);
       } else {
@@ -1062,21 +1272,95 @@ function draw() {
 
 
 
+
+
+
+  if (squareCheck1 == true && squareCheck2 == true && squareCheck3 == true && squareCheck4 == true && squareCheck5 == true) {
+    squareChecks = true;
+
+
+
+
+  }
+
+  if (pageSel == "activity3" && squareChecks == true) {
+    stroke('black');
+    tryAgainCC = 0;
+    pageSel = "tryAgain3";
+    tracing = false;
+    background(activity1BG);
+    strokeWeight(1);
+    fill(196, 164, 132, 250);
+    rect(125, 25, 750, 100, 50);
+    fill('black');
+    textSize(70);
+    strokeWeight(0);
+    text("Trace the Shape", 500, 100);
+    strokeWeight(1);
+    fill(196, 164, 132, 250);
+    rect((width / 4), 215, (width / 2), 100, 50);
+    strokeWeight(0);
+    fill('black');
+    text("YOU WIN!", 500, 300);
+
+    textSize(70);
+    strokeWeight(1);
+    fill(196, 164, 132, 250);
+    rect((width / 4), 390, (width / 2), 100, 50);
+    strokeWeight(0);
+    fill('black');
+    text("Try Again?", (width / 2), 475);
+
+    resetAct3();
+
+
+  }
+  if (pageSel == "tryAgain3") {
+    if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
+      if (tryAgainCC >= 2) {
+
+        activityThree();
+        tryAgainCC = 0;
+      }
+    }
+  }
 }
 
 function mouseReleased() {
-  if (pageSel == "activity3" && tracing == true) {
-    strokeWeight(0);
-    sameShape = true;
-    stroke('black');
-    fill('black');
-    tracing = false;
-    text("work", 250, 250);
-    tracing = false;
-    activityThree();
 
+  if (pageSel == "activity3" && tracing == true) {
+    {
+      strokeWeight(0);
+      sameShape = true;
+      sameColor = true;
+      stroke('black');
+      fill('black');
+      activityThree();
+      squareCheck1 = false;
+      squareCheck2 = false;
+      squareCheck3 = false;
+      squareCheck4 = false;
+      squareCheck5 = false;
+      tracing = false;
+    }
   }
 }
+
+function resetAct3() {
+
+
+  squareCheck1 = false;
+  squareCheck2 = false;
+  squareCheck3 = false;
+  squareCheck4 = false;
+  squareCheck5 = false;
+  squareChecks = false;
+  tracing = false;
+  sameShape = false;
+  sameColor = false;
+  stroke('black');
+}
+
 
 
 
