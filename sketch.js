@@ -949,17 +949,21 @@ function settings() {
   background(activity1BG);
   homeButton.position(50, 50);
   fill(196, 164, 132, 250);
+  strokeWeight(1);
   rect(125, 25, 750, 100, 50);
   fill('black');
   textSize(75);
+  strokeWeight(0);
   text("Settings", 500, 100);
 
     muteButton.position((width/2) + 170, height/2+70);
     gainSlider.position((width/2) - 170, height/2+70);
     textSize(50);
     fill(196, 164, 132, 250);
+    strokeWeight(1);
     rect(75, 180, 850, 100, 350);
     fill('black');
+    strokeWeight(0);
     text("this controls the volume", width/2, 250);
   
 }
