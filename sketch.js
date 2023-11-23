@@ -81,6 +81,9 @@ var sqrX = 350;
 var sqrY = 150;
 var shapeSize = 300;
 var randomShape;
+var randomColorVal;
+var randomColor;
+
 var prevRandomShape = -1;
 var circleD;
 var circleRad = shapeSize / 2;
@@ -92,6 +95,7 @@ var squareCheck3 = false;
 var squareCheck4 = false;
 var squareCheck5 = false;
 var squareChecks = false;
+var sameColor = false;
 
 
 
@@ -119,6 +123,7 @@ function preload() {
 }
 // The setup function creates and prints the entire home page
 function setup() {
+
   textFont(myFont);
   pageSel = "home";
   createCanvas(1000, 500);
@@ -173,7 +178,7 @@ function setup() {
 
 // The function below waits until the user selects one of the menu options
 function mouseClicked() {
-
+  text(mouseX + " " + mouseY, 250, 250);
   // The following variables hold the X and Y coordinate of every user click.
   cursorY = mouseY;
   cursorX = mouseX;
@@ -788,17 +793,30 @@ function activityThree() {
   rect(125, 25, 750, 100, 50);
 
   fill('black');
-  textSize(75);
+  textSize(70);
   strokeWeight(0);
-  text("Trace the Picture", 500, 100);
+  text("Trace the Shape", 500, 100);
   strokeWeight(1);
   fill(196, 164, 132, 250);
-  rect(100, 230, 100, 215, 60);
-  textSize(25);
+  rect(100, 210, 150, 215, 50);
+  textSize(30);
   fill('black')
   strokeWeight(0);
-  text("Trace the Picture to Win!", (width / 7), 275, 10);
+  text("Trace the Shape to Win!", 165, 260, 10);
 
+  textSize(35);
+  strokeWeight(1);
+  fill(196, 164, 132, 250);
+  rect(675, 210, 300, 175, 50);
+
+  fill('black');
+  strokeWeight(0);
+  text("Start at the Green Dot", 675, 270,290);
+
+
+  if (sameShape == false) {
+    randomColorGenerator();
+  }
 
   randomShapeGenerator();
 
@@ -807,49 +825,103 @@ function activityThree() {
 
 }
 
+function randomColorGenerator() {
+  if (sameColor == false) {
+    randomColorVal = random(1, 5);
+    randomColorVal = round(randomColorVal);
+    int(randomColorVal);
+
+
+  }
+
+  switch (randomColorVal) {
+    case 1:
+      randomColor = color(144, 238, 144);
+
+      break;
+    case 2:
+      randomColor = color(255, 182, 193);
+
+      break;
+    case 3:
+      randomColor = color(173,216,230);
+
+      break;
+    case 4:
+      randomColor = color(203, 195, 227);
+
+      break;
+    case 5:
+      randomColor = color(255, 252, 187);
+
+      break;
+
+  }
+
+}
 function randomShapeGenerator() {
 
 
-  // This part of the function determines a random integer that will dictate which picture will display. 
+ 
   if (sameShape == false) {
     randomShape = random(1, 3);
     randomShape = round(randomShape);
     int(randomShape);
 
-    // Ensures that the picture is never the same as the one before.
+
     if (randomShape == prevRandomShape) {
       randomShapeGenerator();
     }
   }
+
+
+
+
   switch (randomShape) {
     case 1:
-      noFill();
-      strokeWeight(1);
-      image(hay, sqrX - 50, sqrY - 50, shapeSize + 75, shapeSize + 75);
+
+      // noFill();
+      // image(hay, sqrX - 50, sqrY - 50, shapeSize + 75, shapeSize + 75);
+      strokeWeight(3);
+      fill(randomColor);
       rect(sqrX, sqrY, shapeSize, shapeSize);
       strokeWeight(0);
+      ellipseMode(CENTER);
+      fill('green');
+      ellipse(sqrX, sqrY, 15);
       prevRandomShape = randomShape;
+      fill('black');
       break;
 
     case 2:
-      noFill();
-      strokeWeight(1);
+      // noFill();
+      strokeWeight(3);
+      fill(randomColor);
       rect(sqrX, sqrY + 50, shapeSize, shapeSize / 2);
       strokeWeight(0);
+      ellipseMode(CENTER);
+      fill('green');
+      ellipse(sqrX, sqrY+50, 15);
       prevRandomShape = randomShape;
+      fill('black');
       break;
 
     case 3:
-      imageMode(CENTER);
-      image(apple, width / 2, height / 2 + 50, shapeSize, shapeSize);
-      noFill();
-      ellipseMode(CENTER);
       strokeWeight(1);
+      imageMode(CENTER);
+      // image(apple, width / 2, height / 2 + 50, shapeSize, shapeSize);
+      // noFill();
+      fill(randomColor);
+      ellipseMode(CENTER);
+      strokeWeight(3);
       ellipse(width / 2, height / 2 + 50, shapeSize);
       strokeWeight(0);
-      // triangle(sqrX, sqrY + shapeSize, sqrX + shapeSize, sqrY + shapeSize, sqrX + (shapeSize / 2), sqrY)
+      ellipseMode(CENTER);
+      fill('green');
+      ellipse(500, 150, 15);
       prevRandomShape = randomShape;
       imageMode(CORNER);
+      fill('black');
       break;
   }
 }
@@ -864,7 +936,7 @@ function settings() {
 
 // The following function paints and operates the home page.
 function home() {
-
+  sameColor = false;
   sameShape = false;
   pageSel = "home";
 
@@ -1113,20 +1185,20 @@ function draw() {
         point(mouseX, mouseY);
         squareCheck2 = true;
         // Checks if bottom left corner is passed
-      } else if (mouseX >= 650 - 20 && mouseX <= 650 + 20 && mouseY >= 305 - 20 && mouseY <= 305+ 20) {
+      } else if (mouseX >= 650 - 20 && mouseX <= 650 + 20 && mouseY >= 305 - 20 && mouseY <= 305 + 20) {
         stroke('green');
         point(mouseX, mouseY);
         squareCheck3 = true;
-      } else if (mouseX >= 350 - 20 && mouseX <= 350 + 20 && mouseY >= 305 - 20 && mouseY <= 305+ 20) {
+      } else if (mouseX >= 350 - 20 && mouseX <= 350 + 20 && mouseY >= 305 - 20 && mouseY <= 305 + 20) {
         stroke('green');
         point(mouseX, mouseY);
         squareCheck4 = true;
-      } else if (mouseX >= 500 - 20 && mouseX <= 500 + 20 && mouseY >= 450 - 20 && mouseY <= 450+ 20) {
+      } else if (mouseX >= 500 - 20 && mouseX <= 500 + 20 && mouseY >= 450 - 20 && mouseY <= 450 + 20) {
         stroke('green');
         point(mouseX, mouseY);
         squareCheck5 = true;
       }
-       else if (circleD >= circleRad - 20 && circleD <= circleRad + 20) {
+      else if (circleD >= circleRad - 20 && circleD <= circleRad + 20) {
         stroke('green');
         point(mouseX, mouseY);
       } else {
@@ -1168,9 +1240,9 @@ function draw() {
     fill(196, 164, 132, 250);
     rect(125, 25, 750, 100, 50);
     fill('black');
-    textSize(75);
+    textSize(70);
     strokeWeight(0);
-    text("Tracing", 500, 100);
+    text("Trace the Shape", 500, 100);
     strokeWeight(1);
     fill(196, 164, 132, 250);
     rect((width / 4), 215, (width / 2), 100, 50);
@@ -1193,6 +1265,7 @@ function draw() {
   if (pageSel == "tryAgain3") {
     if (cursorX >= 250 && cursorX <= 750 && cursorY >= 390 && cursorY <= 490) {
       if (tryAgainCC >= 2) {
+
         activityThree();
         tryAgainCC = 0;
       }
@@ -1206,6 +1279,7 @@ function mouseReleased() {
     {
       strokeWeight(0);
       sameShape = true;
+      sameColor = true;
       stroke('black');
       fill('black');
       activityThree();
@@ -1230,30 +1304,12 @@ function resetAct3() {
   squareChecks = false;
   tracing = false;
   sameShape = false;
+  sameColor = false;
   stroke('black');
 }
 
 
-function paintAct3BG() {
-  background(activity1BG);
-  homeButton.position(50, 50);
-  pageSel = "activity3";
-  strokeWeight(1);
-  fill(196, 164, 132, 250);
-  rect(125, 25, 750, 100, 50);
 
-  fill('black');
-  textSize(75);
-  strokeWeight(0);
-  text("Trace the Picture", 500, 100);
-  strokeWeight(1);
-  fill(196, 164, 132, 250);
-  rect(100, 230, 100, 215, 60);
-  textSize(25);
-  fill('black')
-  strokeWeight(0);
-  text("Trace the Picture to Win!", (width / 7), 275, 10);
-}
 
 
 
