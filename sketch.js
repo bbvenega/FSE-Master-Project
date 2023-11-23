@@ -178,7 +178,7 @@ function setup() {
 
 // The function below waits until the user selects one of the menu options
 function mouseClicked() {
-  text(mouseX + " " + mouseY, 250, 250);
+
   // The following variables hold the X and Y coordinate of every user click.
   cursorY = mouseY;
   cursorX = mouseX;
@@ -392,20 +392,25 @@ function WhackAMole() {
     fill(196, 164, 132, 250);
     rect(125, 25, 750, 100, 50);
     fill('black');
+    strokeWeight(0);
     text("Whack-a-Mole", 500, 100);
     fill(200, 0, 0);
     image(smallMole, 999, 999, 1, 1);
+    strokeWeight(1);
     fill(196, 164, 132, 250);
+    
     rect((width / 4), 215, (width / 2), 100, 50);
     fill('black');
+    strokeWeight(0);
     text("YOU WIN!", 500, 300);
     textSize(70);
 
-
+    strokeWeight(1);
     fill(196, 164, 132, 250);
     rect((width / 4), 390, (width / 2), 100, 50);
 
     fill('black');
+    strokeWeight(0);
     text("Try Again?", (width / 2), 475);
 
 
