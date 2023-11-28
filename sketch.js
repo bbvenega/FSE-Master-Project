@@ -753,7 +753,7 @@ function dragAndMatch() {
   }
 
   // paint the unmovable red images
-  tint('red');
+  tint('green');
   if (int(randomImageTopVal) == 1 && act2TopWon == true) {
     image(hay, 600, 120, 200, 200);
   } else if (int(randomImageTopVal) == 2 && act2TopWon == true) {
