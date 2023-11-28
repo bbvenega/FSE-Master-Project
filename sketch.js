@@ -754,7 +754,7 @@ function dragAndMatch() {
   }
 
   // paint the unmovable red images
-  tint('red');
+  tint(70, 500, 70);
   if (int(randomImageTopVal) == 1 && act2TopWon == true) {
     image(hay, 600, 120, 200, 200);
   } else if (int(randomImageTopVal) == 2 && act2TopWon == true) {
@@ -954,14 +954,16 @@ function settings() {
   rect(125, 25, 750, 100, 50);
   fill('black');
   textSize(75);
+  strokeWeight(0);
   text("Settings", 500, 100);
-
+  strokeWeight(1);
     muteButton.position((width/2) + 170, height/2+70);
     gainSlider.position((width/2) - 170, height/2+70);
     textSize(50);
     fill(196, 164, 132, 250);
     rect(75, 180, 850, 100, 350);
     fill('black');
+    strokeWeight(0);
     text("this controls the volume", width/2, 250);
   
 }
