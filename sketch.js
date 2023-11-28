@@ -6,11 +6,11 @@ let cursorX = 0;
 let cursorY = 0;
 let homeButton;
 var tryAgainCC = 0;
-let gainSlider; 
+let gainSlider;
 let muteButton;
 let muteState = false;
 let muteStateN = 1;
-var mainMusic; 
+var mainMusic;
 //Main menu variables
 
 // Activity One Variables
@@ -413,7 +413,7 @@ function WhackAMole() {
     image(smallMole, 999, 999, 1, 1);
     strokeWeight(1);
     fill(196, 164, 132, 250);
-    
+
     rect((width / 4), 215, (width / 2), 100, 50);
     fill('black');
     strokeWeight(0);
@@ -832,7 +832,7 @@ function activityThree() {
 
   fill('black');
   strokeWeight(0);
-  text("Start at the Green Dot", 675, 270,290);
+  text("Start at the Green Dot", 675, 270, 290);
 
 
   if (sameShape == false) {
@@ -866,7 +866,7 @@ function randomColorGenerator() {
 
       break;
     case 3:
-      randomColor = color(173,216,230);
+      randomColor = color(173, 216, 230);
 
       break;
     case 4:
@@ -886,7 +886,7 @@ function randomColorGenerator() {
 function randomShapeGenerator() {
 
 
- 
+
   if (sameShape == false) {
     randomShape = random(1, 3);
     randomShape = round(randomShape);
@@ -925,7 +925,7 @@ function randomShapeGenerator() {
       strokeWeight(0);
       ellipseMode(CENTER);
       fill('green');
-      ellipse(sqrX, sqrY+50, 15);
+      ellipse(sqrX, sqrY + 50, 15);
       prevRandomShape = randomShape;
       fill('black');
       break;
@@ -962,16 +962,16 @@ function settings() {
   strokeWeight(0);
   text("Settings", 500, 100);
   strokeWeight(1);
-    muteButton.position((width/2) + 170, height/2+70);
-    gainSlider.position((width/2) - 170, height/2+70);
-    textSize(50);
-    fill(196, 164, 132, 250);
-    strokeWeight(1);
-    rect(75, 180, 850, 100, 350);
-    fill('black');
-    strokeWeight(0);
-    text("this controls the volume", width/2, 250);
-  
+  muteButton.position((width / 2) + 170, height / 2 + 70);
+  gainSlider.position((width / 2) - 170, height / 2 + 70);
+  textSize(50);
+  fill(196, 164, 132, 250);
+  strokeWeight(1);
+  rect(75, 180, 850, 100, 350);
+  fill('black');
+  strokeWeight(0);
+  text("this controls the volume", width / 2, 250);
+
 }
 
 function tog() { //calls certain funcitons depending on if we are mutes
@@ -1057,7 +1057,7 @@ function home() {
 
 function musicPlay() {
   mainMusic.setVolume(0.1 * gainSlider.value() * muteStateN);
-  mainMusic.play(0.1,1,3,0.1,155);
+  mainMusic.play(0.1, 1, 3, 0.1, 155);
 }
 
 function draw() {
@@ -1070,7 +1070,7 @@ function draw() {
   strokeWeight(0);
 
   circleD = dist(width / 2, height / 2 + 50, mouseX, mouseY);
-  
+
   // Decides which page is opened based on click position.
   if (pageSel == "home") {
     homeButton.position(999, 999);
