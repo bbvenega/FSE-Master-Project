@@ -844,6 +844,7 @@ function activityThree() {
 
 }
 
+// The following function generates a random color everytime activity 3 is called.
 function randomColorGenerator() {
   if (sameColor == false) {
     randomColorVal = random(1, 5);
@@ -878,6 +879,8 @@ function randomColorGenerator() {
   }
 
 }
+
+// The following function generates a random shape everytime activity 3 is called.
 function randomShapeGenerator() {
 
 
