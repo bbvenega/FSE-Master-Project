@@ -10,6 +10,7 @@ let gainSlider;
 let muteButton;
 let muteState = false;
 let muteStateN = 1;
+var mainMusic; 
 //Main menu variables
 
 // Activity One Variables
@@ -185,8 +186,6 @@ function setup() {
   textAlign(CENTER);
   text("Settings", 650, 440);
 
-  mainMusic.setVolume(0.1);
-  mainMusic.play();
 }
 
 
@@ -197,7 +196,9 @@ function mouseClicked() {
   cursorY = mouseY;
   cursorX = mouseX;
 
-
+  if (!mainMusic.isPlaying()) {
+    musicPlay();
+  }
 
   if (pageSel == "tryAgain" || pageSel == "tryAgain2" || pageSel == "tryAgain3") {
     tryAgainCC++;
@@ -753,7 +754,8 @@ function dragAndMatch() {
   }
 
   // paint the unmovable red images
-  tint('green');
+
+  tint(70, 500, 70);
   if (int(randomImageTopVal) == 1 && act2TopWon == true) {
     image(hay, 600, 120, 200, 200);
   } else if (int(randomImageTopVal) == 2 && act2TopWon == true) {
@@ -949,6 +951,7 @@ function randomShapeGenerator() {
 }
 // The following function paints and operates the settings page.
 function settings() {
+  strokeWeight(1);
   background(activity1BG);
   homeButton.position(50, 50);
   fill(196, 164, 132, 250);
@@ -958,7 +961,7 @@ function settings() {
   textSize(75);
   strokeWeight(0);
   text("Settings", 500, 100);
-
+  strokeWeight(1);
     muteButton.position((width/2) + 170, height/2+70);
     gainSlider.position((width/2) - 170, height/2+70);
     textSize(50);
@@ -1052,11 +1055,18 @@ function home() {
 
 }
 
+function musicPlay() {
+  mainMusic.setVolume(0.1 * gainSlider.value() * muteStateN);
+  mainMusic.play(0.1,1,3,0.1,155);
+}
 
 function draw() {
 
 
   mainMusic.setVolume(0.1 * gainSlider.value() * muteStateN);
+  if (frameCount > 400 && !mainMusic.isPlaying()) {
+    musicPlay();
+  }
   strokeWeight(0);
 
   circleD = dist(width / 2, height / 2 + 50, mouseX, mouseY);
