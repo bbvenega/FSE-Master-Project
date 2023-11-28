@@ -150,12 +150,12 @@ function setup() {
 
   // Title text & Background
   background(mainMenuImg);
-  textSize(50)
+  textSize(40);
   textAlign(CENTER);
   fill(196, 164, 132, 250);
   rect(150, 35, 675, 90, 50);
   fill('black');
-  text("Moo Moo's Farm Adventure", 500, 100);
+  text("Moo Moo's Farm Adventure", 490, 100);
 
 
   textSize(40);
